@@ -6,12 +6,18 @@
 
 class ServerConnectionManager
 {
+	template <typename T> struct ConnectionArgument
+	{
+		QString name;
+		T value;
+	};
 	QString hostname;
 	std::unique_ptr<QNetworkAccessManager> networkAccessManager;
-	ServerConnectionManager(QObject* caller)
+	ServerConnectionManager(QObject* caller);
+	QNetworkAccessManager* get()
 	{
-		networkAccessManager = std::make_unique<QNetworkAccessManager>(caller);
+		
+		return networkAccessManager.get();
 	}
-
 };
 
