@@ -49,6 +49,9 @@
     <ClCompile Include="UsernameValidator.cpp">
       <Filter>Source Files\Validators</Filter>
     </ClCompile>
+    <ClCompile Include="PasswordValidator.cpp">
+      <Filter>Source Files\Validators</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="LoginWindow.h">
@@ -69,6 +72,9 @@
       <Filter>Header Files\Validators</Filter>
     </ClInclude>
     <ClInclude Include="UsernameValidator.h">
+      <Filter>Header Files\Validators</Filter>
+    </ClInclude>
+    <ClInclude Include="PasswordValidator.h">
       <Filter>Header Files\Validators</Filter>
     </ClInclude>
   </ItemGroup>

@@ -90,6 +90,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="PasswordValidator.cpp" />
     <ClCompile Include="UsernameValidator.cpp" />
     <ClCompile Include="ServerConnection.cpp" />
     <ClCompile Include="ServerConnectionManager.cpp" />
@@ -101,6 +102,7 @@
     <QtUic Include="registerWindow.ui" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PasswordValidator.h" />
     <ClInclude Include="Validator.h" />
     <ClInclude Include="UsernameValidator.h" />
     <ClInclude Include="QtMacros.h" />
