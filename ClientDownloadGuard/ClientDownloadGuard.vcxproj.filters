@@ -27,6 +27,12 @@
     <Filter Include="Source Files\Validators">
       <UniqueIdentifier>{c38ef9ef-b50a-469b-911f-018d3ff801d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\REST Api Callers">
+      <UniqueIdentifier>{a3d183b9-3c50-45f3-8c42-fbd4a2957d2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\REST Api Callers">
+      <UniqueIdentifier>{281098d0-f250-432c-8d71-fd6fae6a4da1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="mainWindow.qrc">
@@ -52,6 +58,9 @@
     <ClCompile Include="PasswordValidator.cpp">
       <Filter>Source Files\Validators</Filter>
     </ClCompile>
+    <ClCompile Include="RESTApiCaller.cpp">
+      <Filter>Source Files\REST Api Callers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="LoginWindow.h">
@@ -76,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="PasswordValidator.h">
       <Filter>Header Files\Validators</Filter>
+    </ClInclude>
+    <ClInclude Include="RESTApiCaller.h">
+      <Filter>Header Files\REST Api Callers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

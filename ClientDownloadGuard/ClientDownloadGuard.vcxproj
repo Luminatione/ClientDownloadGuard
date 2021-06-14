@@ -91,6 +91,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="PasswordValidator.cpp" />
+    <ClCompile Include="RESTApiCaller.cpp" />
     <ClCompile Include="UsernameValidator.cpp" />
     <ClCompile Include="ServerConnection.cpp" />
     <ClCompile Include="ServerConnectionManager.cpp" />
@@ -103,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PasswordValidator.h" />
+    <ClInclude Include="RESTApiCaller.h" />
     <ClInclude Include="Validator.h" />
     <ClInclude Include="UsernameValidator.h" />
     <ClInclude Include="QtMacros.h" />
