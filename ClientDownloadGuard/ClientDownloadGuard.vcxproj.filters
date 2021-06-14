@@ -33,6 +33,12 @@
     <Filter Include="Header Files\REST Api Callers">
       <UniqueIdentifier>{281098d0-f250-432c-8d71-fd6fae6a4da1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Windows">
+      <UniqueIdentifier>{f127e1fe-5f82-44cb-a8c4-6b1c3e09c823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Windows">
+      <UniqueIdentifier>{cf597978-2864-49fd-be6d-58191d4ae1cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="mainWindow.qrc">
@@ -41,9 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LoginWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ServerConnectionManager.cpp">
@@ -64,11 +67,12 @@
     <ClCompile Include="LoginApiCaller.cpp">
       <Filter>Source Files\REST Api Callers</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="LoginWindow.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
+    <ClCompile Include="LoginWindow.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="RegisterWindow.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QtMacros.h">
@@ -103,5 +107,13 @@
     <QtUic Include="loginWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="LoginWindow.h">
+      <Filter>Header Files\Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="RegisterWindow.h">
+      <Filter>Header Files\Windows</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>
