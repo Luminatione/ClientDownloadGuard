@@ -2,7 +2,7 @@
 
 #include <QUrlQuery>
 
-QUrlQuery LoginApiCaller::getQueryWithLoginAndPassword(QString login, QString password)
+QUrlQuery LoginApiCaller::getQueryWithLoginAndPassword(QString& login, QString& password)
 {
 	QUrlQuery query;
 	query.addQueryItem("login", login);
