@@ -35,8 +35,10 @@ void LoginWindow::setupConnections()
 void LoginWindow::onLoginClick()
 {
 	ui.statusBar->showMessage("Logging...");
-	
-	reply = ServerConnectionManager::serverConnectionManager->login(ui.UsernameLineEdit->text(), ui.PasswordLineEdit->text());	
+	QString username = ui.UsernameLineEdit->text();
+	QString password = ui.PasswordLineEdit->text();
+	reply = QSharedPointer<QNetworkReply>(
+		ServerConnectionManager::serverConnectionManager->login(username, password));
 	connect(reply.get(), &QIODevice::readyRead, this, &LoginWindow::onLoginResponse);
 	connect(reply.get(), &QNetworkReply::errorOccurred, this, &LoginWindow::onError);
 
@@ -57,7 +59,7 @@ void LoginWindow::onLoginResponse()
 	QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
 	QString state = document.object()["state"].toString();
 	QString value = document.object()["value"].toString();
-	if(state == "Failure")
+	if (state == "Failure")
 	{
 		ui.statusBar->showMessage(state + ": " + value);
 	}

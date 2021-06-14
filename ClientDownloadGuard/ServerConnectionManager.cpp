@@ -11,10 +11,7 @@ ServerConnectionManager::ServerConnectionManager(QObject* caller = nullptr)
 	networkAccessManager = QSharedPointer<QNetworkAccessManager>(new QNetworkAccessManager());
 }
 
-QSharedPointer<QNetworkReply> ServerConnectionManager::login(QString& username, QString& password)
+QNetworkReply* ServerConnectionManager::login(QString& username, QString& password)
 {	
-	QNetworkRequest request;
-	request.setUrl(getLoginUrl(username, password));
-	QSharedPointer<QNetworkReply> reply = QSharedPointer<QNetworkReply>(networkAccessManager->get(request));	
-	return reply;
+	return loginApiCaller->call(networkAccessManager.get(), hostname, LoginApiCallerArguments{username, password});
 }
