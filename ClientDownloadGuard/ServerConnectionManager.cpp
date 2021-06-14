@@ -19,14 +19,15 @@ QUrlQuery ServerConnectionManager::getQueryWithLoginAndPassword(QString& login, 
 	return query;
 }
 
-QSharedPointer<QNetworkReply> ServerConnectionManager::login(QString& username, QString& password)
+const QString ServerConnectionManager::getLoginUrl(QString& username, QString& password)
 {
-	QString url = hostname + loginPage + '?' + getQueryWithLoginAndPassword(username, password).query();
-	
-	QNetworkRequest request;
-	request.setUrl(url);
+	return hostname + loginPage + '?' + getQueryWithLoginAndPassword(username, password).query();
+}
 
-	QSharedPointer<QNetworkReply> reply = QSharedPointer<QNetworkReply>(networkAccessManager->get(request));
-	
+QSharedPointer<QNetworkReply> ServerConnectionManager::login(QString& username, QString& password)
+{	
+	QNetworkRequest request;
+	request.setUrl(getLoginUrl(username, password));
+	QSharedPointer<QNetworkReply> reply = QSharedPointer<QNetworkReply>(networkAccessManager->get(request));	
 	return reply;
 }

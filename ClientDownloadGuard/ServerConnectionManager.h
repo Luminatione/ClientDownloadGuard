@@ -10,7 +10,8 @@ public:
 	
 private:
 	static QUrlQuery getQueryWithLoginAndPassword(QString& login, QString& password);
-	
+	const QString getLoginUrl(QString& username, QString& password);
+
 #ifdef _DEBUG
 	QString hostname = "http://localhost:5000/api/";
 #else
