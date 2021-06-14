@@ -8,6 +8,7 @@
 #include "QtMacros.h"
 #include "PasswordValidator.h"
 #include "UsernameValidator.h"
+#include "ServerConnectionManager.h"
 
 
 LoginWindow::LoginWindow(QWidget* parent)
@@ -35,15 +36,7 @@ void LoginWindow::onLoginClick()
 {
 	ui.statusBar->showMessage("Logging...");
 	
-	QNetworkRequest request;
-	QUrlQuery query;
-	query.addQueryItem("login",  ui.UsernameLineEdit->text() );
-	query.addQueryItem("password",  ui.PasswordLineEdit->text() );
-	QString url = hostname + loginPage + '?' + query.query();
-	request.setUrl(url);
-	
-	reply = QSharedPointer<QNetworkReply>(networkAccessManager->get(request));
-	
+	reply = ServerConnectionManager::serverConnectionManager->login(ui.UsernameLineEdit->text(), ui.PasswordLineEdit->text());	
 	connect(reply.get(), &QIODevice::readyRead, this, &LoginWindow::onLoginResponse);
 	connect(reply.get(), &QNetworkReply::errorOccurred, this, &LoginWindow::onError);
 
