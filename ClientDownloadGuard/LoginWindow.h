@@ -1,8 +1,11 @@
 #pragma once
 
-#include <QtWidgets/QMainWindow>
 #include "ui_mainWindow.h"
+#include "Validator.h"
+
+#include <QtWidgets/QMainWindow>
 #include <QtNetwork/QNetworkReply>
+#include <QSharedPointer>
 
 class LoginWindow : public QMainWindow
 {
@@ -14,8 +17,8 @@ public:
 private:
 	Ui::MainWindowClass ui;
 
-	QNetworkAccessManager* networkAccessManager;
-	QNetworkReply* reply;
+	QSharedPointer<QNetworkAccessManager> networkAccessManager;
+	QSharedPointer<QNetworkReply> reply;
 
 #ifdef _DEBUG
 	QString hostname = "http://localhost:5000/api/";
@@ -27,6 +30,9 @@ private:
 	bool isLoginValid = false;
 	bool isPasswordValid = false;
 
+	QSharedPointer<Validator> usernameValidator;
+	QSharedPointer<Validator> passwordValidator;
+
 
 	void setupConnections();
 private slots:
@@ -37,4 +43,6 @@ private slots:
 	void onError(QNetworkReply::NetworkError code);
 	void onUsernameTextChanged(QString currentText);
 	void onPasswordTextChanged(QString currentText);
+
+
 };

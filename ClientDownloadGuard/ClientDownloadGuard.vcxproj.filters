@@ -46,7 +46,7 @@
     <ClCompile Include="ServerConnection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LoginValidator.cpp">
+    <ClCompile Include="UsernameValidator.cpp">
       <Filter>Source Files\Validators</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,10 +65,10 @@
     <ClInclude Include="ServerConnection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LoginValidator.h">
+    <ClInclude Include="Validator.h">
       <Filter>Header Files\Validators</Filter>
     </ClInclude>
-    <ClInclude Include="Validator.h">
+    <ClInclude Include="UsernameValidator.h">
       <Filter>Header Files\Validators</Filter>
     </ClInclude>
   </ItemGroup>

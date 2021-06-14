@@ -90,7 +90,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="LoginValidator.cpp" />
+    <ClCompile Include="UsernameValidator.cpp" />
     <ClCompile Include="ServerConnection.cpp" />
     <ClCompile Include="ServerConnectionManager.cpp" />
     <QtRcc Include="mainWindow.qrc" />
@@ -102,7 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Validator.h" />
-    <ClInclude Include="LoginValidator.h" />
+    <ClInclude Include="UsernameValidator.h" />
     <ClInclude Include="QtMacros.h" />
     <ClInclude Include="ServerConnection.h" />
     <ClInclude Include="ServerConnectionManager.h" />

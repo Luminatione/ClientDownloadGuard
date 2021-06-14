@@ -1,9 +1,9 @@
 #pragma once
 #include <QString>
 
-class IValidator
+class Validator
 {
 public:
-	virtual ~IValidator() = default;
+	virtual ~Validator() = default;
 	virtual bool isValid(QString text) = 0;
 };

@@ -5,11 +5,14 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 
+#include "UsernameValidator.h"
+
 
 LoginWindow::LoginWindow(QWidget* parent)
 	: QMainWindow(parent)
 {
-	networkAccessManager = new QNetworkAccessManager(this);
+	usernameValidator = QSharedPointer<UsernameValidator>();
+	networkAccessManager = QSharedPointer<QNetworkAccessManager>();
 	ui.setupUi(this);
 	setupConnections();
 }
@@ -32,10 +35,10 @@ void LoginWindow::onLoginClick()
 	query.addQueryItem("password",  ui.PasswordLineEdit->text() );
 	QString url = hostname + loginPage + '?' + query.query();
 	request.setUrl(url);
-	reply = networkAccessManager->get(request);
+	reply = QSharedPointer<QNetworkReply>(networkAccessManager->get(request));
 	//connect(reply, SIGNAL(finished()), this, SLOT(onLoginResponse));
-	connect(reply, &QIODevice::readyRead, this, &LoginWindow::onLoginResponse);
-	connect(reply, &QNetworkReply::errorOccurred, this, &LoginWindow::onError);
+	connect(reply.get(), &QIODevice::readyRead, this, &LoginWindow::onLoginResponse);
+	connect(reply.get(), &QNetworkReply::errorOccurred, this, &LoginWindow::onError);
 
 }
 
@@ -66,7 +69,7 @@ void LoginWindow::onError(QNetworkReply::NetworkError code)
 
 void LoginWindow::onUsernameTextChanged(QString currentText)
 {
-	
+	usernameValidator->isValid(currentText);
 }
 
 void LoginWindow::onPasswordTextChanged(QString currentText)
