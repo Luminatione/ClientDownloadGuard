@@ -13,11 +13,13 @@
 LoginWindow::LoginWindow(QWidget* parent)
 	: QMainWindow(parent)
 {
-	usernameValidator = QSharedPointer<UsernameValidator>();
-	passwordValidator = QSharedPointer<PasswordValidator>();
-	networkAccessManager = QSharedPointer<QNetworkAccessManager>();
+	usernameValidator = QSharedPointer<UsernameValidator>(new UsernameValidator());
+	passwordValidator = QSharedPointer<PasswordValidator>(new PasswordValidator());
+	networkAccessManager = QSharedPointer<QNetworkAccessManager>(new QNetworkAccessManager(this));
 	ui.setupUi(this);
 	setupConnections();
+
+	ui.LoginButton->setEnabled(false);
 }
 
 void LoginWindow::setupConnections()
@@ -26,11 +28,13 @@ void LoginWindow::setupConnections()
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.QuitButton, onQuitClick());
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.RegisterButton, onRegisterClick());
 	connect(ui.UsernameLineEdit, SIGNAL(textChanged(QString)), this, SLOT(onCredentialsTextChanged()));
+	connect(ui.PasswordLineEdit, SIGNAL(textChanged(QString)), this, SLOT(onCredentialsTextChanged()));
 }
 
 void LoginWindow::onLoginClick()
 {
 	ui.statusBar->showMessage("Logging...");
+	
 	QNetworkRequest request;
 	QUrlQuery query;
 	query.addQueryItem("login",  ui.UsernameLineEdit->text() );
@@ -70,9 +74,9 @@ void LoginWindow::onError(QNetworkReply::NetworkError code)
 	ui.statusBar->showMessage("Error: " + QString::number(code));
 }
 
-void LoginWindow::onCredentialsTextChanged(const QString currentText)
+void LoginWindow::onCredentialsTextChanged()
 {
-	isLoginValid = usernameValidator->isValid(currentText);
-	isPasswordValid = passwordValidator->isValid(currentText);
+	isLoginValid = usernameValidator->isValid(ui.UsernameLineEdit->text());
+	isPasswordValid = passwordValidator->isValid(ui.PasswordLineEdit->text());
 	ui.LoginButton->setEnabled(isLoginValid && isPasswordValid);
 }

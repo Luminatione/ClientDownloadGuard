@@ -41,5 +41,5 @@ private slots:
 	void onRegisterClick();
 	void onLoginResponse();
 	void onError(QNetworkReply::NetworkError code);
-	void onCredentialsTextChanged(QString currentText);
+	void onCredentialsTextChanged();
 };
