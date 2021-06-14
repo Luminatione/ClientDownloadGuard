@@ -17,6 +17,7 @@ LoginWindow::LoginWindow(QWidget* parent)
 	usernameValidator = QSharedPointer<UsernameValidator>(new UsernameValidator());
 	passwordValidator = QSharedPointer<PasswordValidator>(new PasswordValidator());
 	networkAccessManager = QSharedPointer<QNetworkAccessManager>(new QNetworkAccessManager(this));
+	
 	ui.setupUi(this);
 	setupConnections();
 

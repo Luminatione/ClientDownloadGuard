@@ -1,10 +1,11 @@
 #pragma once
-#include <QString>
-#include <QNetworkReply>
-#include <QSharedPointer>
-#include <QStringList>
-#include <QMap>
 
+#include <QNetworkReply>
+
+/**
+ * \brief 
+ * \tparam T Container for custom arguments in call() function
+ */
 template <typename T> class RESTApiCaller
 {
 public:

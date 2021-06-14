@@ -20,7 +20,6 @@ private:
 #else
 	QString hostname = "http://192.168.1.10:5000/api/";
 #endif
-
 	QSharedPointer<RESTApiCaller<LoginApiCallerArguments>> loginApiCaller = QSharedPointer<LoginApiCaller>(new LoginApiCaller());
 public:
 	QNetworkReply* login(QString& username, QString& password);
