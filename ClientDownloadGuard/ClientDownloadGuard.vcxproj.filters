@@ -61,6 +61,9 @@
     <ClCompile Include="RESTApiCaller.cpp">
       <Filter>Source Files\REST Api Callers</Filter>
     </ClCompile>
+    <ClCompile Include="LoginApiCaller.cpp">
+      <Filter>Source Files\REST Api Callers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="LoginWindow.h">
@@ -87,6 +90,9 @@
       <Filter>Header Files\Validators</Filter>
     </ClInclude>
     <ClInclude Include="RESTApiCaller.h">
+      <Filter>Header Files\REST Api Callers</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginApiCaller.h">
       <Filter>Header Files\REST Api Callers</Filter>
     </ClInclude>
   </ItemGroup>
