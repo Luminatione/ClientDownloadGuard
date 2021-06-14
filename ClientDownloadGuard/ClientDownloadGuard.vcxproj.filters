@@ -21,6 +21,12 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
+    <Filter Include="Header Files\Validators">
+      <UniqueIdentifier>{835d7ed8-b7e2-477a-967c-1648a0432b6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Validators">
+      <UniqueIdentifier>{c38ef9ef-b50a-469b-911f-018d3ff801d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="mainWindow.qrc">
@@ -40,6 +46,9 @@
     <ClCompile Include="ServerConnection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LoginValidator.cpp">
+      <Filter>Source Files\Validators</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="LoginWindow.h">
@@ -55,6 +64,12 @@
     </ClInclude>
     <ClInclude Include="ServerConnection.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginValidator.h">
+      <Filter>Header Files\Validators</Filter>
+    </ClInclude>
+    <ClInclude Include="Validator.h">
+      <Filter>Header Files\Validators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
