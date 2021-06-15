@@ -1,15 +1,16 @@
 #pragma once
-#include <QMainWindow>
-#include <ui_mainWindow.h>
 
-class RegisterWindow : public QMainWindow
+#include <QWidget>
+#include "ui_RegisterWindow.h"
+
+class RegisterWindow : public QWidget
 {
 	Q_OBJECT
+
 public:
+	RegisterWindow(QWidget *parent = Q_NULLPTR);
+	~RegisterWindow();
 
-	RegisterWindow(QWidget* widget = Q_NULLPTR);
-
-	Ui::MainWindowClass ui;
-
+private:
+	Ui::RegisterWindow ui;
 };
-

@@ -101,10 +101,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="registerWindow.ui">
+    <QtUic Include="loginWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="loginWindow.ui">
+    <QtUic Include="RegisterWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

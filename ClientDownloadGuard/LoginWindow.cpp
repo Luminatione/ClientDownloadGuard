@@ -9,6 +9,7 @@
 #include "PasswordValidator.h"
 #include "UsernameValidator.h"
 #include "ServerConnectionManager.h"
+#include "RegisterWindow.h"
 
 
 LoginWindow::LoginWindow(QWidget* parent)
@@ -19,6 +20,7 @@ LoginWindow::LoginWindow(QWidget* parent)
 	networkAccessManager = QSharedPointer<QNetworkAccessManager>(new QNetworkAccessManager(this));
 	
 	ui.setupUi(this);
+	
 	setupConnections();
 
 	ui.LoginButton->setEnabled(false);
@@ -52,7 +54,10 @@ void LoginWindow::onQuitClick()
 
 void LoginWindow::onRegisterClick()
 {
-
+	QWidget* registerWindow = new RegisterWindow();
+	
+	registerWindow->show();
+	close();
 }
 
 void LoginWindow::onLoginResponse()

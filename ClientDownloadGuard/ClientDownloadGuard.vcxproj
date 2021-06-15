@@ -102,7 +102,7 @@
     <QtMoc Include="LoginWindow.h" />
     <ClCompile Include="LoginWindow.cpp" />
     <ClCompile Include="main.cpp" />
-    <QtUic Include="registerWindow.ui" />
+    <QtUic Include="RegisterWindow.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoginApiCaller.h" />

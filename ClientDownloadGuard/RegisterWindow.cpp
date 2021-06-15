@@ -1,7 +1,11 @@
 #include "RegisterWindow.h"
 
-
-RegisterWindow::RegisterWindow(QWidget* widget = Q_NULLPTR)
+RegisterWindow::RegisterWindow(QWidget *parent)
+	: QWidget(parent)
 {
-	ui.setupUi();
+	ui.setupUi(this);
+}
+
+RegisterWindow::~RegisterWindow()
+{
 }
