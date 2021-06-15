@@ -103,6 +103,7 @@
     <QtMoc Include="LoginWindow.h" />
     <ClCompile Include="LoginWindow.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="MainWindow1.ui" />
     <QtUic Include="RegisterWindow.ui" />
   </ItemGroup>
   <ItemGroup>

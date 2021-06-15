@@ -110,6 +110,9 @@
     <QtUic Include="loginWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="MainWindow1.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
     <QtUic Include="RegisterWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
