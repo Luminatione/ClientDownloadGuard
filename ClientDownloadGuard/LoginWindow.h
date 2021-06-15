@@ -17,15 +17,7 @@ public:
 private:
 	Ui::MainWindowClass ui;
 
-	QSharedPointer<QNetworkAccessManager> networkAccessManager;
 	QSharedPointer<QNetworkReply> reply;
-
-#ifdef _DEBUG
-	QString hostname = "http://localhost:5000/api/";
-#else
-	QString hostname = "http://192.168.1.10:5000/api/";
-#endif
-	QString loginPage = "login";
 
 	bool isLoginValid = false;
 	bool isPasswordValid = false;
@@ -35,6 +27,7 @@ private:
 
 
 	void setupConnections();
+	bool isUsernameAndPasswordValid();
 private slots:
 	void onLoginClick();
 	void onQuitClick();

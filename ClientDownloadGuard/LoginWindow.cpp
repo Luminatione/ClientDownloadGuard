@@ -17,7 +17,6 @@ LoginWindow::LoginWindow(QWidget* parent)
 {
 	usernameValidator = QSharedPointer<UsernameValidator>(new UsernameValidator());
 	passwordValidator = QSharedPointer<PasswordValidator>(new PasswordValidator());
-	networkAccessManager = QSharedPointer<QNetworkAccessManager>(new QNetworkAccessManager(this));
 	
 	ui.setupUi(this);
 	
@@ -75,9 +74,13 @@ void LoginWindow::onError(QNetworkReply::NetworkError code)
 	ui.statusBar->showMessage("Error: " + QString::number(code));
 }
 
+bool LoginWindow::isUsernameAndPasswordValid()
+{
+	return usernameValidator->isValid(ui.UsernameLineEdit->text()) && passwordValidator->isValid(
+		ui.PasswordLineEdit->text());
+}
+
 void LoginWindow::onCredentialsTextChanged()
 {
-	isLoginValid = usernameValidator->isValid(ui.UsernameLineEdit->text());
-	isPasswordValid = passwordValidator->isValid(ui.PasswordLineEdit->text());
-	ui.LoginButton->setEnabled(isLoginValid && isPasswordValid);
+	ui.LoginButton->setEnabled(isUsernameAndPasswordValid());
 }
