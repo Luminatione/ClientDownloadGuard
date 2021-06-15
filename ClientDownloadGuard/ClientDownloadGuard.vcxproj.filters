@@ -73,6 +73,9 @@
     <ClCompile Include="RegisterWindow.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="RegisterApiCaller.cpp">
+      <Filter>Source Files\REST Api Callers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QtMacros.h">
@@ -97,6 +100,9 @@
       <Filter>Header Files\REST Api Callers</Filter>
     </ClInclude>
     <ClInclude Include="LoginApiCaller.h">
+      <Filter>Header Files\REST Api Callers</Filter>
+    </ClInclude>
+    <ClInclude Include="RegisterApiCaller.h">
       <Filter>Header Files\REST Api Callers</Filter>
     </ClInclude>
   </ItemGroup>

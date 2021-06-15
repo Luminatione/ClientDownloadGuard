@@ -92,6 +92,7 @@
   <ItemGroup>
     <ClCompile Include="LoginApiCaller.cpp" />
     <ClCompile Include="PasswordValidator.cpp" />
+    <ClCompile Include="RegisterApiCaller.cpp" />
     <ClCompile Include="RegisterWindow.cpp" />
     <ClCompile Include="RESTApiCaller.cpp" />
     <ClCompile Include="UsernameValidator.cpp" />
@@ -108,6 +109,7 @@
     <ClInclude Include="LoginApiCaller.h" />
     <ClInclude Include="PasswordValidator.h" />
     <QtMoc Include="RegisterWindow.h" />
+    <ClInclude Include="RegisterApiCaller.h" />
     <ClInclude Include="RESTApiCaller.h" />
     <ClInclude Include="Validator.h" />
     <ClInclude Include="UsernameValidator.h" />
