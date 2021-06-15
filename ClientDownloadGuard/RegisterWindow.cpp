@@ -2,6 +2,8 @@
 
 #include "LoginWindow.h"
 #include "QtMacros.h"
+#include "ServerConnectionManager.h"
+
 RegisterWindow::RegisterWindow(QWidget *parent)
 	: QWidget(parent)
 {
@@ -45,14 +47,21 @@ void RegisterWindow::onLoginClick()
 
 void RegisterWindow::onRegisterClick()
 {
+	QString username = ui.usernameLineEdit->text();
+	QString password = ui.passwordLineEdit->text();
+	reply = QSharedPointer<QNetworkReply>(
+		ServerConnectionManager::serverConnectionManager->registerNewUser(username, password));
+	connect(reply.get(), &QIODevice::readyRead, this, &RegisterWindow::onRegisterResponse);
+	connect(reply.get(), &QNetworkReply::errorOccurred, this, &RegisterWindow::onError);
 }
 
 void RegisterWindow::onRegisterResponse()
 {
 }
 
-void RegisterWindow::onError()
+void RegisterWindow::onError(QNetworkReply::NetworkError errorCode)
 {
+	//ui.statusBar->showMessage("Error: " + QString::number(errorCode));
 }
 
 void RegisterWindow::onCredentialsChange()

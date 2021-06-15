@@ -5,6 +5,7 @@
 
 #include "RESTApiCaller.h"
 #include "LoginApiCaller.h"
+#include "RegisterApiCaller.h"
 
 class ServerConnectionManager
 {
@@ -20,8 +21,11 @@ private:
 #else
 	QString hostname = "http://192.168.1.10:5000/api/";
 #endif
+	
 	QSharedPointer<RESTApiCaller<LoginApiCallerArguments>> loginApiCaller = QSharedPointer<LoginApiCaller>(new LoginApiCaller());
+	QSharedPointer<RESTApiCaller<RegisterApiCallerArguments>> registerApiCaller = QSharedPointer<RegisterApiCaller>(new RegisterApiCaller());
 public:
 	QNetworkReply* login(QString& username, QString& password);
+	QNetworkReply* registerNewUser(QString& username, QString& password);
 };
 

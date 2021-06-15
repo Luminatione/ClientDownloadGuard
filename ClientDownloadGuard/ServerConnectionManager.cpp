@@ -15,3 +15,8 @@ QNetworkReply* ServerConnectionManager::login(QString& username, QString& passwo
 {	
 	return loginApiCaller->call(networkAccessManager.get(), hostname, LoginApiCallerArguments{username, password});
 }
+
+QNetworkReply* ServerConnectionManager::registerNewUser(QString& username, QString& password)
+{
+	return registerApiCaller->call(networkAccessManager.get(), hostname, RegisterApiCallerArguments{ username, password });
+}

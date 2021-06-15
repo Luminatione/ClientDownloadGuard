@@ -69,9 +69,9 @@ void LoginWindow::onLoginResponse()
 		ui.statusBar->showMessage(state + ": " + value);
 	}
 }
-void LoginWindow::onError(QNetworkReply::NetworkError code)
+void LoginWindow::onError(QNetworkReply::NetworkError errorCode)
 {
-	ui.statusBar->showMessage("Error: " + QString::number(code));
+	ui.statusBar->showMessage("Error: " + QString::number(errorCode));
 }
 
 bool LoginWindow::isUsernameAndPasswordValid()

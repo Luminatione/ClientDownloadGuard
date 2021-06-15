@@ -33,6 +33,6 @@ private slots:
 	void onQuitClick();
 	void onRegisterClick();
 	void onLoginResponse();
-	void onError(QNetworkReply::NetworkError code);
+	void onError(QNetworkReply::NetworkError errorCode);
 	void onCredentialsTextChanged();
 };
