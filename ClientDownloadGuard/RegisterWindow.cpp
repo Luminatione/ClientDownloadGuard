@@ -1,12 +1,18 @@
-#include "RegisterWindow.h"
+#include <QJsonObject>
+#include <QJsonDocument>
 
+#include "RegisterWindow.h"
 #include "LoginWindow.h"
+#include "PasswordValidator.h"
 #include "QtMacros.h"
 #include "ServerConnectionManager.h"
+#include "UsernameValidator.h"
 
-RegisterWindow::RegisterWindow(QWidget *parent)
-	: QWidget(parent)
+RegisterWindow::RegisterWindow(QWidget* parent) : QMainWindow(parent)
 {
+	usernameValidator = QSharedPointer<Validator>(new UsernameValidator());
+	passwordValidator = QSharedPointer<Validator>(new PasswordValidator());
+	
 	ui.setupUi(this);
 	setupConnections();
 
@@ -47,6 +53,7 @@ void RegisterWindow::onLoginClick()
 
 void RegisterWindow::onRegisterClick()
 {
+	ui.statusbar->showMessage("Processing");
 	QString username = ui.usernameLineEdit->text();
 	QString password = ui.passwordLineEdit->text();
 	reply = QSharedPointer<QNetworkReply>(
@@ -57,15 +64,18 @@ void RegisterWindow::onRegisterClick()
 
 void RegisterWindow::onRegisterResponse()
 {
-	
+	QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+	QString state = document.object()["state"].toString();
+	QString value = document.object()["value"].toString();
+	ui.statusbar->showMessage(state + ": " + value);
 }
 
 void RegisterWindow::onError(QNetworkReply::NetworkError errorCode)
 {
-	//ui.statusBar->showMessage("Error: " + QString::number(errorCode));
+	ui.statusbar->showMessage("Error: " + QString::number(errorCode));
 }
 
-void RegisterWindow::onCredentialsChange()
+void RegisterWindow::onCredentialsTextChanged()
 {
 	ui.registerButton->setEnabled(isUsernameAndPasswordValid());
 }

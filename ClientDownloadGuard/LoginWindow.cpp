@@ -17,9 +17,9 @@ LoginWindow::LoginWindow(QWidget* parent)
 {
 	usernameValidator = QSharedPointer<UsernameValidator>(new UsernameValidator());
 	passwordValidator = QSharedPointer<PasswordValidator>(new PasswordValidator());
-	
+
 	ui.setupUi(this);
-	
+
 	setupConnections();
 
 	ui.LoginButton->setEnabled(false);
@@ -54,7 +54,6 @@ void LoginWindow::onQuitClick()
 void LoginWindow::onRegisterClick()
 {
 	QWidget* registerWindow = new RegisterWindow();
-	
 	registerWindow->show();
 	close();
 }
@@ -64,10 +63,8 @@ void LoginWindow::onLoginResponse()
 	QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
 	QString state = document.object()["state"].toString();
 	QString value = document.object()["value"].toString();
-	if (state == "Failure")
-	{
-		ui.statusBar->showMessage(state + ": " + value);
-	}
+	ui.statusBar->showMessage(state + ": " + value);
+
 }
 void LoginWindow::onError(QNetworkReply::NetworkError errorCode)
 {

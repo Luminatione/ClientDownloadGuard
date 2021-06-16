@@ -70,11 +70,14 @@
     <ClCompile Include="LoginWindow.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="RegisterApiCaller.cpp">
+      <Filter>Source Files\REST Api Callers</Filter>
+    </ClCompile>
     <ClCompile Include="RegisterWindow.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="RegisterApiCaller.cpp">
-      <Filter>Source Files\REST Api Callers</Filter>
+    <ClCompile Include="ResponseReader.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,15 +108,15 @@
     <ClInclude Include="RegisterApiCaller.h">
       <Filter>Header Files\REST Api Callers</Filter>
     </ClInclude>
+    <ClInclude Include="ResponseReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="loginWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="MainWindow1.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="RegisterWindow.ui">
+    <QtUic Include="registerWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

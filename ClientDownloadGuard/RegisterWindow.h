@@ -1,24 +1,21 @@
 #pragma once
-
-#include <QWidget>
+#include <QMainWindow>
 #include <QNetworkReply>
 
-#include "ui_RegisterWindow.h"
 #include "Validator.h"
+#include "ui_registerWindow.h"
 
-class RegisterWindow : public QWidget
+
+class RegisterWindow : public QMainWindow
 {
 	Q_OBJECT
-
+	
 public:
-	RegisterWindow(QWidget *parent = Q_NULLPTR);
+	RegisterWindow(QWidget* parent = Q_NULLPTR);
 	~RegisterWindow();
 
 private:
-	Ui::RegisterWindow ui;
-
-	bool isLoginValid = false;
-	bool isPasswordValid = false;
+	Ui::MainWindow ui;
 
 	QSharedPointer<Validator> usernameValidator;
 	QSharedPointer<Validator> passwordValidator;
@@ -33,5 +30,5 @@ private slots:
 	void onRegisterClick();
 	void onRegisterResponse();
 	void onError(QNetworkReply::NetworkError errorCode);
-	void onCredentialsChange();
+	void onCredentialsTextChanged();
 };
