@@ -7,10 +7,10 @@
 
 class ResponseReader
 {
-	QString stateName = "state";
-	QString valueName = "value";
+	static inline QString stateName = "state";
+	static inline QString valueName = "value";
 public:
-	std::tuple<QJsonValueRef, QJsonValueRef> getStateAndValueJsonRefValues(QNetworkReply* reply);
-	std::tuple<QString, QString> getStateAndValueQStrings(QNetworkReply* reply);
+	static std::tuple<QJsonValueRef, QJsonValueRef> getStateAndValueJsonRefValues(QNetworkReply* reply);
+	static std::tuple<QString, QString> getStateAndValueQStrings(QNetworkReply* reply);
 };
 

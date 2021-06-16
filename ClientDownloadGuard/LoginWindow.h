@@ -13,6 +13,7 @@ class LoginWindow : public QMainWindow
 
 public:
 	LoginWindow(QWidget* parent = Q_NULLPTR);
+	void setUsernameAndPasswordText(QString& username, QString& password);
 
 private:
 	Ui::MainWindowClass ui;

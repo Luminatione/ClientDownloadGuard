@@ -10,6 +10,7 @@
 #include "UsernameValidator.h"
 #include "ServerConnectionManager.h"
 #include "RegisterWindow.h"
+#include "ResponseReader.h"
 
 
 LoginWindow::LoginWindow(QWidget* parent)
@@ -23,6 +24,12 @@ LoginWindow::LoginWindow(QWidget* parent)
 	setupConnections();
 
 	ui.LoginButton->setEnabled(false);
+}
+
+void LoginWindow::setUsernameAndPasswordText(QString& username, QString& password)
+{
+	ui.UsernameLineEdit->setText(username);
+	ui.PasswordLineEdit->setText(password);
 }
 
 void LoginWindow::setupConnections()
@@ -60,11 +67,8 @@ void LoginWindow::onRegisterClick()
 
 void LoginWindow::onLoginResponse()
 {
-	QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
-	QString state = document.object()["state"].toString();
-	QString value = document.object()["value"].toString();
+	auto [state, value] = ResponseReader::getStateAndValueQStrings(reply.get());
 	ui.statusBar->showMessage(state + ": " + value);
-
 }
 void LoginWindow::onError(QNetworkReply::NetworkError errorCode)
 {
