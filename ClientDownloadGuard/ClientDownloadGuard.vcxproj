@@ -97,7 +97,6 @@
     <ClCompile Include="ResponseReader.cpp" />
     <ClCompile Include="RESTApiCaller.cpp" />
     <ClCompile Include="UsernameValidator.cpp" />
-    <ClCompile Include="ServerConnection.cpp" />
     <ClCompile Include="ServerConnectionManager.cpp" />
     <QtRcc Include="mainWindow.qrc" />
     <QtUic Include="loginWindow.ui" />
@@ -116,7 +115,6 @@
     <ClInclude Include="Validator.h" />
     <ClInclude Include="UsernameValidator.h" />
     <ClInclude Include="QtMacros.h" />
-    <ClInclude Include="ServerConnection.h" />
     <ClInclude Include="ServerConnectionManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
