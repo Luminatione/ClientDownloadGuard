@@ -5,6 +5,7 @@
 #include "LoginWindow.h"
 #include "PasswordValidator.h"
 #include "QtMacros.h"
+#include "ResponseReader.h"
 #include "ServerConnectionManager.h"
 #include "UsernameValidator.h"
 
@@ -53,7 +54,7 @@ void RegisterWindow::onLoginClick()
 
 void RegisterWindow::onRegisterClick()
 {
-	ui.statusbar->showMessage("Processing");
+	ui.statusbar->showMessage("Processing...");
 	QString username = ui.usernameLineEdit->text();
 	QString password = ui.passwordLineEdit->text();
 	reply = QSharedPointer<QNetworkReply>(
@@ -64,10 +65,17 @@ void RegisterWindow::onRegisterClick()
 
 void RegisterWindow::onRegisterResponse()
 {
-	QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
-	QString state = document.object()["state"].toString();
-	QString value = document.object()["value"].toString();
+	auto [state, value] = ResponseReader::getStateAndValueQStrings(reply.get());
 	ui.statusbar->showMessage(state + ": " + value);
+	if(state == "Success")
+	{
+		LoginWindow* loginWindow = new LoginWindow();
+		QString username = ui.usernameLineEdit->text();
+		QString password = ui.passwordLineEdit->text();
+		loginWindow->setUsernameAndPasswordText(username, password);
+		loginWindow->show();
+		close();
+	}
 }
 
 void RegisterWindow::onError(QNetworkReply::NetworkError errorCode)

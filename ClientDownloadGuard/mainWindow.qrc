@@ -1,4 +1,5 @@
 <RCC>
-    <qresource prefix="MainWindow">
+    <qresource prefix="/Graphic">
+        <file>Graphic/loader.gif</file>
     </qresource>
 </RCC>
