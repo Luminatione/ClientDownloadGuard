@@ -10,6 +10,7 @@ class ResponseReader
 	QString stateName = "state";
 	QString valueName = "value";
 public:
-	std::tuple<QJsonValueRef, QJsonValueRef> GetStateAndValueJsonObjects(QNetworkReply* reply);
+	std::tuple<QJsonValueRef, QJsonValueRef> getStateAndValueJsonRefValues(QNetworkReply* reply);
+	std::tuple<QString, QString> getStateAndValueQStrings(QNetworkReply* reply);
 };
 
