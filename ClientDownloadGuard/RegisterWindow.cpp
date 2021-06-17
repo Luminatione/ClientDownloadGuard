@@ -54,6 +54,7 @@ void RegisterWindow::onLoginClick()
 
 void RegisterWindow::onRegisterClick()
 {
+	loading->startLoading();
 	ui.statusbar->showMessage("Processing...");
 	QString username = ui.usernameLineEdit->text();
 	QString password = ui.passwordLineEdit->text();
@@ -67,6 +68,7 @@ void RegisterWindow::onRegisterResponse()
 {
 	auto [state, value] = ResponseReader::getStateAndValueQStrings(reply.get());
 	ui.statusbar->showMessage(state + ": " + value);
+	loading->stopLoading();
 	if(state == "Success")
 	{
 		LoginWindow* loginWindow = new LoginWindow();

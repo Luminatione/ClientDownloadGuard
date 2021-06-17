@@ -2,6 +2,8 @@
 #include <QMainWindow>
 #include <QNetworkReply>
 
+
+#include "LoadingUtility.h"
 #include "Validator.h"
 #include "ui_registerWindow.h"
 
@@ -21,6 +23,8 @@ private:
 	QSharedPointer<Validator> passwordValidator;
 
 	QSharedPointer<QNetworkReply> reply;
+
+	QSharedPointer<LoadingUtility> loading = QSharedPointer<LoadingUtility>(new LoadingUtility(this));
 
 	void setupConnections();
 	bool isUsernameAndPasswordValid();
