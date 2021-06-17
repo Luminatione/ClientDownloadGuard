@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>MainPanelWindow</class>
+ <widget class="QMainWindow" name="MainPanelWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>659</width>
-    <height>568</height>
+    <width>477</width>
+    <height>522</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,11 +19,41 @@
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QLabel" name="currentStateGraphic">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>128</width>
+          <height>128</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>166660</width>
+          <height>166660</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="frameShadow">
          <enum>QFrame::Plain</enum>
         </property>
         <property name="text">
          <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>false</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
         <property name="wordWrap">
          <bool>false</bool>
@@ -76,7 +106,7 @@
       <item>
        <widget class="QPushButton" name="confirmButton">
         <property name="text">
-         <string>PushButton</string>
+         <string>Confirm</string>
         </property>
        </widget>
       </item>
@@ -89,7 +119,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>659</width>
+     <width>477</width>
      <height>22</height>
     </rect>
    </property>

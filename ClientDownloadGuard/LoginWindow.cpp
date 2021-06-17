@@ -11,6 +11,8 @@
 #include "ServerConnectionManager.h"
 #include "RegisterWindow.h"
 #include "LoadingUtility.h"
+#include "MainPanelWindow.h"
+
 
 
 LoginWindow::LoginWindow(QWidget* parent)
@@ -24,6 +26,9 @@ LoginWindow::LoginWindow(QWidget* parent)
 	setupConnections();
 
 	ui.LoginButton->setEnabled(false);
+
+	MainPanelWindow* mainPanelWindow = new MainPanelWindow();
+	mainPanelWindow->show();
 }
 
 void LoginWindow::setUsernameAndPasswordText(QString& username, QString& password)
@@ -73,6 +78,7 @@ void LoginWindow::onLoginResponse()
 	QString value = document.object()["value"].toString();
 	ui.statusBar->showMessage(state + ": " + value);
 	loading->stopLoading();
+	
 }
 void LoginWindow::onError(QNetworkReply::NetworkError errorCode)
 {
