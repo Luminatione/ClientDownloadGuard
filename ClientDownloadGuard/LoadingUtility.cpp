@@ -35,7 +35,7 @@ void LoadingUtility::setAllWidgetsEnabledState(bool state)
 
 QLabel* LoadingUtility::getCenteredLabelWithLoadingAnimation()
 {
-	QLabel* label = new QLabel(mainWindow.get());
+	QLabel* label = new QLabel(mainWindow);
 	label->setMovie(movie.get());
 	label->show();
 	label->setFixedWidth(30);
@@ -43,9 +43,8 @@ QLabel* LoadingUtility::getCenteredLabelWithLoadingAnimation()
 	return label;
 }
 
-LoadingUtility::LoadingUtility(QMainWindow* mainWindow)
+LoadingUtility::LoadingUtility(QMainWindow* mainWindow): mainWindow(mainWindow)
 {
-	this->mainWindow = QSharedPointer<QMainWindow>(mainWindow);
 	movie = QSharedPointer<QMovie>(new QMovie(":/Graphic/Graphic/loader.gif"));
 	label = Q_NULLPTR;
 }

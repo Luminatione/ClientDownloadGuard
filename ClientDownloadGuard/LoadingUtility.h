@@ -7,7 +7,7 @@ class QMainWindow;
 
 class LoadingUtility
 {
-	QSharedPointer<QMainWindow> mainWindow;
+	QMainWindow* mainWindow;
 	QSharedPointer<QLabel> label;
 	QSharedPointer<QMovie> movie;
 
