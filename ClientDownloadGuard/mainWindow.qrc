@@ -4,5 +4,6 @@
         <file>Graphic/check.png</file>
         <file>Graphic/close.png</file>
         <file>Graphic/exclamation.png</file>
+        <file>Graphic/no-internet.png</file>
     </qresource>
 </RCC>

@@ -90,6 +90,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GetNetworkStateApiCaller.cpp" />
     <ClCompile Include="LoadingUtility.cpp" />
     <ClCompile Include="LoginApiCaller.cpp" />
     <ClCompile Include="MainPanelWindow.cpp" />
@@ -109,6 +110,7 @@
     <QtUic Include="registerWindow.ui" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GetNetworkStateApiCaller.h" />
     <ClInclude Include="LoadingUtility.h" />
     <ClInclude Include="LoginApiCaller.h" />
     <QtMoc Include="MainPanelWindow.h" />

@@ -82,6 +82,9 @@
     <ClCompile Include="MainPanelWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GetNetworkStateApiCaller.cpp">
+      <Filter>Source Files\REST Api Callers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QtMacros.h">
@@ -113,6 +116,9 @@
     </ClInclude>
     <ClInclude Include="LoadingUtility.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GetNetworkStateApiCaller.h">
+      <Filter>Header Files\REST Api Callers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

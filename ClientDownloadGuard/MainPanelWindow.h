@@ -8,12 +8,23 @@ class MainPanelWindow : public QMainWindow
 	Q_OBJECT
 
 	Ui::MainPanelWindow ui;
-	QPixmap networkIsBusyIcon = QPixmap(":/Graphic/Graphic/close.png");
-	QPixmap askNotToDownload = QPixmap(":/Graphic/Graphic/exclamation.png");
-	QPixmap networkIsFree = QPixmap(":/Graphic/Graphic/check.png");
+	QPixmap networkIsBusyIcon;
+	QPixmap askNotToDownload;
+	QPixmap networkIsFree;
+	QPixmap noConnection;
+
+	QString authKey;
+
 public:
 	MainPanelWindow(QWidget* parent = Q_NULLPTR);
-
+	
+	void setAuthKey(QString& authKey);
+	
+private:
+	void initializeIcons();
+	void setupConnections();
+	void populateStateSelection();
+	void getState();
 private slots:
 	void onAboutTriggered();
 };
