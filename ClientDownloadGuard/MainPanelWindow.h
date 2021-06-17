@@ -15,7 +15,7 @@ class MainPanelWindow : public QMainWindow
 
 	QString authKey;
 
-
+	QSharedPointer<QNetworkReply> reply;
 	
 public:
 	MainPanelWindow(QWidget* parent = Q_NULLPTR);
@@ -27,7 +27,10 @@ private:
 	void setupConnections();
 	void populateStateSelection();
 	void getState();
+	
 private slots:
 	void onAboutTriggered();
+	void onGetStateResponse();
+	void onGetStateError(QNetworkReply::NetworkError errorCode);
 };
 
