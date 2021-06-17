@@ -3,6 +3,8 @@
 #include <QString>
 #include <QtNetwork/QNetworkAccessManager>
 
+
+#include "GetNetworkStateApiCaller.h"
 #include "RESTApiCaller.h"
 #include "LoginApiCaller.h"
 #include "RegisterApiCaller.h"
@@ -24,8 +26,10 @@ private:
 	
 	QSharedPointer<RESTApiCaller<LoginApiCallerArguments>> loginApiCaller = QSharedPointer<LoginApiCaller>(new LoginApiCaller());
 	QSharedPointer<RESTApiCaller<RegisterApiCallerArguments>> registerApiCaller = QSharedPointer<RegisterApiCaller>(new RegisterApiCaller());
+	QSharedPointer<RESTApiCaller<GetNetworkStateApiCallerArguments>> getNetworkStateApiCaller = QSharedPointer<GetNetworkStateApiCaller>(new GetNetworkStateApiCaller());
 public:
 	QNetworkReply* login(QString& username, QString& password);
 	QNetworkReply* registerNewUser(QString& username, QString& password);
+	QNetworkReply* getNetworkState(QString& authKey);
 };
 

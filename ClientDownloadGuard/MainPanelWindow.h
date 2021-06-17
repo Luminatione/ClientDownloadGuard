@@ -15,6 +15,8 @@ class MainPanelWindow : public QMainWindow
 
 	QString authKey;
 
+
+	
 public:
 	MainPanelWindow(QWidget* parent = Q_NULLPTR);
 	

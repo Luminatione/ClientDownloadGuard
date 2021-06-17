@@ -12,11 +12,16 @@ ServerConnectionManager::ServerConnectionManager(QObject* caller = nullptr)
 }
 
 QNetworkReply* ServerConnectionManager::login(QString& username, QString& password)
-{	
-	return loginApiCaller->call(networkAccessManager.get(), hostname, LoginApiCallerArguments{username, password});
+{
+	return loginApiCaller->call(networkAccessManager.get(), hostname, { username, password });
 }
 
 QNetworkReply* ServerConnectionManager::registerNewUser(QString& username, QString& password)
 {
-	return registerApiCaller->call(networkAccessManager.get(), hostname, RegisterApiCallerArguments{ username, password });
+	return registerApiCaller->call(networkAccessManager.get(), hostname, { username, password });
+}
+
+QNetworkReply* ServerConnectionManager::getNetworkState(QString& authKey)
+{
+	return getNetworkStateApiCaller->call(networkAccessManager.get(), hostname, { authKey });
 }

@@ -79,11 +79,11 @@
     <ClCompile Include="LoadingUtility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainPanelWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GetNetworkStateApiCaller.cpp">
       <Filter>Source Files\REST Api Callers</Filter>
+    </ClCompile>
+    <ClCompile Include="MainPanelWindow.cpp">
+      <Filter>Source Files\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,7 +140,7 @@
       <Filter>Header Files\Windows</Filter>
     </QtMoc>
     <QtMoc Include="MainPanelWindow.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Windows</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

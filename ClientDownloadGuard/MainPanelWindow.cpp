@@ -1,4 +1,6 @@
 #include <QMessageBox>
+#include <QNetworkReply>
+
 
 #include "MainPanelWindow.h"
 
@@ -33,7 +35,7 @@ void MainPanelWindow::populateStateSelection()
 
 void MainPanelWindow::getState()
 {
-	
+	QNetworkReply* reply = 
 }
 
 void MainPanelWindow::setAuthKey(QString& authKey)
