@@ -24,9 +24,6 @@ LoginWindow::LoginWindow(QWidget* parent)
 	setupConnections();
 
 	ui.LoginButton->setEnabled(false);
-	LoadingUtility* loading= new LoadingUtility(this);
-	loading->startLoading();
-	loading->stopLoading();
 }
 
 void LoginWindow::setUsernameAndPasswordText(QString& username, QString& password)
@@ -46,6 +43,7 @@ void LoginWindow::setupConnections()
 
 void LoginWindow::onLoginClick()
 {
+	loading->startLoading();
 	ui.statusBar->showMessage("Logging...");
 	QString username = ui.UsernameLineEdit->text();
 	QString password = ui.PasswordLineEdit->text();
@@ -74,7 +72,7 @@ void LoginWindow::onLoginResponse()
 	QString state = document.object()["state"].toString();
 	QString value = document.object()["value"].toString();
 	ui.statusBar->showMessage(state + ": " + value);
-
+	loading->stopLoading();
 }
 void LoginWindow::onError(QNetworkReply::NetworkError errorCode)
 {
