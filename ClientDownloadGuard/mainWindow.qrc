@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/Graphic">
         <file>Graphic/loader.gif</file>
+        <file>Graphic/check.png</file>
+        <file>Graphic/close.png</file>
+        <file>Graphic/exclamation.png</file>
     </qresource>
 </RCC>

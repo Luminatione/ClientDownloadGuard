@@ -92,6 +92,7 @@
   <ItemGroup>
     <ClCompile Include="LoadingUtility.cpp" />
     <ClCompile Include="LoginApiCaller.cpp" />
+    <ClCompile Include="MainPanelWindow.cpp" />
     <ClCompile Include="PasswordValidator.cpp" />
     <ClCompile Include="RegisterApiCaller.cpp" />
     <ClCompile Include="RegisterWindow.cpp" />
@@ -104,11 +105,13 @@
     <QtMoc Include="LoginWindow.h" />
     <ClCompile Include="LoginWindow.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="MainPanelWindow.ui" />
     <QtUic Include="registerWindow.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoadingUtility.h" />
     <ClInclude Include="LoginApiCaller.h" />
+    <QtMoc Include="MainPanelWindow.h" />
     <ClInclude Include="PasswordValidator.h" />
     <ClInclude Include="RegisterApiCaller.h" />
     <QtMoc Include="RegisterWindow.h" />
