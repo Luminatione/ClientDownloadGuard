@@ -10,6 +10,7 @@
 #include "UsernameValidator.h"
 #include "ServerConnectionManager.h"
 #include "RegisterWindow.h"
+#include "LoadingUtility.h"
 
 
 LoginWindow::LoginWindow(QWidget* parent)
@@ -23,6 +24,15 @@ LoginWindow::LoginWindow(QWidget* parent)
 	setupConnections();
 
 	ui.LoginButton->setEnabled(false);
+	LoadingUtility* loading= new LoadingUtility(this);
+	loading->startLoading();
+	loading->stopLoading();
+}
+
+void LoginWindow::setUsernameAndPasswordText(QString& username, QString& password)
+{
+	ui.UsernameLineEdit->setText(username);
+	ui.PasswordLineEdit->setText(password);
 }
 
 void LoginWindow::setupConnections()

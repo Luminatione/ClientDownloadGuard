@@ -76,6 +76,9 @@
     <ClCompile Include="ResponseReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingUtility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QtMacros.h">
@@ -103,6 +106,9 @@
       <Filter>Header Files\REST Api Callers</Filter>
     </ClInclude>
     <ClInclude Include="ResponseReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingUtility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

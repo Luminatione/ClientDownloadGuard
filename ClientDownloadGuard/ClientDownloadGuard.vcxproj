@@ -90,6 +90,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LoadingUtility.cpp" />
     <ClCompile Include="LoginApiCaller.cpp" />
     <ClCompile Include="PasswordValidator.cpp" />
     <ClCompile Include="RegisterApiCaller.cpp" />
@@ -106,6 +107,7 @@
     <QtUic Include="registerWindow.ui" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LoadingUtility.h" />
     <ClInclude Include="LoginApiCaller.h" />
     <ClInclude Include="PasswordValidator.h" />
     <ClInclude Include="RegisterApiCaller.h" />
