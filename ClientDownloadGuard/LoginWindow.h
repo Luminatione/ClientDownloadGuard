@@ -20,9 +20,6 @@ private:
 
 	QSharedPointer<QNetworkReply> reply;
 
-	bool isLoginValid = false;
-	bool isPasswordValid = false;
-
 	QSharedPointer<Validator> usernameValidator;
 	QSharedPointer<Validator> passwordValidator;
 
