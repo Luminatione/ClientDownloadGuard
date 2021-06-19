@@ -27,8 +27,8 @@ LoginWindow::LoginWindow(QWidget* parent)
 
 	ui.LoginButton->setEnabled(false);
 
-	MainPanelWindow* mainPanelWindow = new MainPanelWindow();
-	mainPanelWindow->show();
+	ui.UsernameLineEdit->setText("adam997");
+	ui.PasswordLineEdit->setText("jp2gmd2137");
 }
 
 void LoginWindow::setUsernameAndPasswordText(QString& username, QString& password)
@@ -73,16 +73,27 @@ void LoginWindow::onRegisterClick()
 void LoginWindow::onLoginResponse()
 {
 	auto [state, value] = ResponseReader::getStateAndValueQStrings(reply.get());
-	ui.statusBar->showMessage(state + ": " + value);
+	if (state == "Success")
+	{
+		MainPanelWindow* mainPanelWindow = new MainPanelWindow();
+		mainPanelWindow->setAuthKey(value);
+		mainPanelWindow->show();
+		loading->stopLoading();
+		close();
+	}
+	else
+	{
+		ui.statusBar->showMessage(state + ": " + value);
+	}
 	loading->stopLoading();
-	
+	ui.LoginButton->setEnabled(areUsernameAndPasswordValid());
 }
 void LoginWindow::onError(QNetworkReply::NetworkError errorCode)
 {
 	ui.statusBar->showMessage("Error: " + QString::number(errorCode));
 }
 
-bool LoginWindow::isUsernameAndPasswordValid()
+bool LoginWindow::areUsernameAndPasswordValid()
 {
 	return usernameValidator->isValid(ui.UsernameLineEdit->text()) && passwordValidator->isValid(
 		ui.PasswordLineEdit->text());
@@ -90,5 +101,5 @@ bool LoginWindow::isUsernameAndPasswordValid()
 
 void LoginWindow::onCredentialsTextChanged()
 {
-	ui.LoginButton->setEnabled(isUsernameAndPasswordValid());
+	ui.LoginButton->setEnabled(areUsernameAndPasswordValid());
 }

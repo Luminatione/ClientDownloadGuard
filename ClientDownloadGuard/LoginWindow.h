@@ -29,7 +29,7 @@ private:
 
 
 	void setupConnections();
-	bool isUsernameAndPasswordValid();
+	bool areUsernameAndPasswordValid();
 private slots:
 	void onLoginClick();
 	void onQuitClick();

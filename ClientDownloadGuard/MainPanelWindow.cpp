@@ -16,6 +16,7 @@ MainPanelWindow::MainPanelWindow(QWidget* parent)
 
 	setupConnections();
 	populateStateSelection();
+	getState();
 }
 void MainPanelWindow::initializeIcons()
 {
@@ -54,7 +55,7 @@ void MainPanelWindow::onAboutTriggered()
 void MainPanelWindow::onGetStateResponse()
 {
 	auto [state, value] = ResponseReader::getStateAndValueJsonRefValues(reply.get());
-	if(state=="Success")
+	if(state.toString()=="Success")
 	{
 		int type = value.toObject()["type"].toInt();
 		QString description = value.toObject()["description"].toString();

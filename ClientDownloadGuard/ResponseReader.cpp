@@ -2,7 +2,7 @@
 
 #include <QNetworkReply>
 
-std::tuple<QJsonValueRef, QJsonValueRef> ResponseReader::getStateAndValueJsonRefValues(QNetworkReply* reply)
+std::tuple<QJsonValue, QJsonValue> ResponseReader::getStateAndValueJsonRefValues(QNetworkReply* reply)
 {
 	QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
 	return std::make_tuple(document.object()[stateName], document.object()[valueName]);
