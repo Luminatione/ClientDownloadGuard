@@ -12,7 +12,7 @@
 #include "RegisterWindow.h"
 #include "LoadingUtility.h"
 #include "MainPanelWindow.h"
-
+#include "ResponseReader.h"
 
 
 LoginWindow::LoginWindow(QWidget* parent)
@@ -72,9 +72,7 @@ void LoginWindow::onRegisterClick()
 
 void LoginWindow::onLoginResponse()
 {
-	QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
-	QString state = document.object()["state"].toString();
-	QString value = document.object()["value"].toString();
+	auto [state, value] = ResponseReader::getStateAndValueQStrings(reply.get());
 	ui.statusBar->showMessage(state + ": " + value);
 	loading->stopLoading();
 	
