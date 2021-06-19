@@ -1,6 +1,8 @@
 #pragma once
 
 #include <qmainwindow.h>
+#include <QSharedPointer>
+#include <QNetworkReply>
 
 #include "ui_MainPanelWindow.h"
 class MainPanelWindow : public QMainWindow

@@ -54,8 +54,7 @@ void LoginWindow::onLoginClick()
 	QString password = ui.PasswordLineEdit->text();
 	reply = QSharedPointer<QNetworkReply>(
 		ServerConnectionManager::serverConnectionManager->login(username, password));
-	connect(reply.get(), &QIODevice::readyRead, this, &LoginWindow::onLoginResponse);
-	connect(reply.get(), &QNetworkReply::errorOccurred, this, &LoginWindow::onError);
+	SERVER_RESPONSE_TO_THIS_CONNECTION(reply, LoginWindow::onLoginResponse, LoginWindow::onError);
 
 }
 

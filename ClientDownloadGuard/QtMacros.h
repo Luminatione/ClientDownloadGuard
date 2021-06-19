@@ -6,5 +6,5 @@
 
 #ifndef SERVER_RESPONSE_TO_THIS_CONNECTION(reply, onSuccess, onError)
 #define SERVER_RESPONSE_TO_THIS_CONNECTION(reply, onSuccess, onError) 	connect(reply.get(), &QIODevice::readyRead, this, &onSuccess);\
-																		connect(reply.get(), &QNetworkReply::errorOccurred, this, &onError);
+																		connect(reply.get(), &QNetworkReply::errorOccurred, this, &onError)
 #endif

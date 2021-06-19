@@ -59,8 +59,7 @@ void RegisterWindow::onRegisterClick()
 	QString password = ui.passwordLineEdit->text();
 	reply = QSharedPointer<QNetworkReply>(
 		ServerConnectionManager::serverConnectionManager->registerNewUser(username, password));
-	connect(reply.get(), &QIODevice::readyRead, this, &RegisterWindow::onRegisterResponse);
-	connect(reply.get(), &QNetworkReply::errorOccurred, this, &RegisterWindow::onError);
+	SERVER_RESPONSE_TO_THIS_CONNECTION(reply, RegisterWindow::onRegisterResponse, RegisterWindow::onError);
 }
 
 void RegisterWindow::onRegisterResponse()
