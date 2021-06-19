@@ -17,6 +17,7 @@ QNetworkReply* GetNetworkStateApiCaller::call(QNetworkAccessManager* accessManag
                                               GetNetworkStateApiCallerArguments arguments)
 {
 	QNetworkRequest request;
-	request.setUrl(getUrl(hostname, arguments.authKey));
+	QString url = getUrl(hostname, arguments.authKey);
+	request.setUrl(url);
 	return accessManager->get(request);
 }

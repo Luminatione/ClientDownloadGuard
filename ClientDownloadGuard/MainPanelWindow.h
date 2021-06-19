@@ -4,7 +4,10 @@
 #include <QSharedPointer>
 #include <QNetworkReply>
 
+
+#include "LabelTextSetter.h"
 #include "ui_MainPanelWindow.h"
+
 class MainPanelWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -18,9 +21,12 @@ class MainPanelWindow : public QMainWindow
 	QString authKey;
 
 	QSharedPointer<QNetworkReply> reply;
+
+	LabelTextSetter authorLabelTextSetter = LabelTextSetter("", "Author: ", "", ui.authorLabel);
+	LabelTextSetter descriptionLabelTextSetter = LabelTextSetter("", "Description: \n", "", ui.currentDescriptionLabel);
 	
 public:
-	MainPanelWindow(QWidget* parent = Q_NULLPTR);
+	MainPanelWindow(QString authKey, QWidget* parent = Q_NULLPTR);
 	
 	void setAuthKey(QString& authKey);
 	

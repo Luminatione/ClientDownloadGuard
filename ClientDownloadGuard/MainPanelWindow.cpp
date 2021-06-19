@@ -8,7 +8,7 @@
 #include "ServerConnectionManager.h"
 
 
-MainPanelWindow::MainPanelWindow(QWidget* parent)
+MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(authKey)
 {
 	ui.setupUi(this);
 	initializeIcons();
@@ -60,6 +60,13 @@ void MainPanelWindow::onGetStateResponse()
 		int type = value.toObject()["type"].toInt();
 		QString description = value.toObject()["description"].toString();
 		QString user = value.toObject()["login"].toString();
+
+		authorLabelTextSetter.setText(user);
+		descriptionLabelTextSetter.setText(description);
+		switch (type)
+		{
+			case 
+		}
 	}
 	else
 	{

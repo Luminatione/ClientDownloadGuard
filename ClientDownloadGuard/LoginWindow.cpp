@@ -75,8 +75,7 @@ void LoginWindow::onLoginResponse()
 	auto [state, value] = ResponseReader::getStateAndValueQStrings(reply.get());
 	if (state == "Success")
 	{
-		MainPanelWindow* mainPanelWindow = new MainPanelWindow();
-		mainPanelWindow->setAuthKey(value);
+		MainPanelWindow* mainPanelWindow = new MainPanelWindow(value);
 		mainPanelWindow->show();
 		loading->stopLoading();
 		close();

@@ -91,6 +91,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GetNetworkStateApiCaller.cpp" />
+    <ClCompile Include="LabelTextSetter.cpp" />
     <ClCompile Include="LoadingUtility.cpp" />
     <ClCompile Include="LoginApiCaller.cpp" />
     <ClCompile Include="MainPanelWindow.cpp" />
@@ -111,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GetNetworkStateApiCaller.h" />
+    <ClInclude Include="LabelTextSetter.h" />
     <ClInclude Include="LoadingUtility.h" />
     <ClInclude Include="LoginApiCaller.h" />
     <QtMoc Include="MainPanelWindow.h" />
