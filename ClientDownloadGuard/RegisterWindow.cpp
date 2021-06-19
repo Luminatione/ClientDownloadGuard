@@ -62,17 +62,22 @@ void RegisterWindow::onRegisterClick()
 	SERVER_RESPONSE_TO_THIS_CONNECTION(reply, RegisterWindow::onRegisterResponse, RegisterWindow::onError);
 }
 
+void RegisterWindow::openFilledLoginWindow()
+{
+	LoginWindow* loginWindow = new LoginWindow();
+	QString username = ui.usernameLineEdit->text();
+	QString password = ui.passwordLineEdit->text();
+	loginWindow->setUsernameAndPasswordText(username, password);
+	loginWindow->show();
+}
+
 void RegisterWindow::onRegisterResponse()
 {
 	auto [state, value] = ResponseReader::getStateAndValueQStrings(reply.get());
 	ui.statusbar->showMessage(state + ": " + value);
 	if(state == "Success")
 	{
-		LoginWindow* loginWindow = new LoginWindow();
-		QString username = ui.usernameLineEdit->text();
-		QString password = ui.passwordLineEdit->text();
-		loginWindow->setUsernameAndPasswordText(username, password);
-		loginWindow->show();
+		openFilledLoginWindow();
 		close();
 	}
 }

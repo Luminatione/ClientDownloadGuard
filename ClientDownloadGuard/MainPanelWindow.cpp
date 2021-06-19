@@ -53,11 +53,20 @@ void MainPanelWindow::onAboutTriggered()
 
 void MainPanelWindow::onGetStateResponse()
 {
-	ResponseReader responseReader;
-	responseReader.getStateAndValueJsonRefValues(reply.get());
+	auto [state, value] = ResponseReader::getStateAndValueJsonRefValues(reply.get());
+	if(state=="Success")
+	{
+		int type = value.toObject()["type"].toInt();
+		QString description = value.toObject()["description"].toString();
+		QString user = value.toObject()["login"].toString();
+	}
+	else
+	{
+		ui.statusbar->showMessage(state.toString() + ": " + value.toString());
+	}
 }
 
 void MainPanelWindow::onGetStateError(QNetworkReply::NetworkError errorCode)
 {
-	
+	ui.statusbar->showMessage("Error: " + errorCode);
 }
