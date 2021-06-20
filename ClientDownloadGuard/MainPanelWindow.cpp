@@ -40,7 +40,7 @@ void MainPanelWindow::setupConnections()
 
 void MainPanelWindow::populateStateSelection()
 {
-	ui.stateSelection->addItems({ "Downloading", "Ask not to download", "Free" });
+	ui.stateSelection->addItems({  "Free", "Downloading", "Ask not to download" });
 }
 
 void MainPanelWindow::getState()
