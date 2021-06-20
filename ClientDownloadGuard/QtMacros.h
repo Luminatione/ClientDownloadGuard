@@ -8,3 +8,7 @@
 #define SERVER_RESPONSE_TO_THIS_CONNECTION(reply, onSuccess, onError) 	connect(reply.get(), &QIODevice::readyRead, this, &onSuccess);\
 																		connect(reply.get(), &QNetworkReply::errorOccurred, this, &onError)
 #endif
+#ifndef SERVER_RESPONSE_TO_THIS_DISCONNECTION(reply, onSuccess, onError)
+#define SERVER_RESPONSE_TO_THIS_DISCONNECTION(reply, onSuccess, onError) 	disconnect(reply.get(), &QIODevice::readyRead, this, &onSuccess);\
+																		disconnect(reply.get(), &QNetworkReply::errorOccurred, this, &onError)
+#endif

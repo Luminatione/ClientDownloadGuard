@@ -36,6 +36,7 @@ void MainPanelWindow::initializeIcons()
 void MainPanelWindow::setupConnections()
 {
 	connect(ui.actionAbout, SIGNAL(triggered()), this, SLOT(onAboutTriggered()));
+	BUTTON_CLICK_TO_THIS_CONNECTION(ui.confirmButton, setState());
 }
 
 void MainPanelWindow::populateStateSelection()
@@ -44,9 +45,18 @@ void MainPanelWindow::populateStateSelection()
 }
 
 void MainPanelWindow::getState()
+{	
+	replyGet = QSharedPointer<QNetworkReply>(ServerConnectionManager::serverConnectionManager->getNetworkState(authKey));
+	SERVER_RESPONSE_TO_THIS_CONNECTION(replyGet, MainPanelWindow::onGetStateResponse, MainPanelWindow::onGetStateError);
+}
+
+void MainPanelWindow::setState()
 {
-	reply = QSharedPointer<QNetworkReply>(ServerConnectionManager::serverConnectionManager->getNetworkState(authKey));
-	SERVER_RESPONSE_TO_THIS_CONNECTION(reply, MainPanelWindow::onGetStateResponse, MainPanelWindow::onGetStateError);
+	QString description = ui.descriptionTextEdit->toPlainText();
+	replySet = QSharedPointer<QNetworkReply>(
+		ServerConnectionManager::serverConnectionManager->setNetworkState(
+			authKey, ui.stateSelection->currentIndex(), description));
+	SERVER_RESPONSE_TO_THIS_CONNECTION(replySet, MainPanelWindow::onSetStateResponse, MainPanelWindow::onSetStateError);
 }
 
 void MainPanelWindow::setAuthKey(QString& authKey)
@@ -76,7 +86,7 @@ void MainPanelWindow::setIcon(int type)
 
 void MainPanelWindow::onGetStateResponse()
 {
-	auto [state, value] = ResponseReader::getStateAndValueJsonRefValues(reply.get());
+	auto [state, value] = ResponseReader::getStateAndValueJsonRefValues(replyGet.get());
 	if (state.toString() == "Success")
 	{
 		int type = value.toObject()["type"].toInt();
@@ -97,5 +107,25 @@ void MainPanelWindow::onGetStateResponse()
 void MainPanelWindow::onGetStateError(QNetworkReply::NetworkError errorCode)
 {
 	ui.currentStateGraphic->setPixmap(noConnection);
+	ui.statusbar->showMessage("Error: " + errorCode);
+}
+
+void MainPanelWindow::onSetStateResponse()
+{
+	auto [state, value] = ResponseReader::getStateAndValueQStrings(replySet.get());
+	if (state == "Success")
+	{
+		ui.statusbar->showMessage(state);
+		getState();
+	}
+	else
+	{
+		ui.statusbar->showMessage(state + ": " + value);
+		ui.currentStateGraphic->setPixmap(noConnection);
+	}
+}
+
+void MainPanelWindow::onSetStateError(QNetworkReply::NetworkError errorCode)
+{
 	ui.statusbar->showMessage("Error: " + errorCode);
 }

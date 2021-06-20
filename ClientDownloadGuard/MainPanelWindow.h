@@ -3,6 +3,8 @@
 #include <qmainwindow.h>
 #include <QSharedPointer>
 #include <QNetworkReply>
+#include <qpointer.h>
+
 
 
 #include "LabelTextSetter.h"
@@ -20,7 +22,8 @@ class MainPanelWindow : public QMainWindow
 
 	QString authKey;
 
-	QSharedPointer<QNetworkReply> reply;
+	QSharedPointer<QNetworkReply> replyGet;
+	QSharedPointer<QNetworkReply> replySet;
 
 	LabelTextSetter authorLabelTextSetter;
 	LabelTextSetter descriptionLabelTextSetter;
@@ -36,11 +39,13 @@ private:
 	void setupConnections();
 	void populateStateSelection();
 	void getState();
-	
-private slots:
-	void onAboutTriggered();
 	void setIcon(int type);
+private slots:
+	void setState();
+	void onAboutTriggered();
 	void onGetStateResponse();
 	void onGetStateError(QNetworkReply::NetworkError errorCode);
+	void onSetStateResponse();
+	void onSetStateError(QNetworkReply::NetworkError errorCode);
 };
 
