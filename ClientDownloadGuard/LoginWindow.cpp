@@ -26,9 +26,10 @@ LoginWindow::LoginWindow(QWidget* parent)
 	setupConnections();
 
 	ui.LoginButton->setEnabled(false);
-
+#ifdef _DEBUG	
 	ui.UsernameLineEdit->setText("adam997");
 	ui.PasswordLineEdit->setText("jp2gmd2137");
+#endif
 }
 
 void LoginWindow::setUsernameAndPasswordText(QString& username, QString& password)
