@@ -14,7 +14,7 @@ class LabelTextSetter
 
 
 public:
-
+	LabelTextSetter() = default;
 	LabelTextSetter(const QString& text, const QString& prefix, const QString& suffix,
 		QLabel* label)
 		: text(text),

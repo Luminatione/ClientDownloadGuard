@@ -22,10 +22,11 @@ class MainPanelWindow : public QMainWindow
 
 	QSharedPointer<QNetworkReply> reply;
 
-	LabelTextSetter authorLabelTextSetter = LabelTextSetter("", "Author: ", "", ui.authorLabel);
-	LabelTextSetter descriptionLabelTextSetter = LabelTextSetter("", "Description: \n", "", ui.currentDescriptionLabel);
+	LabelTextSetter authorLabelTextSetter;
+	LabelTextSetter descriptionLabelTextSetter;
 	
 public:
+	void initializeLabelTextSetters();
 	MainPanelWindow(QString authKey, QWidget* parent = Q_NULLPTR);
 	
 	void setAuthKey(QString& authKey);

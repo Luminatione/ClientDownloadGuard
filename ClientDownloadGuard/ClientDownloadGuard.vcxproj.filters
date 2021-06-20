@@ -88,6 +88,9 @@
     <ClCompile Include="LabelTextSetter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SetNetworkStateApiCaller.cpp">
+      <Filter>Source Files\REST Api Callers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QtMacros.h">
@@ -125,6 +128,9 @@
     </ClInclude>
     <ClInclude Include="LabelTextSetter.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetNetworkStateApiCaller.h">
+      <Filter>Header Files\REST Api Callers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

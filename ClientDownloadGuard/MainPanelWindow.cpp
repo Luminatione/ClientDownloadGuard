@@ -3,10 +3,16 @@
 
 #include "QtMacros.h"
 #include "MainPanelWindow.h"
-
 #include "ResponseReader.h"
 #include "ServerConnectionManager.h"
+#include "LabelTextSetter.h"
 
+
+void MainPanelWindow::initializeLabelTextSetters()
+{
+	authorLabelTextSetter = LabelTextSetter("", "Author: ", "", ui.authorLabel);
+	descriptionLabelTextSetter = LabelTextSetter("", "Description: \n", "", ui.currentDescriptionLabel);
+}
 
 MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(authKey)
 {
@@ -16,6 +22,7 @@ MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(aut
 
 	setupConnections();
 	populateStateSelection();
+	initializeLabelTextSetters();
 	getState();
 }
 void MainPanelWindow::initializeIcons()
