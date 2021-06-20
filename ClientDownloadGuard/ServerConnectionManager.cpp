@@ -25,3 +25,8 @@ QNetworkReply* ServerConnectionManager::getNetworkState(QString& authKey)
 {
 	return getNetworkStateApiCaller->call(networkAccessManager.get(), hostname, { authKey });
 }
+
+QNetworkReply* ServerConnectionManager::setNetworkState(QString& authKey, int type, QString& description)
+{
+	return setNetworkStateApiCaller->call(networkAccessManager.get(), hostname, { authKey,  description, type });
+}

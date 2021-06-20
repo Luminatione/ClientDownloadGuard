@@ -59,6 +59,21 @@ void MainPanelWindow::onAboutTriggered()
 	QMessageBox::about(this, "About", "Icons made by <a href=\"https://www.flaticon.com/authors/alfredo-hernandez\" title=\"Alfredo Hernandez\">Alfredo Hernandez</a>, <a href=\"https://www.flaticon.com/authors/good-ware\" title=\"Good Ware\">Good Ware</a> and <a href=\"https://www.flaticon.com/authors/pixelmeetup\" title=\"Pixelmeetup\">Pixelmeetup</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a>");
 }
 
+void MainPanelWindow::setIcon(int type)
+{
+	switch (type)
+	{
+	case 0: ui.currentStateGraphic->setPixmap(networkIsFreeIcon);
+		break;
+	case 1: ui.currentStateGraphic->setPixmap(networkIsBusyIcon);
+		break;
+	case 2: ui.currentStateGraphic->setPixmap(askNotToDownloadIcon);
+		break;
+	default: ui.currentStateGraphic->setPixmap(noConnection);
+		break;
+	}
+}
+
 void MainPanelWindow::onGetStateResponse()
 {
 	auto [state, value] = ResponseReader::getStateAndValueJsonRefValues(reply.get());
@@ -70,17 +85,7 @@ void MainPanelWindow::onGetStateResponse()
 
 		authorLabelTextSetter.setText(user);
 		descriptionLabelTextSetter.setText(description);
-		switch (type)
-		{
-		case 0: ui.currentStateGraphic->setPixmap(networkIsFreeIcon);
-			break;
-		case 1: ui.currentStateGraphic->setPixmap(networkIsBusyIcon);
-			break;
-		case 2: ui.currentStateGraphic->setPixmap(askNotToDownloadIcon);
-			break;
-		default: ui.currentStateGraphic->setPixmap(noConnection);
-			break;
-		}
+		setIcon(type);
 	}
 	else
 	{

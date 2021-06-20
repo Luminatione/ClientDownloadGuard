@@ -39,6 +39,7 @@ private:
 	
 private slots:
 	void onAboutTriggered();
+	void setIcon(int type);
 	void onGetStateResponse();
 	void onGetStateError(QNetworkReply::NetworkError errorCode);
 };
