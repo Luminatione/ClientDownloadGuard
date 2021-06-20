@@ -22,7 +22,7 @@ private:
 
 	QSharedPointer<QNetworkReply> reply;
 
-	QSharedPointer<LoadingUtility> loading = QSharedPointer<LoadingUtility>(new LoadingUtility(this));
+	LoadingUtility* loading = new LoadingUtility(this);
 
 	QSharedPointer<Validator> usernameValidator;
 	QSharedPointer<Validator> passwordValidator;

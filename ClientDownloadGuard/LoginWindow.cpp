@@ -18,8 +18,8 @@
 LoginWindow::LoginWindow(QWidget* parent)
 	: QMainWindow(parent)
 {
-	usernameValidator = QSharedPointer<UsernameValidator>(new UsernameValidator());
-	passwordValidator = QSharedPointer<PasswordValidator>(new PasswordValidator());
+	usernameValidator = QSharedPointer<Validator>(new UsernameValidator());
+	passwordValidator = QSharedPointer<Validator>(new PasswordValidator());
 
 	ui.setupUi(this);
 
@@ -55,7 +55,7 @@ void LoginWindow::onLoginClick()
 	QString password = ui.PasswordLineEdit->text();
 	reply = QSharedPointer<QNetworkReply>(
 		ServerConnectionManager::serverConnectionManager->login(username, password));
-	SERVER_RESPONSE_TO_THIS_CONNECTION(reply, LoginWindow::onLoginResponse, LoginWindow::onError);
+	SERVER_RESPONSE_TO_THIS_CONNECTION(reply.get(), LoginWindow::onLoginResponse, LoginWindow::onError);
 
 }
 
