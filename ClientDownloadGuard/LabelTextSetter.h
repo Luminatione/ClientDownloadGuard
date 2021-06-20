@@ -10,7 +10,7 @@ class LabelTextSetter
 	QString prefix;
 	QString suffix;
 
-	QSharedPointer<QLabel> label;
+	QLabel* label;
 
 
 public:
@@ -25,9 +25,9 @@ public:
 	}
 	void update();
 	
-	void setText(QString text);
-	void setPrefix(QString text);
-	void setSuffix(QString text);
+	void setText(QString& text);
+	void setPrefix(QString& text);
+	void setSuffix(QString& text);
 
 	QString getText();
 	QString getPrefix();

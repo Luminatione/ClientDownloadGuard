@@ -21,8 +21,8 @@ MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(aut
 void MainPanelWindow::initializeIcons()
 {
 	networkIsBusyIcon = QPixmap(":/Graphic/Graphic/close.png").scaled(ui.currentStateGraphic->width(), ui.currentStateGraphic->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-	askNotToDownload = QPixmap(":/Graphic/Graphic/exclamation.png").scaled(ui.currentStateGraphic->width(), ui.currentStateGraphic->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-	networkIsFree = QPixmap(":/Graphic/Graphic/check.png").scaled(ui.currentStateGraphic->width(), ui.currentStateGraphic->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+	askNotToDownloadIcon = QPixmap(":/Graphic/Graphic/exclamation.png").scaled(ui.currentStateGraphic->width(), ui.currentStateGraphic->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+	networkIsFreeIcon = QPixmap(":/Graphic/Graphic/check.png").scaled(ui.currentStateGraphic->width(), ui.currentStateGraphic->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 	noConnection = QPixmap(":/Graphic/Graphic/no-internet.png").scaled(ui.currentStateGraphic->width(), ui.currentStateGraphic->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
 
@@ -55,7 +55,7 @@ void MainPanelWindow::onAboutTriggered()
 void MainPanelWindow::onGetStateResponse()
 {
 	auto [state, value] = ResponseReader::getStateAndValueJsonRefValues(reply.get());
-	if(state.toString()=="Success")
+	if (state.toString() == "Success")
 	{
 		int type = value.toObject()["type"].toInt();
 		QString description = value.toObject()["description"].toString();
@@ -65,16 +65,25 @@ void MainPanelWindow::onGetStateResponse()
 		descriptionLabelTextSetter.setText(description);
 		switch (type)
 		{
-			case 
+		case 0: ui.currentStateGraphic->setPixmap(networkIsFreeIcon);
+			break;
+		case 1: ui.currentStateGraphic->setPixmap(networkIsBusyIcon);
+			break;
+		case 2: ui.currentStateGraphic->setPixmap(askNotToDownloadIcon);
+			break;
+		default: ui.currentStateGraphic->setPixmap(noConnection);
+			break;
 		}
 	}
 	else
 	{
 		ui.statusbar->showMessage(state.toString() + ": " + value.toString());
+		ui.currentStateGraphic->setPixmap(noConnection);
 	}
 }
 
 void MainPanelWindow::onGetStateError(QNetworkReply::NetworkError errorCode)
 {
+	ui.currentStateGraphic->setPixmap(noConnection);
 	ui.statusbar->showMessage("Error: " + errorCode);
 }

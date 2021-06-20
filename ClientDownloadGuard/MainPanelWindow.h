@@ -14,8 +14,8 @@ class MainPanelWindow : public QMainWindow
 
 	Ui::MainPanelWindow ui;
 	QPixmap networkIsBusyIcon;
-	QPixmap askNotToDownload;
-	QPixmap networkIsFree;
+	QPixmap askNotToDownloadIcon;
+	QPixmap networkIsFreeIcon;
 	QPixmap noConnection;
 
 	QString authKey;
