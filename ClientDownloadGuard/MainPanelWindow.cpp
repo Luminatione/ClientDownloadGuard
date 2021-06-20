@@ -47,7 +47,7 @@ void MainPanelWindow::populateStateSelection()
 void MainPanelWindow::getState()
 {	
 	replyGet = QSharedPointer<QNetworkReply>(ServerConnectionManager::serverConnectionManager->getNetworkState(authKey));
-	SERVER_RESPONSE_TO_THIS_CONNECTION(replyGet.get(), MainPanelWindow::onGetStateResponse, MainPanelWindow::onGetStateError);
+	SERVER_RESPONSE_TO_THIS_CONNECTION(replyGet, MainPanelWindow::onGetStateResponse, MainPanelWindow::onGetStateError);
 }
 
 void MainPanelWindow::setState()
@@ -56,7 +56,7 @@ void MainPanelWindow::setState()
 	replySet = QSharedPointer<QNetworkReply>(
 		ServerConnectionManager::serverConnectionManager->setNetworkState(
 			authKey, ui.stateSelection->currentIndex(), description));
-	SERVER_RESPONSE_TO_THIS_CONNECTION(replySet.get(), MainPanelWindow::onSetStateResponse, MainPanelWindow::onSetStateError);
+	SERVER_RESPONSE_TO_THIS_CONNECTION(replySet, MainPanelWindow::onSetStateResponse, MainPanelWindow::onSetStateError);
 }
 
 void MainPanelWindow::setAuthKey(QString& authKey)
