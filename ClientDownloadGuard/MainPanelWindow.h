@@ -29,6 +29,7 @@ class MainPanelWindow : public QMainWindow
 	LabelTextSetter descriptionLabelTextSetter;
 	
 	bool offlineMode = false;
+	bool awaitsSetState = false;
 	
 public:
 	void initializeLabelTextSetters();

@@ -85,7 +85,7 @@ void LoginWindow::onLoginResponse()
 		else
 		{
 			mainPanelWindow->setAuthKey(value);
-			mainPanelWindow->becomeOnline();
+			emit mainPanelWindow->becomeOnline();
 		}
 		mainPanelWindow->show();
 		loading->stopLoading();

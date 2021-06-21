@@ -61,10 +61,11 @@ void MainPanelWindow::setState()
 {
 	if (offlineMode)
 	{
-		connect(this, SIGNAL(becomeOnline()), this, SLOT(setState()));
+		awaitsSetState = true;
+		ui.statusbar->showMessage("Waiting for server");
 		return;
 	}
-	disconnect(this, SIGNAL(becomeOnline()), this, SLOT(setState()));
+	awaitsSetState = false;
 	QString description = ui.descriptionTextEdit->toPlainText();
 	replySet = QSharedPointer<QNetworkReply>(
 		ServerConnectionManager::serverConnectionManager->setNetworkState(
@@ -101,6 +102,10 @@ void MainPanelWindow::becomeOnline()
 {
 	offlineMode = false;
 	getState();
+	if(awaitsSetState)
+	{
+		setState();
+	}
 }
 
 void MainPanelWindow::onGetStateResponse()
