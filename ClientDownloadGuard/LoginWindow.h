@@ -5,7 +5,7 @@
 #include <QtNetwork/QNetworkReply>
 #include <QSharedPointer>
 
-#include "ui_mainWindow.h"
+#include "ui_loginWindow.h"
 #include "Validator.h"
 #include "LoadingUtility.h"
 

@@ -25,34 +25,34 @@ LoginWindow::LoginWindow(QWidget* parent)
 
 	setupConnections();
 
-	ui.LoginButton->setEnabled(false);
+	ui.loginButton->setEnabled(false);
 #ifdef _DEBUG	
-	ui.UsernameLineEdit->setText("adam997");
-	ui.PasswordLineEdit->setText("jp2gmd2137");
+	ui.usernameLineEdit->setText("adam997");
+	ui.passwordLineEdit->setText("jp2gmd2137");
 #endif
 }
 
 void LoginWindow::setUsernameAndPasswordText(QString& username, QString& password)
 {
-	ui.UsernameLineEdit->setText(username);
-	ui.PasswordLineEdit->setText(password);
+	ui.usernameLineEdit->setText(username);
+	ui.passwordLineEdit->setText(password);
 }
 
 void LoginWindow::setupConnections()
 {
-	BUTTON_CLICK_TO_THIS_CONNECTION(ui.LoginButton, onLoginClick());
-	BUTTON_CLICK_TO_THIS_CONNECTION(ui.QuitButton, onQuitClick());
-	BUTTON_CLICK_TO_THIS_CONNECTION(ui.RegisterButton, onRegisterClick());
-	connect(ui.UsernameLineEdit, SIGNAL(textChanged(QString)), this, SLOT(onCredentialsTextChanged()));
-	connect(ui.PasswordLineEdit, SIGNAL(textChanged(QString)), this, SLOT(onCredentialsTextChanged()));
+	BUTTON_CLICK_TO_THIS_CONNECTION(ui.loginButton, onLoginClick());
+	BUTTON_CLICK_TO_THIS_CONNECTION(ui.quitButton, onQuitClick());
+	BUTTON_CLICK_TO_THIS_CONNECTION(ui.registerButton, onRegisterClick());
+	connect(ui.usernameLineEdit, SIGNAL(textChanged(QString)), this, SLOT(onCredentialsTextChanged()));
+	connect(ui.passwordLineEdit, SIGNAL(textChanged(QString)), this, SLOT(onCredentialsTextChanged()));
 }
 
 void LoginWindow::onLoginClick()
 {
 	loading->startLoading();
 	ui.statusBar->showMessage("Logging...");
-	QString username = ui.UsernameLineEdit->text();
-	QString password = ui.PasswordLineEdit->text();
+	QString username = ui.usernameLineEdit->text();
+	QString password = ui.passwordLineEdit->text();
 	reply = QSharedPointer<QNetworkReply>(
 		ServerConnectionManager::serverConnectionManager->login(username, password));
 	SERVER_RESPONSE_TO_THIS_CONNECTION(reply, LoginWindow::onLoginResponse, LoginWindow::onError);
@@ -86,7 +86,7 @@ void LoginWindow::onLoginResponse()
 		ui.statusBar->showMessage(state + ": " + value);
 	}
 	loading->stopLoading();
-	ui.LoginButton->setEnabled(areUsernameAndPasswordValid());
+	ui.loginButton->setEnabled(areUsernameAndPasswordValid());
 }
 void LoginWindow::onError(QNetworkReply::NetworkError errorCode)
 {
@@ -95,11 +95,11 @@ void LoginWindow::onError(QNetworkReply::NetworkError errorCode)
 
 bool LoginWindow::areUsernameAndPasswordValid()
 {
-	return usernameValidator->isValid(ui.UsernameLineEdit->text()) && passwordValidator->isValid(
-		ui.PasswordLineEdit->text());
+	return usernameValidator->isValid(ui.usernameLineEdit->text()) && passwordValidator->isValid(
+		ui.passwordLineEdit->text());
 }
 
 void LoginWindow::onCredentialsTextChanged()
 {
-	ui.LoginButton->setEnabled(areUsernameAndPasswordValid());
+	ui.loginButton->setEnabled(areUsernameAndPasswordValid());
 }
