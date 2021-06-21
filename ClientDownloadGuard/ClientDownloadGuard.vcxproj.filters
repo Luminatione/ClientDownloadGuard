@@ -145,10 +145,10 @@
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="LoginWindow.h">
+    <QtMoc Include="RegisterWindow.h">
       <Filter>Header Files\Windows</Filter>
     </QtMoc>
-    <QtMoc Include="RegisterWindow.h">
+    <QtMoc Include="LoginWindow.h">
       <Filter>Header Files\Windows</Filter>
     </QtMoc>
     <QtMoc Include="MainPanelWindow.h">

@@ -32,7 +32,7 @@ class MainPanelWindow : public QMainWindow
 	
 public:
 	void initializeLabelTextSetters();
-	MainPanelWindow(QString authKey, QWidget* parent = Q_NULLPTR);
+	MainPanelWindow(QString authKey, QWidget* parent = nullptr);
 	
 	void setAuthKey(QString& authKey);
 	
@@ -42,6 +42,10 @@ private:
 	void populateStateSelection();
 	void getState();
 	void setIcon(int type);
+
+signals:
+	void becomeOnline();
+	
 private slots:
 	void setState();
 	void onAboutTriggered();

@@ -28,7 +28,7 @@ private:
 	QSharedPointer<Validator> usernameValidator;
 	QSharedPointer<Validator> passwordValidator;
 
-	MainPanelWindow* mainPanelWindow;
+	MainPanelWindow* mainPanelWindow = nullptr;
 
 	void setupConnections();
 	bool areUsernameAndPasswordValid();

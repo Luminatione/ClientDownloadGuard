@@ -20,6 +20,10 @@ MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(aut
 	initializeLabelTextSetters();
 	getState();
 	offlineMode = authKey.isEmpty();
+	if (offlineMode)
+	{
+		ui.statusbar->showMessage("Waiting for server...");
+	}
 }
 
 void MainPanelWindow::initializeLabelTextSetters()
@@ -44,7 +48,7 @@ void MainPanelWindow::setupConnections()
 
 void MainPanelWindow::populateStateSelection()
 {
-	ui.stateSelection->addItems({  "Free", "Downloading", "Ask not to download" });
+	ui.stateSelection->addItems({ "Free", "Downloading", "Ask not to download" });
 }
 
 void MainPanelWindow::getState()
@@ -55,6 +59,12 @@ void MainPanelWindow::getState()
 
 void MainPanelWindow::setState()
 {
+	if (offlineMode)
+	{
+		connect(this, SIGNAL(becomeOnline()), this, SLOT(setState()));
+		return;
+	}
+	disconnect(this, SIGNAL(becomeOnline()), this, SLOT(setState()));
 	QString description = ui.descriptionTextEdit->toPlainText();
 	replySet = QSharedPointer<QNetworkReply>(
 		ServerConnectionManager::serverConnectionManager->setNetworkState(
@@ -85,6 +95,12 @@ void MainPanelWindow::setIcon(int type)
 	default: ui.currentStateGraphic->setPixmap(noConnection);
 		break;
 	}
+}
+
+void MainPanelWindow::becomeOnline()
+{
+	offlineMode = false;
+	getState();
 }
 
 void MainPanelWindow::onGetStateResponse()
