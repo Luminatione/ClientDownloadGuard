@@ -21,7 +21,7 @@ private:
 	QSharedPointer<Validator> passwordValidator;
 
 	QSharedPointer<QNetworkReply> reply;
-
+	
 	void setupConnections();
 	bool isUsernameAndPasswordValid();
 private slots:

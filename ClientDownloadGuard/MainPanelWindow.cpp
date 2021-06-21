@@ -8,11 +8,6 @@
 #include "LabelTextSetter.h"
 
 
-void MainPanelWindow::initializeLabelTextSetters()
-{
-	authorLabelTextSetter = LabelTextSetter("", "Author: ", "", ui.authorLabel);
-	descriptionLabelTextSetter = LabelTextSetter("", "Description: \n", "", ui.currentDescriptionLabel);
-}
 
 MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(authKey)
 {
@@ -24,7 +19,15 @@ MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(aut
 	populateStateSelection();
 	initializeLabelTextSetters();
 	getState();
+	offlineMode = authKey.isEmpty();
 }
+
+void MainPanelWindow::initializeLabelTextSetters()
+{
+	authorLabelTextSetter = LabelTextSetter("", "Author: ", "", ui.authorLabel);
+	descriptionLabelTextSetter = LabelTextSetter("", "Description: \n", "", ui.currentDescriptionLabel);
+}
+
 void MainPanelWindow::initializeIcons()
 {
 	networkIsBusyIcon = QPixmap(":/Graphic/Graphic/close.png").scaled(ui.currentStateGraphic->width(), ui.currentStateGraphic->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -45,7 +48,7 @@ void MainPanelWindow::populateStateSelection()
 }
 
 void MainPanelWindow::getState()
-{	
+{
 	replyGet = QSharedPointer<QNetworkReply>(ServerConnectionManager::serverConnectionManager->getNetworkState(authKey));
 	SERVER_RESPONSE_TO_THIS_CONNECTION(replyGet, MainPanelWindow::onGetStateResponse, MainPanelWindow::onGetStateError);
 }
@@ -107,7 +110,7 @@ void MainPanelWindow::onGetStateResponse()
 void MainPanelWindow::onGetStateError(QNetworkReply::NetworkError errorCode)
 {
 	ui.currentStateGraphic->setPixmap(noConnection);
-	ui.statusbar->showMessage("Error: " + errorCode);
+	ui.statusbar->showMessage("Error: " + QString::number(errorCode));
 }
 
 void MainPanelWindow::onSetStateResponse()
@@ -127,5 +130,5 @@ void MainPanelWindow::onSetStateResponse()
 
 void MainPanelWindow::onSetStateError(QNetworkReply::NetworkError errorCode)
 {
-	ui.statusbar->showMessage("Error: " + errorCode);
+	ui.statusbar->showMessage("Error: " + QString::number(errorCode));
 }

@@ -28,6 +28,8 @@ class MainPanelWindow : public QMainWindow
 	LabelTextSetter authorLabelTextSetter;
 	LabelTextSetter descriptionLabelTextSetter;
 	
+	bool offlineMode = false;
+	
 public:
 	void initializeLabelTextSetters();
 	MainPanelWindow(QString authKey, QWidget* parent = Q_NULLPTR);

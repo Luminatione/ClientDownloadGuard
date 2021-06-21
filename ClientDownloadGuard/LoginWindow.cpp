@@ -2,6 +2,7 @@
 #include <QUrlQuery>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QTimer>
 
 
 #include "LoginWindow.h"
@@ -56,6 +57,7 @@ void LoginWindow::onLoginClick()
 	reply = QSharedPointer<QNetworkReply>(
 		ServerConnectionManager::serverConnectionManager->login(username, password));
 	SERVER_RESPONSE_TO_THIS_CONNECTION(reply, LoginWindow::onLoginResponse, LoginWindow::onError);
+	connect(reply.get(), &QNetworkReply::errorOccurred, this, &LoginWindow::waitForServer);
 
 }
 
@@ -76,7 +78,15 @@ void LoginWindow::onLoginResponse()
 	auto [state, value] = ResponseReader::getStateAndValueQStrings(reply.get());
 	if (state == "Success")
 	{
-		MainPanelWindow* mainPanelWindow = new MainPanelWindow(value);
+		if(mainPanelWindow == Q_NULLPTR)
+		{
+			mainPanelWindow = new MainPanelWindow(value);			
+		}
+		else
+		{
+			mainPanelWindow->setAuthKey(value);
+			//TODO: mainPanelWindow->becomeOnline();
+		}
 		mainPanelWindow->show();
 		loading->stopLoading();
 		close();
@@ -90,6 +100,7 @@ void LoginWindow::onLoginResponse()
 }
 void LoginWindow::onError(QNetworkReply::NetworkError errorCode)
 {
+	loading->stopLoading();
 	ui.statusBar->showMessage("Error: " + QString::number(errorCode));
 }
 
@@ -97,6 +108,17 @@ bool LoginWindow::areUsernameAndPasswordValid()
 {
 	return usernameValidator->isValid(ui.usernameLineEdit->text()) && passwordValidator->isValid(
 		ui.passwordLineEdit->text());
+}
+
+void LoginWindow::waitForServer(QNetworkReply::NetworkError errorCode)
+{
+	if (errorCode == 4 || errorCode == 5)
+	{
+		hide();
+		mainPanelWindow = new MainPanelWindow("");
+		mainPanelWindow->show();		
+		QTimer::singleShot(60000, this, &LoginWindow::onLoginClick);
+	}
 }
 
 void LoginWindow::onCredentialsTextChanged()

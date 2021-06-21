@@ -8,6 +8,7 @@
 #include "ui_loginWindow.h"
 #include "Validator.h"
 #include "LoadingUtility.h"
+#include "MainPanelWindow.h"
 
 class LoginWindow : public QMainWindow
 {
@@ -27,10 +28,12 @@ private:
 	QSharedPointer<Validator> usernameValidator;
 	QSharedPointer<Validator> passwordValidator;
 
+	MainPanelWindow* mainPanelWindow;
 
 	void setupConnections();
 	bool areUsernameAndPasswordValid();
 private slots:
+	void waitForServer(QNetworkReply::NetworkError errorCode);
 	void onLoginClick();
 	void onQuitClick();
 	void onRegisterClick();

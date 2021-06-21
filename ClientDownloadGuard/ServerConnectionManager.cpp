@@ -9,6 +9,7 @@ QSharedPointer<ServerConnectionManager> ServerConnectionManager::serverConnectio
 ServerConnectionManager::ServerConnectionManager(QObject* caller = nullptr)
 {
 	networkAccessManager = QSharedPointer<QNetworkAccessManager>(new QNetworkAccessManager());
+	networkAccessManager->setTransferTimeout(7000);
 }
 
 QNetworkReply* ServerConnectionManager::login(QString& username, QString& password)
