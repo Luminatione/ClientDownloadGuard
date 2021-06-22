@@ -35,5 +35,6 @@ public:
 	QNetworkReply* registerNewUser(QString& username, QString& password);
 	QNetworkReply* getNetworkState(QString& authKey);
 	QNetworkReply* setNetworkState(QString& authKey, int type, QString& description);
+	void setHostname(QString hostname);
 };
 

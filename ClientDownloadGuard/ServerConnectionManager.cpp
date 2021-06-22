@@ -33,3 +33,8 @@ QNetworkReply* ServerConnectionManager::setNetworkState(QString& authKey, int ty
 {
 	return setNetworkStateApiCaller->call(networkAccessManager.get(), hostname, { authKey,  description, type });
 }
+
+void ServerConnectionManager::setHostname(QString hostname)
+{
+	this->hostname = hostname;
+}

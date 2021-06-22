@@ -27,6 +27,7 @@ LoginWindow::LoginWindow(QWidget* parent)
 	setupConnections();
 
 	ui.loginButton->setEnabled(false);
+
 #ifdef _DEBUG	
 	ui.usernameLineEdit->setText("adam997");
 	ui.passwordLineEdit->setText("jp2gmd2137");

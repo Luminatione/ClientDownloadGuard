@@ -6,7 +6,7 @@
 #include "ResponseReader.h"
 #include "ServerConnectionManager.h"
 #include "LabelTextSetter.h"
-
+#include "SettingsWindow.h"
 
 
 MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(authKey)
@@ -43,6 +43,7 @@ void MainPanelWindow::initializeIcons()
 void MainPanelWindow::setupConnections()
 {
 	connect(ui.actionAbout, SIGNAL(triggered()), this, SLOT(onAboutTriggered()));
+	connect(ui.actionSettings, SIGNAL(triggered()), this, SLOT(onSettingsTriggered()));
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.confirmButton, setState());
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.refreshButton, onRefreshClick());
 }
@@ -82,6 +83,13 @@ void MainPanelWindow::setAuthKey(QString& authKey)
 void MainPanelWindow::onAboutTriggered()
 {
 	QMessageBox::about(this, "About", "Icons made by <a href=\"https://www.flaticon.com/authors/alfredo-hernandez\" title=\"Alfredo Hernandez\">Alfredo Hernandez</a>, <a href=\"https://www.flaticon.com/authors/good-ware\" title=\"Good Ware\">Good Ware</a> and <a href=\"https://www.flaticon.com/authors/pixelmeetup\" title=\"Pixelmeetup\">Pixelmeetup</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a>");
+}
+
+void MainPanelWindow::onSettingsTriggered()
+{
+	SettingsWindow* settingsWindow = new SettingsWindow();
+	settingsWindow->setWindowModality(Qt::ApplicationModal);
+	settingsWindow->show();
 }
 
 void MainPanelWindow::setIcon(int type)
