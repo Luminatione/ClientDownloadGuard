@@ -117,13 +117,10 @@ bool LoginWindow::areUsernameAndPasswordValid()
 
 void LoginWindow::waitForServer(QNetworkReply::NetworkError errorCode)
 {
-	if (errorCode == 4 || errorCode == 5)
-	{
-		hide();
-		mainPanelWindow = new MainPanelWindow("");
-		mainPanelWindow->show();
-		QTimer::singleShot(60000, this, &LoginWindow::onLoginClick);
-	}
+	hide();
+	mainPanelWindow = new MainPanelWindow("");
+	mainPanelWindow->show();
+	QTimer::singleShot(5000, this, &LoginWindow::onLoginClick);
 }
 
 void LoginWindow::onCredentialsTextChanged()

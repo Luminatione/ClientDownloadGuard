@@ -91,11 +91,11 @@
     <ClCompile Include="SetNetworkStateApiCaller.cpp">
       <Filter>Source Files\REST Api Callers</Filter>
     </ClCompile>
-    <ClCompile Include="Settings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SettingsWindow.cpp">
       <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultSettings.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -135,10 +135,7 @@
     <ClInclude Include="SetNetworkStateApiCaller.h">
       <Filter>Header Files\REST Api Callers</Filter>
     </ClInclude>
-    <ClInclude Include="Settings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ServerConnectionManager.h">
+    <ClInclude Include="DefaultSettings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -168,6 +165,9 @@
     </QtMoc>
     <QtMoc Include="SettingsWindow.h">
       <Filter>Header Files\Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="ServerConnectionManager.h">
+      <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

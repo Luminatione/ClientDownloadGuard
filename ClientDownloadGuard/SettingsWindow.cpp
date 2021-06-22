@@ -1,5 +1,7 @@
 #include "SettingsWindow.h"
 #include "QtMacros.h"
+#include "DefaultSettings.h"
+#include "ServerConnectionManager.h"
 
 SettingsWindow::SettingsWindow()
 {
@@ -24,10 +26,10 @@ void SettingsWindow::setAndShowAuthKey(QString authKey)
 
 void SettingsWindow::setSavedOrDefaultSettings()
 {
-	ui.connectionProtocoloComboBox->setCurrentIndex(settings.value("protocolIndex", defaultProtocolComboboxIndex).toInt());
-	ui.hostnameLineEdit->setText(settings.value("hostname", defaultHostname).toString());
-	ui.portLineEdit->setText(settings.value("port", defaultPort).toString());
-	ui.runOnStartupCheckBox->setChecked(settings.value("runOnStartup", defaultProtocolComboboxIndex).toBool());
+	ui.connectionProtocoloComboBox->setCurrentIndex(settings.value("protocolIndex", DefaultSettings::settings->defaultProtocolComboboxIndex).toInt());
+	ui.hostnameLineEdit->setText(settings.value("hostname", DefaultSettings::settings->defaultHostname).toString());
+	ui.portLineEdit->setText(settings.value("port", DefaultSettings::settings->defaultPort).toString());
+	ui.runOnStartupCheckBox->setChecked(settings.value("runOnStartup", DefaultSettings::settings->defaultProtocolComboboxIndex).toBool());
 }
 
 void SettingsWindow::initializeConnections()
@@ -57,9 +59,12 @@ void SettingsWindow::onCancelClick()
 void SettingsWindow::onApplyClick()
 {
 	settings.setValue("protocolIndex", ui.connectionProtocoloComboBox->currentIndex());
+	settings.setValue("protocol", ui.connectionProtocoloComboBox->currentText());
 	settings.setValue("hostname", ui.hostnameLineEdit->text());
 	settings.setValue("port", ui.portLineEdit->text());
 	settings.setValue("runOnStartup", ui.runOnStartupCheckBox->isChecked());
+	QString a = settings.fileName();
+	ServerConnectionManager::serverConnectionManager->syncWithSettings();
 }
 
 void SettingsWindow::onShowHideAuthKeyClick()

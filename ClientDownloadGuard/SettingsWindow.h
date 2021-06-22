@@ -18,11 +18,6 @@ private:
 	
 	QSettings settings = QSettings();
 
-	QString defaultHostname = "192.168.1.110";
-	QString defaultPort = "5000";
-	bool defaultRunOnStartup = false;
-	int defaultProtocolComboboxIndex = 0;
-
 	QString authKey;
 	
 	void initializeConnections();

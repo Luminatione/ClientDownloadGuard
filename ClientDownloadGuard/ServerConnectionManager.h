@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QMainWindow>
 #include <QString>
 #include <QtNetwork/QNetworkAccessManager>
 
@@ -8,23 +9,21 @@
 #include "LoginApiCaller.h"
 #include "RegisterApiCaller.h"
 #include "SetNetworkStateApiCaller.h"
-#include "Settings.h"
+#include "DefaultSettings.h"
 
-class ServerConnectionManager
+class ServerConnectionManager : public QObject
 {
-
+	Q_OBJECT
 public:
-	static QSharedPointer<ServerConnectionManager> serverConnectionManager;
+	static ServerConnectionManager* serverConnectionManager;
 	
 private:
 	ServerConnectionManager(QObject* caller);
 
-	QSharedPointer<QNetworkAccessManager> networkAccessManager;	
-#ifdef _DEBUG
-	QString hostname = "http://localhost:5000/api/";
-#else
-	QString hostname = "http://192.168.1.110:5000/api/";
-#endif
+	QString getApiConnectionUrl();
+	QSharedPointer<QNetworkAccessManager> networkAccessManager;
+	
+	QString hostname;
 	
 	QSharedPointer<RESTApiCaller<LoginApiCallerArguments>> loginApiCaller = QSharedPointer<LoginApiCaller>(new LoginApiCaller());
 	QSharedPointer<RESTApiCaller<RegisterApiCallerArguments>> registerApiCaller = QSharedPointer<RegisterApiCaller>(new RegisterApiCaller());
@@ -36,5 +35,6 @@ public:
 	QNetworkReply* getNetworkState(QString& authKey);
 	QNetworkReply* setNetworkState(QString& authKey, int type, QString& description);
 	void setHostname(QString hostname);
+	void syncWithSettings();
 };
 
