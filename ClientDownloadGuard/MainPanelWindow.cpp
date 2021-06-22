@@ -89,6 +89,7 @@ void MainPanelWindow::onSettingsTriggered()
 {
 	SettingsWindow* settingsWindow = new SettingsWindow();
 	settingsWindow->setWindowModality(Qt::ApplicationModal);
+	settingsWindow->setAndShowAuthKey(authKey);
 	settingsWindow->show();
 }
 
