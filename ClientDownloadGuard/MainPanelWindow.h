@@ -54,5 +54,6 @@ private slots:
 	void onGetStateError(QNetworkReply::NetworkError errorCode);
 	void onSetStateResponse();
 	void onSetStateError(QNetworkReply::NetworkError errorCode);
+	void onRefreshClick();
 };
 

@@ -44,6 +44,7 @@ void MainPanelWindow::setupConnections()
 {
 	connect(ui.actionAbout, SIGNAL(triggered()), this, SLOT(onAboutTriggered()));
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.confirmButton, setState());
+	BUTTON_CLICK_TO_THIS_CONNECTION(ui.refreshButton, onRefreshClick());
 }
 
 void MainPanelWindow::populateStateSelection()
@@ -152,4 +153,9 @@ void MainPanelWindow::onSetStateResponse()
 void MainPanelWindow::onSetStateError(QNetworkReply::NetworkError errorCode)
 {
 	ui.statusbar->showMessage("Error: " + QString::number(errorCode));
+}
+
+void MainPanelWindow::onRefreshClick()
+{
+	getState();
 }
