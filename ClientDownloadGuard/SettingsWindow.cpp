@@ -56,6 +56,20 @@ void SettingsWindow::onCancelClick()
 	close();
 }
 
+void SettingsWindow::applyRunOnStartupState()
+{
+	QString regPath = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+	QSettings registry = QSettings(regPath, QSettings::NativeFormat);
+	if(ui.runOnStartupCheckBox->isChecked())
+	{
+		registry.setValue(QCoreApplication::applicationName(), "\"" + QCoreApplication::applicationFilePath().replace("/", "\\") + "\"");
+	}
+	else
+	{
+		registry.remove(QCoreApplication::applicationName());
+	}
+}
+
 void SettingsWindow::onApplyClick()
 {
 	settings.setValue("protocolIndex", ui.connectionProtocoloComboBox->currentIndex());
@@ -63,7 +77,8 @@ void SettingsWindow::onApplyClick()
 	settings.setValue("hostname", ui.hostnameLineEdit->text());
 	settings.setValue("port", ui.portLineEdit->text());
 	settings.setValue("runOnStartup", ui.runOnStartupCheckBox->isChecked());
-	QString a = settings.fileName();
+	
+	applyRunOnStartupState();
 	ServerConnectionManager::serverConnectionManager->syncWithSettings();
 }
 

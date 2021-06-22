@@ -25,6 +25,7 @@ private:
 private slots:
 	void onOkClick();
 	void onCancelClick();
+	void applyRunOnStartupState();
 	void onApplyClick();
 	void onShowHideAuthKeyClick();
 };
