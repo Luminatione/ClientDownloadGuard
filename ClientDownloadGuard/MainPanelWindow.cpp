@@ -13,7 +13,7 @@ MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(aut
 {
 	ui.setupUi(this);
 	initializeIcons();
-	ui.currentStateGraphic->setPixmap(noConnection);
+	ui.currentStateGraphic->setPixmap(noConnectionIcon);
 
 	setupConnections();
 	populateStateSelection();
@@ -37,7 +37,7 @@ void MainPanelWindow::initializeIcons()
 	networkIsBusyIcon = QPixmap(":/Graphic/Graphic/close.png").scaled(ui.currentStateGraphic->width(), ui.currentStateGraphic->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 	askNotToDownloadIcon = QPixmap(":/Graphic/Graphic/exclamation.png").scaled(ui.currentStateGraphic->width(), ui.currentStateGraphic->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 	networkIsFreeIcon = QPixmap(":/Graphic/Graphic/check.png").scaled(ui.currentStateGraphic->width(), ui.currentStateGraphic->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-	noConnection = QPixmap(":/Graphic/Graphic/no-internet.png").scaled(ui.currentStateGraphic->width(), ui.currentStateGraphic->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+	noConnectionIcon = QPixmap(":/Graphic/Graphic/no-internet.png").scaled(ui.currentStateGraphic->width(), ui.currentStateGraphic->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
 
 void MainPanelWindow::setupConnections()
@@ -93,7 +93,7 @@ void MainPanelWindow::setIcon(int type)
 		break;
 	case 2: ui.currentStateGraphic->setPixmap(askNotToDownloadIcon);
 		break;
-	default: ui.currentStateGraphic->setPixmap(noConnection);
+	default: ui.currentStateGraphic->setPixmap(noConnectionIcon);
 		break;
 	}
 }
@@ -124,13 +124,13 @@ void MainPanelWindow::onGetStateResponse()
 	else
 	{
 		ui.statusbar->showMessage(state.toString() + ": " + value.toString());
-		ui.currentStateGraphic->setPixmap(noConnection);
+		ui.currentStateGraphic->setPixmap(noConnectionIcon);
 	}
 }
 
 void MainPanelWindow::onGetStateError(QNetworkReply::NetworkError errorCode)
 {
-	ui.currentStateGraphic->setPixmap(noConnection);
+	ui.currentStateGraphic->setPixmap(noConnectionIcon);
 	ui.statusbar->showMessage("Error: " + QString::number(errorCode));
 }
 
@@ -145,7 +145,7 @@ void MainPanelWindow::onSetStateResponse()
 	else
 	{
 		ui.statusbar->showMessage(state + ": " + value);
-		ui.currentStateGraphic->setPixmap(noConnection);
+		ui.currentStateGraphic->setPixmap(noConnectionIcon);
 	}
 }
 

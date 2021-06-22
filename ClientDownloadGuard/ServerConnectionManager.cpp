@@ -3,6 +3,8 @@
 
 #include <QNetworkReply>
 #include <QUrlQuery>
+#include <QApplication>
+
 
 QSharedPointer<ServerConnectionManager> ServerConnectionManager::serverConnectionManager = QSharedPointer<ServerConnectionManager>(new ServerConnectionManager(nullptr));
 
@@ -10,6 +12,13 @@ ServerConnectionManager::ServerConnectionManager(QObject* caller = nullptr)
 {
 	networkAccessManager = QSharedPointer<QNetworkAccessManager>(new QNetworkAccessManager());
 	networkAccessManager->setTransferTimeout(7000);
+
+	//QString path = QApplication::applicationDirPath() + "/config.ini";
+	//QSettings settings = QSettings(path, QSettings::IniFormat);
+	//QString a = settings.fileName();
+	//settings.setValue("hostname", hostname);
+	//settings.sync();
+	//hostname = settings.value("hostname").toString();
 }
 
 QNetworkReply* ServerConnectionManager::login(QString& username, QString& password)

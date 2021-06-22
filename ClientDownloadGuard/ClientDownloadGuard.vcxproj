@@ -112,6 +112,7 @@
     <ClCompile Include="ResponseReader.cpp" />
     <ClCompile Include="RESTApiCaller.cpp" />
     <ClCompile Include="SetNetworkStateApiCaller.cpp" />
+    <ClCompile Include="Settings.cpp" />
     <ClCompile Include="UsernameValidator.cpp" />
     <ClCompile Include="ServerConnectionManager.cpp" />
     <QtRcc Include="mainWindow.qrc" />
@@ -134,6 +135,7 @@
     <ClInclude Include="ResponseReader.h" />
     <ClInclude Include="RESTApiCaller.h" />
     <ClInclude Include="SetNetworkStateApiCaller.h" />
+    <ClInclude Include="Settings.h" />
     <ClInclude Include="Validator.h" />
     <ClInclude Include="UsernameValidator.h" />
     <ClInclude Include="QtMacros.h" />

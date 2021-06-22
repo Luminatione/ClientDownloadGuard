@@ -3,15 +3,16 @@
 #include <QString>
 #include <QtNetwork/QNetworkAccessManager>
 
-
 #include "GetNetworkStateApiCaller.h"
 #include "RESTApiCaller.h"
 #include "LoginApiCaller.h"
 #include "RegisterApiCaller.h"
 #include "SetNetworkStateApiCaller.h"
+#include "Settings.h"
 
 class ServerConnectionManager
 {
+
 public:
 	static QSharedPointer<ServerConnectionManager> serverConnectionManager;
 	
@@ -22,7 +23,7 @@ private:
 #ifdef _DEBUG
 	QString hostname = "http://localhost:5000/api/";
 #else
-	QString hostname = "http://192.168.1.10:5000/api/";
+	QString hostname = "http://192.168.1.110:5000/api/";
 #endif
 	
 	QSharedPointer<RESTApiCaller<LoginApiCallerArguments>> loginApiCaller = QSharedPointer<LoginApiCaller>(new LoginApiCaller());

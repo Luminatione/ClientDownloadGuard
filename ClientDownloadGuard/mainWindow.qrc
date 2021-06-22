@@ -6,4 +6,8 @@
         <file>Graphic/exclamation.png</file>
         <file>Graphic/no-internet.png</file>
     </qresource>
+    <qresource prefix="/text"/>
+    <qresource prefix="/config">
+        <file>Config/config.ini</file>
+    </qresource>
 </RCC>

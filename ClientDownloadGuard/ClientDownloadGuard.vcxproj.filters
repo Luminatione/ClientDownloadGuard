@@ -91,12 +91,12 @@
     <ClCompile Include="SetNetworkStateApiCaller.cpp">
       <Filter>Source Files\REST Api Callers</Filter>
     </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QtMacros.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ServerConnectionManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Validator.h">
@@ -131,6 +131,12 @@
     </ClInclude>
     <ClInclude Include="SetNetworkStateApiCaller.h">
       <Filter>Header Files\REST Api Callers</Filter>
+    </ClInclude>
+    <ClInclude Include="Settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerConnectionManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

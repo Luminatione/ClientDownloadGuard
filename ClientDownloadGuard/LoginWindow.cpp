@@ -31,6 +31,7 @@ LoginWindow::LoginWindow(QWidget* parent)
 	ui.usernameLineEdit->setText("adam997");
 	ui.passwordLineEdit->setText("jp2gmd2137");
 #endif
+
 }
 
 void LoginWindow::setUsernameAndPasswordText(QString& username, QString& password)
@@ -57,7 +58,10 @@ void LoginWindow::onLoginClick()
 	reply = QSharedPointer<QNetworkReply>(
 		ServerConnectionManager::serverConnectionManager->login(username, password));
 	SERVER_RESPONSE_TO_THIS_CONNECTION(reply, LoginWindow::onLoginResponse, LoginWindow::onError);
-	connect(reply.get(), &QNetworkReply::errorOccurred, this, &LoginWindow::waitForServer);
+	if (ui.waitForServer->isChecked())
+	{
+		connect(reply.get(), &QNetworkReply::errorOccurred, this, &LoginWindow::waitForServer);
+	}
 
 }
 
@@ -78,9 +82,9 @@ void LoginWindow::onLoginResponse()
 	auto [state, value] = ResponseReader::getStateAndValueQStrings(reply.get());
 	if (state == "Success")
 	{
-		if(mainPanelWindow == Q_NULLPTR)
+		if (mainPanelWindow == Q_NULLPTR)
 		{
-			mainPanelWindow = new MainPanelWindow(value);			
+			mainPanelWindow = new MainPanelWindow(value);
 		}
 		else
 		{
@@ -116,7 +120,7 @@ void LoginWindow::waitForServer(QNetworkReply::NetworkError errorCode)
 	{
 		hide();
 		mainPanelWindow = new MainPanelWindow("");
-		mainPanelWindow->show();		
+		mainPanelWindow->show();
 		QTimer::singleShot(60000, this, &LoginWindow::onLoginClick);
 	}
 }
