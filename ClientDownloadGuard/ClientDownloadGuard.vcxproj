@@ -117,6 +117,7 @@
     <ClCompile Include="UsernameValidator.cpp" />
     <ClCompile Include="ServerConnectionManager.cpp" />
     <QtRcc Include="mainWindow.qrc" />
+    <QtUic Include="AutoDetctionWindow.ui" />
     <QtUic Include="loginWindow.ui" />
     <QtMoc Include="LoginWindow.h" />
     <ClCompile Include="LoginWindow.cpp" />
