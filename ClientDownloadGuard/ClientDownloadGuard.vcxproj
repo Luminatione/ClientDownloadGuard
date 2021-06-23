@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AutoDetectionWindow.cpp" />
     <ClCompile Include="GetNetworkStateApiCaller.cpp" />
     <ClCompile Include="LabelTextSetter.cpp" />
     <ClCompile Include="LoadingUtility.cpp" />
@@ -127,6 +128,7 @@
     <QtUic Include="SettingsWindow.ui" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="AutoDetectionWindow.h" />
     <ClInclude Include="DefaultSettings.h" />
     <ClInclude Include="GetNetworkStateApiCaller.h" />
     <ClInclude Include="LabelTextSetter.h" />

@@ -7,7 +7,7 @@
 #include "ServerConnectionManager.h"
 #include "LabelTextSetter.h"
 #include "SettingsWindow.h"
-
+#include "AutoDetectionWindow.h"
 
 MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(authKey)
 {
@@ -44,6 +44,7 @@ void MainPanelWindow::setupConnections()
 {
 	connect(ui.actionAbout, SIGNAL(triggered()), this, SLOT(onAboutTriggered()));
 	connect(ui.actionSettings, SIGNAL(triggered()), this, SLOT(onSettingsTriggered()));
+	connect(ui.actionAuto_detection, SIGNAL(triggered()), this, SLOT(onAutoDetectionTriggered()));
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.confirmButton, setState());
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.refreshButton, onRefreshClick());
 }
@@ -91,6 +92,13 @@ void MainPanelWindow::onSettingsTriggered()
 	settingsWindow->setWindowModality(Qt::ApplicationModal);
 	settingsWindow->setAndShowAuthKey(authKey);
 	settingsWindow->show();
+}
+
+void MainPanelWindow::onAutoDetectionTriggered()
+{
+	AutoDetectionWindow* autoDetectionWindow = new AutoDetectionWindow();
+	autoDetectionWindow->show();
+	
 }
 
 void MainPanelWindow::setIcon(int type)

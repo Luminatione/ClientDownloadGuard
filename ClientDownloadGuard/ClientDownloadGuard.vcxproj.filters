@@ -97,6 +97,9 @@
     <ClCompile Include="DefaultSettings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AutoDetectionWindow.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QtMacros.h">
@@ -171,6 +174,9 @@
     </QtMoc>
     <QtMoc Include="ServerConnectionManager.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="AutoDetectionWindow.h">
+      <Filter>Header Files\Windows</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>
