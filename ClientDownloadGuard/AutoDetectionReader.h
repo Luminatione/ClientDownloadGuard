@@ -10,9 +10,7 @@ class AutoDetectionReader
 	QFile file = QFile(fileName);
 	QDataStream dataStream = QDataStream(&file);
 
-	mutable QMutex mutex;
 public:
-	static AutoDetectionReader* autoDetectionReader;
 
 	AutoDetectionReader();
 

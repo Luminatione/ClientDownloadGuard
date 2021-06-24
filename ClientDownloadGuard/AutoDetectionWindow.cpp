@@ -55,7 +55,7 @@ void AutoDetectionWindow::setIndexAtColumnAsComboBox(int column, int value)
 
 void AutoDetectionWindow::readRecord()
 {
-	auto [windowName, type, conflictBehaviour] = AutoDetectionReader::autoDetectionReader->getNextRecord();
+	auto [windowName, type, conflictBehaviour] = autoDetectionReader.getNextRecord();
 	ui.tableWidget->item(ui.tableWidget->rowCount() - 1, 0)->setText(windowName);
 	setIndexAtColumnAsComboBox(1, type);
 	setIndexAtColumnAsComboBox(2, conflictBehaviour);
@@ -63,8 +63,8 @@ void AutoDetectionWindow::readRecord()
 
 void AutoDetectionWindow::loadTableContent()
 {
-	AutoDetectionReader::autoDetectionReader->resetFileCursor();
-	while (!AutoDetectionReader::autoDetectionReader->atEnd())
+	autoDetectionReader.resetFileCursor();
+	while (!autoDetectionReader.atEnd())
 	{
 		onAddClick();
 		readRecord();
@@ -94,12 +94,12 @@ void AutoDetectionWindow::saveLayout()
 
 void AutoDetectionWindow::saveTableContent()
 {
-	AutoDetectionReader::autoDetectionReader->truncate();
-	AutoDetectionReader::autoDetectionReader->resetFileCursor();
+	autoDetectionReader.truncate();
+	autoDetectionReader.resetFileCursor();
 	for (int i = 0; i < ui.tableWidget->rowCount(); ++i)
 	{
 		QString windowName = ui.tableWidget->item(i, 0)->text();
-		AutoDetectionReader::autoDetectionReader->saveRecord(windowName, getCurrentIndexOfCellWidgetAsComboBox(i, 1),
+		autoDetectionReader.saveRecord(windowName, getCurrentIndexOfCellWidgetAsComboBox(i, 1),
 		                                                     getCurrentIndexOfCellWidgetAsComboBox(i, 2));
 	}
 }

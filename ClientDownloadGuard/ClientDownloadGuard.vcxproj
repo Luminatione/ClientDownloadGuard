@@ -103,6 +103,7 @@
   <ItemGroup>
     <ClCompile Include="AutoDetectionReader.cpp" />
     <ClCompile Include="AutoDetectionWindow.cpp" />
+    <ClCompile Include="AutoDetectionWorker.cpp" />
     <ClCompile Include="GetNetworkStateApiCaller.cpp" />
     <ClCompile Include="LabelTextSetter.cpp" />
     <ClCompile Include="LoadingUtility.cpp" />
@@ -131,6 +132,7 @@
   <ItemGroup>
     <QtMoc Include="AutoDetectionWindow.h" />
     <ClInclude Include="AutoDetectionReader.h" />
+    <ClInclude Include="AutoDetectionWorker.h" />
     <ClInclude Include="DefaultSettings.h" />
     <ClInclude Include="GetNetworkStateApiCaller.h" />
     <ClInclude Include="LabelTextSetter.h" />

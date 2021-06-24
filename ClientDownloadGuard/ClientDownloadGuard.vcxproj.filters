@@ -103,6 +103,9 @@
     <ClCompile Include="AutoDetectionReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AutoDetectionWorker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QtMacros.h">
@@ -145,6 +148,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AutoDetectionReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoDetectionWorker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
