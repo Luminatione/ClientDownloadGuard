@@ -100,6 +100,9 @@
     <ClCompile Include="AutoDetectionWindow.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="AutoDetectionReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QtMacros.h">
@@ -139,6 +142,9 @@
       <Filter>Header Files\REST Api Callers</Filter>
     </ClInclude>
     <ClInclude Include="DefaultSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoDetectionReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

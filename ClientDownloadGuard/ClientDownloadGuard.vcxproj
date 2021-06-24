@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AutoDetectionReader.cpp" />
     <ClCompile Include="AutoDetectionWindow.cpp" />
     <ClCompile Include="GetNetworkStateApiCaller.cpp" />
     <ClCompile Include="LabelTextSetter.cpp" />
@@ -129,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AutoDetectionWindow.h" />
+    <ClInclude Include="AutoDetectionReader.h" />
     <ClInclude Include="DefaultSettings.h" />
     <ClInclude Include="GetNetworkStateApiCaller.h" />
     <ClInclude Include="LabelTextSetter.h" />

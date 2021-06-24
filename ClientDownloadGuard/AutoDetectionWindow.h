@@ -14,6 +14,8 @@ private:
 	QComboBox* getComboBoxWithItems(QStringList& items);
 	QComboBox* getTypeComboBox();
 	QComboBox* getConflictBehaviourComboBox();
+	void setValueAtColumnAsComboBox(int column, int value);
+	void readRecord(QDataStream& stream);
 	void loadTableContent();
 	void loadLayout();
 	void saveLayout();
