@@ -150,9 +150,6 @@
     <ClInclude Include="AutoDetectionReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AutoDetectionWorker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="loginWindow.ui">
@@ -189,6 +186,9 @@
     </QtMoc>
     <QtMoc Include="AutoDetectionWindow.h">
       <Filter>Header Files\Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="AutoDetectionWorker.h">
+      <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

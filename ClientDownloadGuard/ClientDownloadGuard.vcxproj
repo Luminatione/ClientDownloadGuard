@@ -132,7 +132,7 @@
   <ItemGroup>
     <QtMoc Include="AutoDetectionWindow.h" />
     <ClInclude Include="AutoDetectionReader.h" />
-    <ClInclude Include="AutoDetectionWorker.h" />
+    <QtMoc Include="AutoDetectionWorker.h" />
     <ClInclude Include="DefaultSettings.h" />
     <ClInclude Include="GetNetworkStateApiCaller.h" />
     <ClInclude Include="LabelTextSetter.h" />

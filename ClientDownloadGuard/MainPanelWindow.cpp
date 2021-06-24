@@ -1,5 +1,5 @@
 #include <QMessageBox>
-#include <QNetworkReply>
+#include <QThread>
 
 #include "QtMacros.h"
 #include "MainPanelWindow.h"
@@ -8,6 +8,7 @@
 #include "LabelTextSetter.h"
 #include "SettingsWindow.h"
 #include "AutoDetectionWindow.h"
+#include "AutoDetectionWorker.h"
 
 MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(authKey)
 {
@@ -24,6 +25,11 @@ MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(aut
 	{
 		ui.statusbar->showMessage("Waiting for server...");
 	}
+	AutoDetectionWorker* autoDetectionWorker = new AutoDetectionWorker();
+	QThread* thr = new QThread();
+	autoDetectionWorker->moveToThread(thr);
+	connect(thr, &QThread::started, autoDetectionWorker, &AutoDetectionWorker::work);
+	thr->start();
 }
 
 void MainPanelWindow::initializeLabelTextSetters()

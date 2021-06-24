@@ -19,7 +19,8 @@ void AutoDetectionWorker::work()
 	}
 }
 
-AutoDetectionWorker::AutoDetectionWorker()
+AutoDetectionWorker::AutoDetectionWorker(QMainWindow* parent)
 {
+	this->parent = parent;
 	loadAutoDetectedWindows();
 }
