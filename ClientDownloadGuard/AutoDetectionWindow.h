@@ -14,13 +14,14 @@ private:
 	QComboBox* getComboBoxWithItems(QStringList& items);
 	QComboBox* getTypeComboBox();
 	QComboBox* getConflictBehaviourComboBox();
-	void setValueAtColumnAsComboBox(int column, int value);
-	void readRecord(QDataStream& stream);
+	void setIndexAtColumnAsComboBox(int column, int value);
+	void readRecord();
 	void loadTableContent();
 	void loadLayout();
 	void saveLayout();
 	void saveTableContent();
 	void setupConnections();
+	int getCurrentIndexOfCellWidgetAsComboBox(int row, int column);
 private slots:
 	void onAddClick();
 	void onOkClick();

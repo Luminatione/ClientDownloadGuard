@@ -1,6 +1,7 @@
 #include "AutoDetectionWindow.h"
 #include "QtMacros.h"
 #include "DefaultSettings.h"
+#include "AutoDetectionReader.h"
 
 #include <QTreeWidget>
 #include <QComboBox>
@@ -23,6 +24,11 @@ void AutoDetectionWindow::setupConnections()
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.cancelButton, onCancelClick());
 }
 
+int AutoDetectionWindow::getCurrentIndexOfCellWidgetAsComboBox(int row, int column)
+{
+	return dynamic_cast<QComboBox*>(ui.tableWidget->cellWidget(row, column))->currentIndex();
+}
+
 QComboBox* AutoDetectionWindow::getComboBoxWithItems(QStringList& items)
 {
 	QComboBox* comboBox = new QComboBox();
@@ -42,37 +48,27 @@ QComboBox* AutoDetectionWindow::getConflictBehaviourComboBox()
 	return getComboBoxWithItems(options);
 }
 
-void AutoDetectionWindow::setValueAtColumnAsComboBox(int column, int value)
+void AutoDetectionWindow::setIndexAtColumnAsComboBox(int column, int value)
 {
 	dynamic_cast<QComboBox*>(ui.tableWidget->cellWidget(ui.tableWidget->rowCount() - 1, column))->setCurrentIndex(value);
 }
 
-void AutoDetectionWindow::readRecord(QDataStream& stream)
+void AutoDetectionWindow::readRecord()
 {
-	onAddClick();
-	ui.tableWidget->item(ui.tableWidget->rowCount() - 1, 0)->read(stream);
-	int temp = 0;
-	stream >> temp;
-	setValueAtColumnAsComboBox(1, temp);
-	stream >> temp;
-	setValueAtColumnAsComboBox(2, temp);
+	auto [windowName, type, conflictBehaviour] = AutoDetectionReader::autoDetectionReader->getNextRecord();
+	ui.tableWidget->item(ui.tableWidget->rowCount() - 1, 0)->setText(windowName);
+	setIndexAtColumnAsComboBox(1, type);
+	setIndexAtColumnAsComboBox(2, conflictBehaviour);
 }
 
 void AutoDetectionWindow::loadTableContent()
 {
-	QFile file = QFile(QCoreApplication::applicationDirPath() + "/auto detection.dat");
-	QDataStream stream = QDataStream(&file);
-	if (!file.open(QIODevice::ReadOnly) && file.exists())
+	AutoDetectionReader::autoDetectionReader->resetFileCursor();
+	while (!AutoDetectionReader::autoDetectionReader->atEnd())
 	{
-		QMessageBox::critical(this, "Error", "Failed to Load File");
-		return;
+		onAddClick();
+		readRecord();
 	}
-	while (!stream.atEnd())
-	{
-		readRecord(stream);
-	}
-	file.flush();
-	file.close();
 }
 
 void AutoDetectionWindow::loadLayout()
@@ -98,21 +94,14 @@ void AutoDetectionWindow::saveLayout()
 
 void AutoDetectionWindow::saveTableContent()
 {
-	QFile file = QFile(QCoreApplication::applicationDirPath() + "/auto detection.dat");
-	QDataStream stream = QDataStream(&file);
-	if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
-	{
-		QMessageBox::critical(this, "Error", "Failed to save Changes");
-		return;
-	}
+	AutoDetectionReader::autoDetectionReader->truncate();
+	AutoDetectionReader::autoDetectionReader->resetFileCursor();
 	for (int i = 0; i < ui.tableWidget->rowCount(); ++i)
 	{
-		ui.tableWidget->item(i, 0)->write(stream);
-		stream << dynamic_cast<QComboBox*>(ui.tableWidget->cellWidget(i, 1))->currentIndex();
-		stream << dynamic_cast<QComboBox*>(ui.tableWidget->cellWidget(i, 2))->currentIndex();
+		QString windowName = ui.tableWidget->item(i, 0)->text();
+		AutoDetectionReader::autoDetectionReader->saveRecord(windowName, getCurrentIndexOfCellWidgetAsComboBox(i, 1),
+		                                                     getCurrentIndexOfCellWidgetAsComboBox(i, 2));
 	}
-	file.flush();
-	file.close();
 }
 
 void AutoDetectionWindow::onAddClick()

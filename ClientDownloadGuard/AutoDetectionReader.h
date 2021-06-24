@@ -1,15 +1,19 @@
 #pragma once
 #include <QFile>
 #include <QString>
+#include <QCoreApplication>
+#include <QMutex>
 
 class AutoDetectionReader
 {
-	QString fileName = "/auto detection.dat";
+	QString fileName = "auto detection.dat";
 	QFile file = QFile(fileName);
 	QDataStream dataStream = QDataStream(&file);
+
+	mutable QMutex mutex;
 public:
 	static AutoDetectionReader* autoDetectionReader;
-	
+
 	AutoDetectionReader();
 
 	std::tuple<QString, int, int> getNextRecord();
@@ -17,6 +21,7 @@ public:
 	void truncate();
 	void closeFile();
 	void resetFileCursor();
+	bool atEnd();
 	~AutoDetectionReader();
 };
 
