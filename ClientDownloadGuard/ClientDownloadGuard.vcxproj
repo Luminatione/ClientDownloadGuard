@@ -101,7 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AutoDetectionReader.cpp" />
+    <ClCompile Include="AutoDetectionIO.cpp" />
     <ClCompile Include="AutoDetectionWindow.cpp" />
     <ClCompile Include="AutoDetectionWorker.cpp" />
     <ClCompile Include="GetNetworkStateApiCaller.cpp" />
@@ -131,7 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AutoDetectionWindow.h" />
-    <ClInclude Include="AutoDetectionReader.h" />
+    <ClInclude Include="AutoDetectionIO.h" />
     <QtMoc Include="AutoDetectionWorker.h" />
     <ClInclude Include="DefaultSettings.h" />
     <ClInclude Include="GetNetworkStateApiCaller.h" />

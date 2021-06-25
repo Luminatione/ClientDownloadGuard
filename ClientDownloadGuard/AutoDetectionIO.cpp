@@ -1,8 +1,8 @@
-#include "AutoDetectionReader.h"
+#include "AutoDetectionIO.h"
 
 #include <QMessageBox>
 
-AutoDetectionReader::AutoDetectionReader()
+AutoDetectionIO::AutoDetectionIO()
 {
 	if (!file.open(QIODeviceBase::ReadWrite) && file.exists())
 	{
@@ -11,7 +11,7 @@ AutoDetectionReader::AutoDetectionReader()
 	QString a = file.fileName();
 }
 
-std::tuple<QString, int, int> AutoDetectionReader::getNextRecord()
+std::tuple<QString, int, int> AutoDetectionIO::getNextRecord()
 {
 	QString windowName;
 	int type;
@@ -20,34 +20,34 @@ std::tuple<QString, int, int> AutoDetectionReader::getNextRecord()
 	return { windowName, type, conflictBehaviour };
 }
 
-void AutoDetectionReader::saveRecord(QString& windowName, int type, int conflictBehaviour)
+void AutoDetectionIO::saveRecord(QString& windowName, int type, int conflictBehaviour)
 {
 	dataStream << windowName << type << conflictBehaviour;
 }
 
-void AutoDetectionReader::truncate()
+void AutoDetectionIO::truncate()
 {
 	closeFile();
 	file.open(QIODevice::ReadWrite | QIODevice::Truncate);
 }
 
-void AutoDetectionReader::closeFile()
+void AutoDetectionIO::closeFile()
 {
 	file.flush();
 	file.close();
 }
 
-void AutoDetectionReader::resetFileCursor()
+void AutoDetectionIO::resetFileCursor()
 {
 	file.seek(0);
 }
 
-bool AutoDetectionReader::atEnd()
+bool AutoDetectionIO::atEnd()
 {
 	return dataStream.atEnd();
 }
 
-AutoDetectionReader::~AutoDetectionReader()
+AutoDetectionIO::~AutoDetectionIO()
 {
 	closeFile();
 }

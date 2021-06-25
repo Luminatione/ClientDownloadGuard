@@ -100,10 +100,10 @@
     <ClCompile Include="AutoDetectionWindow.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="AutoDetectionReader.cpp">
+    <ClCompile Include="AutoDetectionWorker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AutoDetectionWorker.cpp">
+    <ClCompile Include="AutoDetectionIO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -147,7 +147,7 @@
     <ClInclude Include="DefaultSettings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AutoDetectionReader.h">
+    <ClInclude Include="AutoDetectionIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

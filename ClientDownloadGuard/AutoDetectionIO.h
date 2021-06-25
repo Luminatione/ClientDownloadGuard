@@ -4,7 +4,7 @@
 #include <QCoreApplication>
 #include <QMutex>
 
-class AutoDetectionReader
+class AutoDetectionIO
 {
 	QString fileName = "auto detection.dat";
 	QFile file = QFile(fileName);
@@ -12,7 +12,7 @@ class AutoDetectionReader
 
 public:
 
-	AutoDetectionReader();
+	AutoDetectionIO();
 
 	std::tuple<QString, int, int> getNextRecord();
 	void saveRecord(QString& windowName, int type, int conflictBehaviour);
@@ -20,6 +20,6 @@ public:
 	void closeFile();
 	void resetFileCursor();
 	bool atEnd();
-	~AutoDetectionReader();
+	~AutoDetectionIO();
 };
 

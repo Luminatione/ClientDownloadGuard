@@ -1,7 +1,7 @@
 #include "AutoDetectionWindow.h"
 #include "QtMacros.h"
 #include "DefaultSettings.h"
-#include "AutoDetectionReader.h"
+#include "AutoDetectionIO.h"
 
 #include <QTreeWidget>
 #include <QComboBox>
@@ -55,7 +55,7 @@ void AutoDetectionWindow::setIndexAtColumnAsComboBox(int column, int value)
 
 void AutoDetectionWindow::readRecord()
 {
-	auto [windowName, type, conflictBehaviour] = autoDetectionReader.getNextRecord();
+	auto [windowName, type, conflictBehaviour] = autoDetectionIO.getNextRecord();
 	ui.tableWidget->item(ui.tableWidget->rowCount() - 1, 0)->setText(windowName);
 	setIndexAtColumnAsComboBox(1, type);
 	setIndexAtColumnAsComboBox(2, conflictBehaviour);
@@ -63,8 +63,8 @@ void AutoDetectionWindow::readRecord()
 
 void AutoDetectionWindow::loadTableContent()
 {
-	autoDetectionReader.resetFileCursor();
-	while (!autoDetectionReader.atEnd())
+	autoDetectionIO.resetFileCursor();
+	while (!autoDetectionIO.atEnd())
 	{
 		onAddClick();
 		readRecord();
@@ -94,12 +94,12 @@ void AutoDetectionWindow::saveLayout()
 
 void AutoDetectionWindow::saveTableContent()
 {
-	autoDetectionReader.truncate();
-	autoDetectionReader.resetFileCursor();
+	autoDetectionIO.truncate();
+	autoDetectionIO.resetFileCursor();
 	for (int i = 0; i < ui.tableWidget->rowCount(); ++i)
 	{
 		QString windowName = ui.tableWidget->item(i, 0)->text();
-		autoDetectionReader.saveRecord(windowName, getCurrentIndexOfCellWidgetAsComboBox(i, 1),
+		autoDetectionIO.saveRecord(windowName, getCurrentIndexOfCellWidgetAsComboBox(i, 1),
 		                                                     getCurrentIndexOfCellWidgetAsComboBox(i, 2));
 	}
 }
@@ -118,11 +118,13 @@ void AutoDetectionWindow::onOkClick()
 {
 	saveLayout();
 	saveTableContent();
+	autoDetectionIO.closeFile();
 	close();
 }
 
 void AutoDetectionWindow::onCancelClick()
 {
 	saveLayout();
+	autoDetectionIO.closeFile();
 	close();
 }

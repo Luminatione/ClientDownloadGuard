@@ -4,14 +4,14 @@
 #include <QTreeWidgetItem>
 
 #include "ui_AutoDetctionWindow.h"
-#include "AutoDetectionReader.h"
+#include "AutoDetectionIO.h"
 
 class AutoDetectionWindow : public QMainWindow
 {
 	Q_OBJECT
 	
 	Ui::AutoDetectionWindow ui;
-	AutoDetectionReader autoDetectionReader = AutoDetectionReader();
+	AutoDetectionIO autoDetectionIO = AutoDetectionIO();
 public:
 	AutoDetectionWindow(QWidget* parent = nullptr);
 private:

@@ -3,7 +3,7 @@
 #include <QString>
 #include <QVector>
 
-#include "AutoDetectionReader.h"
+#include "AutoDetectionIO.h"
 #include "MainPanelWindow.h"
 
 class AutoDetectionWorker : public QObject
@@ -17,7 +17,7 @@ class AutoDetectionWorker : public QObject
 		int onConflictBehaviour;
 	};
 	QVector<Record> records;
-	AutoDetectionReader autoDetectionReader = AutoDetectionReader();
+	AutoDetectionIO autoDetectionReader = AutoDetectionIO();
 	QMainWindow* parent;
 
 	QMutex mutex;
