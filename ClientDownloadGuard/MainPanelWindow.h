@@ -11,6 +11,8 @@
 #include "LabelTextSetter.h"
 #include "ui_MainPanelWindow.h"
 
+enum state { no_connection = -1, free_network = 0, busy_network = 1, asking_not_to_download = 2 };
+
 class MainPanelWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -31,8 +33,9 @@ class MainPanelWindow : public QMainWindow
 	
 	bool offlineMode = false;
 	bool awaitsSetState = false;
-
-	//AutoDetectionWorker* autoDetectionWorker = new AutoDetectionWorker;
+	AutoDetectionWorker* autoDetectionWorker;
+	int networkState = -1;
+	
 	QThread thr = QThread();
 	
 public:
@@ -43,6 +46,7 @@ public:
 	void setAuthKey(QString& authKey);
 	void getState();
 	void setState(int type, QString& description);
+	void onNotify(int type, QString& windowName);
 	
 private:
 	void initializeIcons();
@@ -51,7 +55,9 @@ private:
 	void setIcon(int type);
 signals:
 	void becomeOnline();
-
+public slots:
+	void onRefreshClick();
+	
 private slots:
 	void setState();
 	void onAboutTriggered();
@@ -61,6 +67,5 @@ private slots:
 	void onGetStateError(QNetworkReply::NetworkError errorCode);
 	void onSetStateResponse();
 	void onSetStateError(QNetworkReply::NetworkError errorCode);
-	void onRefreshClick();
 };
 

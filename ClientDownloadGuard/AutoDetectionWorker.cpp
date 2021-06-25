@@ -1,10 +1,12 @@
 #include "AutoDetectionWorker.h"
-
+#include "MainPanelWindow.h"
 
 #include <QMessageBox>
 #include <Windows.h>
 void AutoDetectionWorker::loadAutoDetectedWindows()
 {
+	records.clear();
+	autoDetectionReader.resetFileCursor();
 	while (!autoDetectionReader.atEnd())
 	{
 		auto [windowName, type, onConflictBehaviour] = autoDetectionReader.getNextRecord();
@@ -14,39 +16,44 @@ void AutoDetectionWorker::loadAutoDetectedWindows()
 
 void AutoDetectionWorker::work()
 {
+	MainPanelWindow* mainPanelWindow = dynamic_cast<MainPanelWindow*>(parent);
 	while (doWork)
 	{
-		//TODO: enumerating thru all windows and check if there are listed in records;
-		for (auto& record : records)
+		if (networkState != -1)
 		{
-			HWND window = FindWindowW(nullptr, reinterpret_cast<LPCWSTR>(record.windowName.utf16()));
-			if(window)
+			for (auto record : records)
 			{
-				if(networkState == 0 || networkState == -1)
+				HWND window = FindWindowW(nullptr, reinterpret_cast<LPCWSTR>(record.windowName.utf16()));
+				if (window && !resolvedWindows.contains(window))
 				{
-					QString description = "I'm using " + record.windowName;
-					mutex.lock();
-					//parent->setState(record.type, description);
-					mutex.unlock();
-				}
-				else
-				{
-					QMessageBox::question(nullptr, "aaa", "bbbb");
+					if (networkState == 0 || record.onConflictBehaviour == 0)
+					{
+						QString description = "I'm using " + record.windowName;
+						mutex.lock();
+						mainPanelWindow->setState(record.type, description);
+						mutex.unlock();
+					}
+					else if (record.onConflictBehaviour == 1)
+					{
+						emit onNotify(record.type, record.windowName);
+					}
+					emit onUpdate();
+					resolvedWindows.push_back(window);
 				}
 			}
 		}
-		Sleep(30000);
+		Sleep(1000);
 	}
 }
 
 void AutoDetectionWorker::setState(int _state)
 {
 	QMutexLocker<QMutex>locker(&mutex);
-	this->networkState = static_cast<state>(_state);
+	this->networkState = _state;
 }
 
 AutoDetectionWorker::AutoDetectionWorker(QMainWindow* parent)
 {
-	//this->parent = parent;
+	this->parent = parent;
 	loadAutoDetectedWindows();
 }

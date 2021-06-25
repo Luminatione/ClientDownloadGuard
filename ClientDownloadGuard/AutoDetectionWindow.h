@@ -27,6 +27,8 @@ private:
 	void saveTableContent();
 	void setupConnections();
 	int getCurrentIndexOfCellWidgetAsComboBox(int row, int column);
+signals:
+	void closeEvent(QCloseEvent* event) override;
 private slots:
 	void onAddClick();
 	void onOkClick();

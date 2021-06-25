@@ -4,11 +4,10 @@
 #include <QVector>
 
 #include "AutoDetectionIO.h"
-#include "MainPanelWindow.h"
 
 class AutoDetectionWorker : public QObject
 {
-	enum state {no_connection = -1, free = 0, busy = 1, asking_not_to_download = 2};
+
 	Q_OBJECT
 	struct Record
 	{
@@ -19,15 +18,20 @@ class AutoDetectionWorker : public QObject
 	QVector<Record> records;
 	AutoDetectionIO autoDetectionReader = AutoDetectionIO();
 	QMainWindow* parent;
+	QVector<HWND> resolvedWindows;
 
-	QMutex mutex;
+	mutable  QMutex mutex;
 
 	bool doWork = true;
-	state networkState = no_connection;
+	int networkState = -1;
+signals:
+	void onNotify(int, QString&);
+	void onUpdate();
 public:
 	AutoDetectionWorker(QMainWindow* parent = nullptr);
-	void loadAutoDetectedWindows();
-	void work();
 	void setState(int state);
+	void work();
+public slots:
+	void loadAutoDetectedWindows();
 };
 

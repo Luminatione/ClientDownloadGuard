@@ -1,5 +1,4 @@
 #include <QMessageBox>
-#include <QThread>
 
 #include "QtMacros.h"
 #include "MainPanelWindow.h"
@@ -12,9 +11,13 @@
 
 void MainPanelWindow::startAutoDetection()
 {
-	//autoDetectionWorker =new  AutoDetectionWorker(this);
-	//autoDetectionWorker->moveToThread(&thr);
-	//connect(&thr, &QThread::started, autoDetectionWorker, &AutoDetectionWorker::work);
+	
+	autoDetectionWorker =new  AutoDetectionWorker(this);
+	autoDetectionWorker->setState(networkState);
+	autoDetectionWorker->moveToThread(&thr);
+	connect(&thr, &QThread::started, autoDetectionWorker, &AutoDetectionWorker::work);
+	connect(autoDetectionWorker, &AutoDetectionWorker::onNotify, this, &MainPanelWindow::onNotify);
+	connect(autoDetectionWorker, &AutoDetectionWorker::onUpdate, this, &MainPanelWindow::onRefreshClick);
 	thr.start();
 }
 
@@ -89,6 +92,16 @@ void MainPanelWindow::setState(int type, QString& description)
 	SERVER_RESPONSE_TO_THIS_CONNECTION(replySet, MainPanelWindow::onSetStateResponse, MainPanelWindow::onSetStateError);
 }
 
+void MainPanelWindow::onNotify(int type, QString& windowName)
+{	
+	QMessageBox::StandardButton result = QMessageBox::question(this, "Conflict", "Set selected type?", QMessageBox::Yes | QMessageBox::No);
+	if(result == QMessageBox::Yes)
+	{
+		QString description = "I'm using " + windowName;
+		setState(type, description);
+	}
+}
+
 void MainPanelWindow::setState()
 {
 	if (offlineMode)
@@ -126,8 +139,9 @@ void MainPanelWindow::onSettingsTriggered()
 void MainPanelWindow::onAutoDetectionTriggered()
 {
 	AutoDetectionWindow* autoDetectionWindow = new AutoDetectionWindow();
+	autoDetectionWindow->connect(autoDetectionWindow, &AutoDetectionWindow::destroyed, autoDetectionWorker, &AutoDetectionWorker::loadAutoDetectedWindows);
 	autoDetectionWindow->show();
-
+	autoDetectionWindow->setAttribute(Qt::WA_DeleteOnClose);
 }
 
 void MainPanelWindow::setIcon(int type)
@@ -167,6 +181,8 @@ void MainPanelWindow::onGetStateResponse()
 		authorLabelTextSetter.setText(user);
 		descriptionLabelTextSetter.setText(description);
 		setIcon(type);
+		networkState = type;
+		autoDetectionWorker->setState(networkState);
 	}
 	else
 	{
@@ -179,6 +195,8 @@ void MainPanelWindow::onGetStateError(QNetworkReply::NetworkError errorCode)
 {
 	ui.currentStateGraphic->setPixmap(noConnectionIcon);
 	ui.statusbar->showMessage("Error: " + QString::number(errorCode));
+	networkState = -1;
+	autoDetectionWorker->setState(networkState);
 }
 
 void MainPanelWindow::onSetStateResponse()

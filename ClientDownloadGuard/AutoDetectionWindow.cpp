@@ -29,6 +29,11 @@ int AutoDetectionWindow::getCurrentIndexOfCellWidgetAsComboBox(int row, int colu
 	return dynamic_cast<QComboBox*>(ui.tableWidget->cellWidget(row, column))->currentIndex();
 }
 
+void AutoDetectionWindow::closeEvent(QCloseEvent* event)
+{
+	emit destroyed();
+}
+
 QComboBox* AutoDetectionWindow::getComboBoxWithItems(QStringList& items)
 {
 	QComboBox* comboBox = new QComboBox();
