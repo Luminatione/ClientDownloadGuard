@@ -4,9 +4,10 @@
 #include <QSharedPointer>
 #include <QNetworkReply>
 #include <qpointer.h>
+#include <QThread>
 
 
-
+#include "AutoDetectionWorker.h"
 #include "LabelTextSetter.h"
 #include "ui_MainPanelWindow.h"
 
@@ -30,23 +31,27 @@ class MainPanelWindow : public QMainWindow
 	
 	bool offlineMode = false;
 	bool awaitsSetState = false;
+
+	//AutoDetectionWorker* autoDetectionWorker = new AutoDetectionWorker;
+	QThread thr = QThread();
 	
 public:
 	void initializeLabelTextSetters();
+	void startAutoDetection();
 	MainPanelWindow(QString authKey, QWidget* parent = nullptr);
-	
+	~MainPanelWindow();
 	void setAuthKey(QString& authKey);
+	void getState();
+	void setState(int type, QString& description);
 	
 private:
 	void initializeIcons();
 	void setupConnections();
 	void populateStateSelection();
-	void getState();
 	void setIcon(int type);
-
 signals:
 	void becomeOnline();
-	
+
 private slots:
 	void setState();
 	void onAboutTriggered();

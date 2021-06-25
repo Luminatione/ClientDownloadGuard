@@ -38,13 +38,13 @@ QComboBox* AutoDetectionWindow::getComboBoxWithItems(QStringList& items)
 
 QComboBox* AutoDetectionWindow::getTypeComboBox()
 {
-	QStringList options{ "Free", "Downloading", "Ask not to download" };
+	QStringList options{ "Free", "Downloading", "Ask not to download", "None" };
 	return getComboBoxWithItems(options);
 }
 
 QComboBox* AutoDetectionWindow::getConflictBehaviourComboBox()
 {
-	QStringList options{ "Ignore", "Notify me", "Abandon" };
+	QStringList options{ "Ignore", "Notify me", "Abandon", "None" };
 	return getComboBoxWithItems(options);
 }
 

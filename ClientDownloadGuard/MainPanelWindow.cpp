@@ -10,6 +10,14 @@
 #include "AutoDetectionWindow.h"
 #include "AutoDetectionWorker.h"
 
+void MainPanelWindow::startAutoDetection()
+{
+	//autoDetectionWorker =new  AutoDetectionWorker(this);
+	//autoDetectionWorker->moveToThread(&thr);
+	//connect(&thr, &QThread::started, autoDetectionWorker, &AutoDetectionWorker::work);
+	thr.start();
+}
+
 MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(authKey)
 {
 	ui.setupUi(this);
@@ -25,11 +33,12 @@ MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(aut
 	{
 		ui.statusbar->showMessage("Waiting for server...");
 	}
-	AutoDetectionWorker* autoDetectionWorker = new AutoDetectionWorker();
-	QThread* thr = new QThread();
-	autoDetectionWorker->moveToThread(thr);
-	connect(thr, &QThread::started, autoDetectionWorker, &AutoDetectionWorker::work);
-	thr->start();
+	startAutoDetection();
+}
+
+MainPanelWindow::~MainPanelWindow()
+{
+	thr.quit();
 }
 
 void MainPanelWindow::initializeLabelTextSetters()
@@ -64,6 +73,20 @@ void MainPanelWindow::getState()
 {
 	replyGet = QSharedPointer<QNetworkReply>(ServerConnectionManager::serverConnectionManager->getNetworkState(authKey));
 	SERVER_RESPONSE_TO_THIS_CONNECTION(replyGet, MainPanelWindow::onGetStateResponse, MainPanelWindow::onGetStateError);
+}
+
+void MainPanelWindow::setState(int type, QString& description)
+{
+	if (offlineMode)
+	{
+		awaitsSetState = true;
+		ui.statusbar->showMessage("Waiting for server");
+		return;
+	}
+	awaitsSetState = false;
+	replySet = QSharedPointer<QNetworkReply>(
+		ServerConnectionManager::serverConnectionManager->setNetworkState(authKey, type, description));
+	SERVER_RESPONSE_TO_THIS_CONNECTION(replySet, MainPanelWindow::onSetStateResponse, MainPanelWindow::onSetStateError);
 }
 
 void MainPanelWindow::setState()
@@ -104,7 +127,7 @@ void MainPanelWindow::onAutoDetectionTriggered()
 {
 	AutoDetectionWindow* autoDetectionWindow = new AutoDetectionWindow();
 	autoDetectionWindow->show();
-	
+
 }
 
 void MainPanelWindow::setIcon(int type)
@@ -126,7 +149,7 @@ void MainPanelWindow::becomeOnline()
 {
 	offlineMode = false;
 	getState();
-	if(awaitsSetState)
+	if (awaitsSetState)
 	{
 		setState();
 	}
