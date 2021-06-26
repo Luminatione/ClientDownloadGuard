@@ -182,7 +182,7 @@ void MainPanelWindow::onGetStateResponse()
 		authorLabelTextSetter.setText(user);
 		descriptionLabelTextSetter.setText(description);
 		setIcon(type);
-		networkState = type;
+		networkState = static_cast<enum state>(type);
 		autoDetectionWorker->setState(networkState);
 	}
 	else
@@ -196,7 +196,7 @@ void MainPanelWindow::onGetStateError(QNetworkReply::NetworkError errorCode)
 {
 	ui.currentStateGraphic->setPixmap(noConnectionIcon);
 	ui.statusbar->showMessage("Error: " + QString::number(errorCode));
-	networkState = -1;
+	networkState = no_connection;
 	autoDetectionWorker->setState(networkState);
 }
 

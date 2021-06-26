@@ -34,7 +34,7 @@ class MainPanelWindow : public QMainWindow
 	bool offlineMode = false;
 	bool awaitsSetState = false;
 	AutoDetectionWorker* autoDetectionWorker;
-	int networkState = -1;
+	state networkState = no_connection;
 	
 	QThread thr = QThread();
 	
