@@ -18,7 +18,7 @@ class AutoDetectionWorker : public QObject
 	QVector<Record> records;
 	AutoDetectionIO autoDetectionReader = AutoDetectionIO();
 	QMainWindow* parent;
-	QVector<HWND> resolvedWindows;
+	QVector<HWND> checkedWindows;
 
 	mutable  QMutex mutex;
 
@@ -27,11 +27,17 @@ class AutoDetectionWorker : public QObject
 signals:
 	void onNotify(int, QString&);
 	void onUpdate();
+	void onSetState(int, QString&);
 public:
 	AutoDetectionWorker(QMainWindow* parent = nullptr);
 	void setState(int state);
 	void work();
 public slots:
 	void loadAutoDetectedWindows();
+	bool hasConnection();
+	HWND getWindowWithName(QString& windowName);
+	bool isNetworkFree();
+	bool networkStateShouldBeIgnored(int conflictBehaviour);
+	bool shouldNotifyUserOnConflict(int conflictBehaviour);
 };
 

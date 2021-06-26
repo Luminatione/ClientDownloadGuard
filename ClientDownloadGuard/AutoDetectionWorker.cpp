@@ -14,31 +14,54 @@ void AutoDetectionWorker::loadAutoDetectedWindows()
 	}
 }
 
+bool AutoDetectionWorker::hasConnection()
+{
+	return networkState != -1;
+}
+
+HWND AutoDetectionWorker::getWindowWithName(QString& windowName)
+{
+	return FindWindowW(nullptr, reinterpret_cast<LPCWSTR>(windowName.utf16()));
+}
+
+bool AutoDetectionWorker::isNetworkFree()
+{
+	return networkState == 0;
+}
+
+bool AutoDetectionWorker::networkStateShouldBeIgnored(int conflictBehaviour)
+{
+	return conflictBehaviour == 0;
+}
+
+bool AutoDetectionWorker::shouldNotifyUserOnConflict(int conflictBehaviour)
+{
+	return conflictBehaviour == 1;
+}
+
 void AutoDetectionWorker::work()
 {
 	MainPanelWindow* mainPanelWindow = dynamic_cast<MainPanelWindow*>(parent);
 	while (doWork)
 	{
-		if (networkState != -1)
+		if (hasConnection())
 		{
 			for (auto record : records)
 			{
-				HWND window = FindWindowW(nullptr, reinterpret_cast<LPCWSTR>(record.windowName.utf16()));
-				if (window && !resolvedWindows.contains(window))
+				HWND window = getWindowWithName(record.windowName);
+				if (window && !checkedWindows.contains(window))
 				{
-					if (networkState == 0 || record.onConflictBehaviour == 0)
+					if (isNetworkFree() || networkStateShouldBeIgnored(record.onConflictBehaviour))
 					{
 						QString description = "I'm using " + record.windowName;
-						mutex.lock();
-						mainPanelWindow->setState(record.type, description);
-						mutex.unlock();
+						emit onSetState(record.type, description);
 					}
-					else if (record.onConflictBehaviour == 1)
+					else if (shouldNotifyUserOnConflict(record.onConflictBehaviour))
 					{
 						emit onNotify(record.type, record.windowName);
 					}
+					checkedWindows.push_back(window);
 					emit onUpdate();
-					resolvedWindows.push_back(window);
 				}
 			}
 		}
