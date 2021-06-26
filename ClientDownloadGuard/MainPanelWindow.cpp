@@ -18,6 +18,7 @@ void MainPanelWindow::startAutoDetection()
 	connect(&thr, &QThread::started, autoDetectionWorker, &AutoDetectionWorker::work);
 	connect(autoDetectionWorker, &AutoDetectionWorker::onNotify, this, &MainPanelWindow::onNotify);
 	connect(autoDetectionWorker, &AutoDetectionWorker::onUpdate, this, &MainPanelWindow::onRefreshClick);
+	connect(autoDetectionWorker, &AutoDetectionWorker::onSetState, this, &MainPanelWindow::onSetState);
 	thr.start();
 }
 
@@ -78,7 +79,7 @@ void MainPanelWindow::getState()
 	SERVER_RESPONSE_TO_THIS_CONNECTION(replyGet, MainPanelWindow::onGetStateResponse, MainPanelWindow::onGetStateError);
 }
 
-void MainPanelWindow::setState(int type, QString& description)
+void MainPanelWindow::onSetState(int type, QString& description)
 {
 	if (offlineMode)
 	{
@@ -98,7 +99,7 @@ void MainPanelWindow::onNotify(int type, QString& windowName)
 	if(result == QMessageBox::Yes)
 	{
 		QString description = "I'm using " + windowName;
-		setState(type, description);
+		onSetState(type, description);
 	}
 }
 

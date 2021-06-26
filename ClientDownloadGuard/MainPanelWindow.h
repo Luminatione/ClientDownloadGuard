@@ -45,7 +45,6 @@ public:
 	~MainPanelWindow();
 	void setAuthKey(QString& authKey);
 	void getState();
-	void setState(int type, QString& description);
 	void onNotify(int type, QString& windowName);
 	
 private:
@@ -56,6 +55,7 @@ private:
 signals:
 	void becomeOnline();
 public slots:
+	void onSetState(int type, QString& description);
 	void onRefreshClick();
 	
 private slots:
