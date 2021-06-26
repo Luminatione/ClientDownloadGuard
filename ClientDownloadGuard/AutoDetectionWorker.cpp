@@ -42,7 +42,7 @@ void AutoDetectionWorker::work()
 				}
 			}
 		}
-		Sleep(1000);
+		Sleep(10000);
 	}
 }
 

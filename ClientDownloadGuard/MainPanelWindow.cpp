@@ -139,7 +139,8 @@ void MainPanelWindow::onSettingsTriggered()
 void MainPanelWindow::onAutoDetectionTriggered()
 {
 	AutoDetectionWindow* autoDetectionWindow = new AutoDetectionWindow();
-	autoDetectionWindow->connect(autoDetectionWindow, &AutoDetectionWindow::destroyed, autoDetectionWorker, &AutoDetectionWorker::loadAutoDetectedWindows);
+	//QObject::connect(autoDetectionWindow, &AutoDetectionWindow::destroyed, autoDetectionWorker, &AutoDetectionWorker::loadAutoDetectedWindows); //<--- this doesn't work for some reason
+	connect(autoDetectionWindow, &AutoDetectionWindow::destroyed, [&] {autoDetectionWorker->loadAutoDetectedWindows(); });
 	autoDetectionWindow->show();
 	autoDetectionWindow->setAttribute(Qt::WA_DeleteOnClose);
 }
