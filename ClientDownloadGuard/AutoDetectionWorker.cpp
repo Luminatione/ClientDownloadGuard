@@ -39,6 +39,11 @@ bool AutoDetectionWorker::shouldNotifyUserOnConflict(int conflictBehaviour)
 	return conflictBehaviour == 1;
 }
 
+bool AutoDetectionWorker::wantsToChangeState(int type)
+{
+	return type != 3;
+}
+
 void AutoDetectionWorker::work()
 {
 	MainPanelWindow* mainPanelWindow = dynamic_cast<MainPanelWindow*>(parent);
@@ -49,7 +54,7 @@ void AutoDetectionWorker::work()
 			for (auto record : records)
 			{
 				HWND window = getWindowWithName(record.windowName);
-				if (window && !checkedWindows.contains(window))
+				if (window && !checkedWindows.contains(window) && wantsToChangeState(record.type))
 				{
 					if (isNetworkFree() || networkStateShouldBeIgnored(record.onConflictBehaviour))
 					{

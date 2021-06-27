@@ -39,5 +39,6 @@ public slots:
 	bool isNetworkFree();
 	bool networkStateShouldBeIgnored(int conflictBehaviour);
 	bool shouldNotifyUserOnConflict(int conflictBehaviour);
+	bool wantsToChangeState(int type);
 };
 
