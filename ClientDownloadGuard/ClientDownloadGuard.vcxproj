@@ -127,6 +127,7 @@
     <ClCompile Include="main.cpp" />
     <QtUic Include="MainPanelWindow.ui" />
     <QtUic Include="registerWindow.ui" />
+    <QtUic Include="ScheduleWindow.ui" />
     <QtUic Include="SettingsWindow.ui" />
   </ItemGroup>
   <ItemGroup>
