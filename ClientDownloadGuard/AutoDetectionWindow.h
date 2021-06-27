@@ -33,5 +33,6 @@ private slots:
 	void onAddClick();
 	void onOkClick();
 	void onCancelClick();
+	void onRemoveClick();
 };
 

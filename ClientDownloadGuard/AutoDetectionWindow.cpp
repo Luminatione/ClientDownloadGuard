@@ -21,6 +21,7 @@ void AutoDetectionWindow::setupConnections()
 {
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.addButton, onAddClick());
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.okButton, onOkClick());
+	BUTTON_CLICK_TO_THIS_CONNECTION(ui.removeButton, onRemoveClick());
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.cancelButton, onCancelClick());
 }
 
@@ -49,7 +50,7 @@ QComboBox* AutoDetectionWindow::getTypeComboBox()
 
 QComboBox* AutoDetectionWindow::getConflictBehaviourComboBox()
 {
-	QStringList options{ "Ignore", "Notify me", "Abandon", "None" };
+	QStringList options{ "Ignore", "Notify me", "Abandon"};
 	return getComboBoxWithItems(options);
 }
 
@@ -132,4 +133,9 @@ void AutoDetectionWindow::onCancelClick()
 	saveLayout();
 	autoDetectionIO.closeFile();
 	close();
+}
+
+void AutoDetectionWindow::onRemoveClick()
+{
+	ui.tableWidget->removeRow(ui.tableWidget->currentRow());
 }
