@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>612</width>
-    <height>283</height>
+    <height>302</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,6 +59,20 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QLabel" name="nnameLabel">
+          <property name="text">
+           <string>Name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="nameLineEdit"/>
+        </item>
+       </layout>
+      </item>
+      <item>
        <widget class="QCheckBox" name="enabledCheckBox">
         <property name="text">
          <string>Enabled</string>
@@ -69,7 +83,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="typeComboBox">
+       <widget class="QComboBox" name="behaviourComboBox">
         <item>
          <property name="text">
           <string>Repetitive</string>
@@ -182,7 +196,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="typeComboBox_2">
+         <widget class="QComboBox" name="typeComboBox">
           <item>
            <property name="text">
             <string>Free</string>

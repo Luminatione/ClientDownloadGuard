@@ -156,9 +156,6 @@
     <ClInclude Include="AutoDetectionIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ScheduleWindow.h">
-      <Filter>Header Files\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="ScheduleRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -204,6 +201,9 @@
     </QtMoc>
     <QtMoc Include="AutoDetectionWorker.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ScheduleWindow.h">
+      <Filter>Header Files\Windows</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

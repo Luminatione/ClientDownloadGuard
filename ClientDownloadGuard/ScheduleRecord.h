@@ -4,6 +4,7 @@
 class ScheduleRecord
 {
 public:
+	QString name;
 	bool enabled;
 	int behaviour;
 	QTime begin;

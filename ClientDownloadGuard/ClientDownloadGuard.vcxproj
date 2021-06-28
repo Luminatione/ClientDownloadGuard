@@ -148,7 +148,7 @@
     <ClInclude Include="ResponseReader.h" />
     <ClInclude Include="RESTApiCaller.h" />
     <ClInclude Include="ScheduleRecord.h" />
-    <ClInclude Include="ScheduleWindow.h" />
+    <QtMoc Include="ScheduleWindow.h" />
     <ClInclude Include="SetNetworkStateApiCaller.h" />
     <QtMoc Include="SettingsWindow.h" />
     <ClInclude Include="Validator.h" />
