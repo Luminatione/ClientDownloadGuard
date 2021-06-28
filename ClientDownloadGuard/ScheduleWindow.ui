@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
-    <height>269</height>
+    <width>612</width>
+    <height>283</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -66,7 +66,18 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="typeComboBox"/>
+       <widget class="QComboBox" name="typeComboBox">
+        <item>
+         <property name="text">
+          <string>Repetitive</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Timer</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -159,6 +170,54 @@
        </layout>
       </item>
       <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="typeLabel">
+          <property name="text">
+           <string>Type</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="typeComboBox_2">
+          <item>
+           <property name="text">
+            <string>Free</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Downloading</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Ask not to download</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>None</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QLabel" name="onConflictBehaviourLabel">
@@ -168,7 +227,23 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="onConflictBehaviourComboBox"/>
+         <widget class="QComboBox" name="onConflictBehaviourComboBox">
+          <item>
+           <property name="text">
+            <string>Ignore</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Notify</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Abandon</string>
+           </property>
+          </item>
+         </widget>
         </item>
         <item>
          <spacer name="horizontalSpacer_2">
@@ -184,6 +259,13 @@
          </spacer>
         </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="removeOnEndCheckBox">
+        <property name="text">
+         <string>Remove on end</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="confirmButton">

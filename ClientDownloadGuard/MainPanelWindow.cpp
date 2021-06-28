@@ -96,7 +96,7 @@ void MainPanelWindow::onSetState(int type, QString& description)
 void MainPanelWindow::onNotify(int type, QString& windowName)
 {	
 	QMessageBox::StandardButton result = QMessageBox::question(this, "Conflict", "Set selected type?", QMessageBox::Yes | QMessageBox::No);
-	if(result == QMessageBox::Yes && type != 3)//3 mean no change  should be applied
+	if(result == QMessageBox::Yes && type != 3)//3 mean no change should be applied
 	{
 		QString description = "I'm using " + windowName;
 		onSetState(type, description);
