@@ -141,7 +141,7 @@
      <string>Options</string>
     </property>
     <addaction name="actionAuto_detection"/>
-    <addaction name="actionMacros"/>
+    <addaction name="actionSchedule"/>
     <addaction name="actionSettings"/>
    </widget>
    <addaction name="menuOptions"/>
@@ -163,7 +163,7 @@
     <string>Settings</string>
    </property>
   </action>
-  <action name="actionMacros">
+  <action name="actionSchedule">
    <property name="text">
     <string>Schedule</string>
    </property>

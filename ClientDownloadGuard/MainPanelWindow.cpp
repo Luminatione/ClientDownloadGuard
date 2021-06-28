@@ -8,6 +8,7 @@
 #include "SettingsWindow.h"
 #include "AutoDetectionWindow.h"
 #include "AutoDetectionWorker.h"
+#include "ScheduleWindow.h"
 
 void MainPanelWindow::startAutoDetection()
 {
@@ -64,6 +65,7 @@ void MainPanelWindow::setupConnections()
 	connect(ui.actionAbout, SIGNAL(triggered()), this, SLOT(onAboutTriggered()));
 	connect(ui.actionSettings, SIGNAL(triggered()), this, SLOT(onSettingsTriggered()));
 	connect(ui.actionAuto_detection, SIGNAL(triggered()), this, SLOT(onAutoDetectionTriggered()));
+	connect(ui.actionSchedule, SIGNAL(triggered()), this, SLOT(onScheduleTriggered()));
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.confirmButton, setState());
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.refreshButton, onRefreshClick());
 }
@@ -144,6 +146,13 @@ void MainPanelWindow::onAutoDetectionTriggered()
 	connect(autoDetectionWindow, &AutoDetectionWindow::destroyed, [&] {autoDetectionWorker->loadAutoDetectedWindows(); });
 	autoDetectionWindow->show();
 	autoDetectionWindow->setAttribute(Qt::WA_DeleteOnClose);
+}
+
+void MainPanelWindow::onScheduleTriggered()
+{
+	ScheduleWindow* window = new ScheduleWindow();
+	window->setWindowModality(Qt::WindowModal);
+	window->show();
 }
 
 void MainPanelWindow::setIcon(int type)

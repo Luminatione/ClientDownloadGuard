@@ -63,6 +63,7 @@ private slots:
 	void onAboutTriggered();
 	void onSettingsTriggered();
 	void onAutoDetectionTriggered();
+	void onScheduleTriggered();
 	void onGetStateResponse();
 	void onGetStateError(QNetworkReply::NetworkError errorCode);
 	void onSetStateResponse();

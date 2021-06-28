@@ -114,6 +114,8 @@
     <ClCompile Include="RegisterWindow.cpp" />
     <ClCompile Include="ResponseReader.cpp" />
     <ClCompile Include="RESTApiCaller.cpp" />
+    <ClCompile Include="ScheduleRecord.cpp" />
+    <ClCompile Include="ScheduleWindow.cpp" />
     <ClCompile Include="SetNetworkStateApiCaller.cpp" />
     <ClCompile Include="DefaultSettings.cpp" />
     <ClCompile Include="SettingsWindow.cpp" />
@@ -145,6 +147,8 @@
     <QtMoc Include="RegisterWindow.h" />
     <ClInclude Include="ResponseReader.h" />
     <ClInclude Include="RESTApiCaller.h" />
+    <ClInclude Include="ScheduleRecord.h" />
+    <ClInclude Include="ScheduleWindow.h" />
     <ClInclude Include="SetNetworkStateApiCaller.h" />
     <QtMoc Include="SettingsWindow.h" />
     <ClInclude Include="Validator.h" />
