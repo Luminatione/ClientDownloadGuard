@@ -4,15 +4,15 @@
 class ScheduleRecord
 {
 public:
-	QString name;
-	bool enabled;
-	int behaviour;
+	QString name = " ";
+	bool enabled = true;
+	int behaviour = 0;
 	QTime begin;
 	QTime end;
-	int days;
-	int type;
-	int onConflictBehaviour;
-	bool removeOnEnd;
+	int days = 0;
+	int type = 0;
+	int onConflictBehaviour = 0;
+	bool removeOnEnd = false;
 
 
 };

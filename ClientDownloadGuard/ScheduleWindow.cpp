@@ -15,6 +15,14 @@ ScheduleWindow::ScheduleWindow(QWidget* parent) : QMainWindow(parent)
 	loadRecords();
 	displayRecords();
 	setLayoutWidgetsEnabledState(false);
+	daysCheckBoxes[0] = ui.mondayCheckBox;
+	daysCheckBoxes[1] = ui.tuesdayCheckBox;
+	daysCheckBoxes[2] = ui.wednesdayCheckBox;
+	daysCheckBoxes[3] = ui.thursdayCheckBox;
+	daysCheckBoxes[4] = ui.fridayCheckBox;
+	daysCheckBoxes[5] = ui.saturdayCheckBox;
+	daysCheckBoxes[6] = ui.sundayCheckBox;
+
 }
 
 void ScheduleWindow::setupConnections()
@@ -49,13 +57,11 @@ void ScheduleWindow::addItemToList(QString& name)
 	ui.listWidget->addItem(name);
 	QListWidgetItem* lastItem = ui.listWidget->item(ui.listWidget->count() - 1);
 	lastItem->setFlags(lastItem->flags() | Qt::ItemIsEditable);
-	ScheduleRecord record;
-	record.name = name;
-	records.push_back(ScheduleRecord());
 }
 
 void ScheduleWindow::saveRecords()
 {
+	truncateFile();
 	for (auto& record : records)
 	{
 		dataStream << record;
@@ -98,6 +104,28 @@ void ScheduleWindow::closeEvent(QCloseEvent* event)
 	closeFile();
 }
 
+int ScheduleWindow::daysToNumber()
+{
+	int result = 0;
+	for (auto* checkBox : daysCheckBoxes)
+	{
+		result += checkBox->isChecked();
+		result <<= 1;
+	}
+	result >>= 1;
+	return result;
+}
+
+void ScheduleWindow::setDaysFromNumber(int number)
+{
+	int mask = 0b1000000;
+	for (auto* checkBox : daysCheckBoxes)
+	{
+		checkBox->setChecked(number & mask);
+		mask >>= 1;
+	}
+}
+
 ScheduleWindow::~ScheduleWindow()
 {
 }
@@ -106,7 +134,10 @@ void ScheduleWindow::onAddClick()
 {
 	QString name = "New item";
 	addItemToList(name);
-	ui.listWidget->editItem(ui.listWidget->item(ui.listWidget->count()-1));
+	ScheduleRecord record;
+	record.name = name;
+	records.push_back(record);
+	ui.listWidget->editItem(ui.listWidget->item(ui.listWidget->count() - 1));
 }
 
 void ScheduleWindow::onCloseClick()
@@ -135,6 +166,7 @@ void ScheduleWindow::onSelectionChanged()
 	ui.behaviourComboBox->setCurrentIndex(record->behaviour);
 	ui.beginTimeEdit->setTime(record->begin);
 	ui.endTimeEdit->setTime(record->end);
+	setDaysFromNumber(record->days);
 	ui.typeComboBox->setCurrentIndex(record->type);
 	ui.onConflictBehaviourComboBox->setCurrentIndex(record->onConflictBehaviour);
 	ui.removeOnEndCheckBox->setChecked(record->removeOnEnd);
@@ -149,6 +181,7 @@ void ScheduleWindow::onConfirmClick()
 	record->behaviour = ui.behaviourComboBox->currentIndex();
 	record->begin = ui.beginTimeEdit->time();
 	record->end = ui.endTimeEdit->time();
+	record->days = daysToNumber();
 	record->type = ui.typeComboBox->currentIndex();
 	record->onConflictBehaviour = ui.onConflictBehaviourComboBox->currentIndex();
 	record->removeOnEnd = ui.removeOnEndCheckBox->isChecked();
