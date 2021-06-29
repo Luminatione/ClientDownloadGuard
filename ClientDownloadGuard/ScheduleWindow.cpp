@@ -14,6 +14,7 @@ ScheduleWindow::ScheduleWindow(QWidget* parent) : QMainWindow(parent)
 	setupConnections();
 	loadRecords();
 	displayRecords();
+	setLayoutWidgetsEnabledState(false);
 }
 
 void ScheduleWindow::setupConnections()
@@ -22,7 +23,7 @@ void ScheduleWindow::setupConnections()
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.removeButton, onRemoveClick());
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.closeButton, onCloseClick());
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.confirmButton, onConfirmClick());
-	bool a = connect(ui.listWidget, &QListWidget::itemSelectionChanged, this, &ScheduleWindow::onSelectionChanged);
+	connect(ui.listWidget, &QListWidget::itemSelectionChanged, this, &ScheduleWindow::onSelectionChanged);
 }
 
 void ScheduleWindow::loadRecords()
@@ -46,9 +47,10 @@ void ScheduleWindow::displayRecords()
 void ScheduleWindow::addItemToList(QString& name)
 {
 	ui.listWidget->addItem(name);
-	QListWidgetItem* item = ui.listWidget->item(ui.listWidget->count() - 1);
-	item->setFlags(item->flags() | Qt::ItemIsEditable);
-	ui.listWidget->editItem(item);
+	QListWidgetItem* lastItem = ui.listWidget->item(ui.listWidget->count() - 1);
+	lastItem->setFlags(lastItem->flags() | Qt::ItemIsEditable);
+	ScheduleRecord record;
+	record.name = name;
 	records.push_back(ScheduleRecord());
 }
 
@@ -72,16 +74,39 @@ void ScheduleWindow::closeFile()
 	file.close();
 }
 
-ScheduleWindow::~ScheduleWindow()
+void ScheduleWindow::setLayoutWidgetsEnabledState(bool state, QLayout* layout)
+{
+	QLayout* currentLayout = layout ? layout : ui.verticalLayout;
+	for (int i = 0; i < currentLayout->count(); i++)
+	{
+		QWidget* widget = currentLayout->itemAt(i)->widget();
+		QLayout* underlyingLayout = currentLayout->itemAt(i)->layout();
+		if (widget)
+		{
+			widget->setEnabled(state);
+		}
+		if (underlyingLayout)
+		{
+			setLayoutWidgetsEnabledState(state, underlyingLayout);
+		}
+	}
+}
+
+void ScheduleWindow::closeEvent(QCloseEvent* event)
 {
 	saveRecords();
 	closeFile();
+}
+
+ScheduleWindow::~ScheduleWindow()
+{
 }
 
 void ScheduleWindow::onAddClick()
 {
 	QString name = "New item";
 	addItemToList(name);
+	ui.listWidget->editItem(ui.listWidget->item(ui.listWidget->count()-1));
 }
 
 void ScheduleWindow::onCloseClick()
@@ -96,7 +121,14 @@ void ScheduleWindow::onRemoveClick()
 
 void ScheduleWindow::onSelectionChanged()
 {
+
 	int selectedIndex = ui.listWidget->currentRow();
+	if (selectedIndex == -1)
+	{
+		setLayoutWidgetsEnabledState(false);
+		return;
+	}
+	setLayoutWidgetsEnabledState(true);
 	ScheduleRecord* record = &records[selectedIndex];
 	ui.nameLineEdit->setText(record->name);
 	ui.enabledCheckBox->setChecked(record->enabled);

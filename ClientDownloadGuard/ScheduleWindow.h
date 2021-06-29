@@ -22,6 +22,8 @@ class ScheduleWindow : public QMainWindow
 	void saveRecords();
 	void truncateFile();
 	void closeFile();
+	void setLayoutWidgetsEnabledState(bool state, QLayout* layout = nullptr);
+	void closeEvent(QCloseEvent* event) override;
 public:
 	ScheduleWindow(QWidget* parent = nullptr);
 	~ScheduleWindow();
@@ -32,5 +34,6 @@ private slots:
 	void onRemoveClick();
 	void onSelectionChanged();
 	void onConfirmClick();
+	void onEditNameEnd();
 };
 
