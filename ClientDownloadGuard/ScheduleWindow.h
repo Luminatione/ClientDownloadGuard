@@ -7,13 +7,14 @@
 #include <QMainWindow>
 #include <ui_ScheduleWindow.h>
 
+#include "ScheduleRecordIO.h"
+
 class ScheduleWindow : public QMainWindow
 {
 	Q_OBJECT
 	Ui::ScheduleWindow ui;
 	QVector<ScheduleRecord> records;
-	QFile file = QFile("schedule.dat");
-	QDataStream dataStream = QDataStream(&file);
+	ScheduleRecordIO scheduleRecordIO = ScheduleRecordIO();
 	QVector<QCheckBox*> daysCheckBoxes = QVector<QCheckBox*>(7);;
 	
 	void setupConnections();
@@ -21,8 +22,6 @@ class ScheduleWindow : public QMainWindow
 	void displayRecords();
 	void addItemToList(QString& name);
 	void saveRecords();
-	void truncateFile();
-	void closeFile();
 	void setLayoutWidgetsEnabledState(bool state, QLayout* layout = nullptr);
 	void closeEvent(QCloseEvent* event) override;
 	int daysToNumber();

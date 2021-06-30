@@ -7,10 +7,6 @@
 ScheduleWindow::ScheduleWindow(QWidget* parent) : QMainWindow(parent)
 {
 	ui.setupUi(this);
-	if (!file.open(QIODeviceBase::ReadWrite) && file.exists())
-	{
-		QMessageBox::critical(nullptr, "Error", "Failed to open file");
-	}
 	setupConnections();
 	loadRecords();
 	displayRecords();
@@ -37,10 +33,9 @@ void ScheduleWindow::setupConnections()
 
 void ScheduleWindow::loadRecords()
 {
-	while (!dataStream.atEnd())
+	while (!scheduleRecordIO.atEnd())
 	{
-		ScheduleRecord record;
-		dataStream >> record;
+		ScheduleRecord record = scheduleRecordIO.getNextRecord();
 		records.push_back(record);
 	}
 }
@@ -62,23 +57,11 @@ void ScheduleWindow::addItemToList(QString& name)
 
 void ScheduleWindow::saveRecords()
 {
-	truncateFile();
+	scheduleRecordIO.truncate();
 	for (auto& record : records)
 	{
-		dataStream << record;
+		scheduleRecordIO.saveRecord(record);
 	}
-}
-
-void ScheduleWindow::truncateFile()
-{
-	closeFile();
-	file.open(QIODeviceBase::ReadWrite | QIODeviceBase::Truncate);
-}
-
-void ScheduleWindow::closeFile()
-{
-	file.flush();
-	file.close();
 }
 
 void ScheduleWindow::setLayoutWidgetsEnabledState(bool state, QLayout* layout)
@@ -102,7 +85,7 @@ void ScheduleWindow::setLayoutWidgetsEnabledState(bool state, QLayout* layout)
 void ScheduleWindow::closeEvent(QCloseEvent* event)
 {
 	saveRecords();
-	closeFile();
+	scheduleRecordIO.closeFile();
 }
 
 int ScheduleWindow::daysToNumber()
