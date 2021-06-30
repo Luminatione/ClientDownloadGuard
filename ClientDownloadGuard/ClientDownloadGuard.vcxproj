@@ -107,7 +107,6 @@
     <ClCompile Include="AutoDetectionRecord.cpp" />
     <ClCompile Include="AutoDetectionWindow.cpp" />
     <ClCompile Include="AutoDetectionWorker.cpp" />
-    <ClCompile Include="DataRecordIO.cpp" />
     <ClCompile Include="GetNetworkStateApiCaller.cpp" />
     <ClCompile Include="LabelTextSetter.cpp" />
     <ClCompile Include="LoadingUtility.cpp" />
