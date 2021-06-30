@@ -115,6 +115,9 @@
     <ClCompile Include="AutoDetectionRecord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ScheduleRecordIO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QtMacros.h">
@@ -166,6 +169,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DataRecordIO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScheduleRecordIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
