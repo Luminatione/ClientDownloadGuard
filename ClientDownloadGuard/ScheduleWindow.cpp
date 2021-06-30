@@ -32,6 +32,7 @@ void ScheduleWindow::setupConnections()
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.closeButton, onCloseClick());
 	BUTTON_CLICK_TO_THIS_CONNECTION(ui.confirmButton, onConfirmClick());
 	connect(ui.listWidget, &QListWidget::itemSelectionChanged, this, &ScheduleWindow::onSelectionChanged);
+	connect(ui.listWidget, &QListWidget::itemChanged, this, &ScheduleWindow::onItemChanged);
 }
 
 void ScheduleWindow::loadRecords()
@@ -133,10 +134,10 @@ ScheduleWindow::~ScheduleWindow()
 void ScheduleWindow::onAddClick()
 {
 	QString name = "New item";
-	addItemToList(name);
 	ScheduleRecord record;
 	record.name = name;
 	records.push_back(record);
+	addItemToList(name);
 	ui.listWidget->editItem(ui.listWidget->item(ui.listWidget->count() - 1));
 }
 
@@ -163,10 +164,10 @@ void ScheduleWindow::onSelectionChanged()
 	ScheduleRecord* record = &records[selectedIndex];
 	ui.nameLineEdit->setText(record->name);
 	ui.enabledCheckBox->setChecked(record->enabled);
-	ui.behaviourComboBox->setCurrentIndex(record->behaviour);
 	ui.beginTimeEdit->setTime(record->begin);
 	ui.endTimeEdit->setTime(record->end);
 	setDaysFromNumber(record->days);
+	ui.repeatCheckBox->setChecked(record->repeat);
 	ui.typeComboBox->setCurrentIndex(record->type);
 	ui.onConflictBehaviourComboBox->setCurrentIndex(record->onConflictBehaviour);
 	ui.removeOnEndCheckBox->setChecked(record->removeOnEnd);
@@ -178,11 +179,21 @@ void ScheduleWindow::onConfirmClick()
 	ScheduleRecord* record = &records[selectedIndex];
 	record->name = ui.nameLineEdit->text();
 	record->enabled = ui.enabledCheckBox->isChecked();
-	record->behaviour = ui.behaviourComboBox->currentIndex();
 	record->begin = ui.beginTimeEdit->time();
 	record->end = ui.endTimeEdit->time();
 	record->days = daysToNumber();
+	record->repeat = ui.repeatCheckBox->isChecked();
 	record->type = ui.typeComboBox->currentIndex();
 	record->onConflictBehaviour = ui.onConflictBehaviourComboBox->currentIndex();
 	record->removeOnEnd = ui.removeOnEndCheckBox->isChecked();
+}
+
+void ScheduleWindow::onItemChanged(QListWidgetItem* item)
+{
+	QModelIndex index = ui.listWidget->indexFromItem(item);
+	records[index.row()].name = item->text();
+	if (item->isSelected())
+	{
+		ui.nameLineEdit->setText(item->text());
+	}
 }

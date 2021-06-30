@@ -83,20 +83,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="behaviourComboBox">
-        <item>
-         <property name="text">
-          <string>Repetitive</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Timer</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
          <widget class="QLabel" name="beginLabel">
@@ -185,6 +171,13 @@
          </widget>
         </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="repeatCheckBox">
+        <property name="text">
+         <string>Repeat</string>
+        </property>
+       </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">

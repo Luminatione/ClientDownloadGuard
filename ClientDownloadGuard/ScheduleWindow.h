@@ -37,5 +37,6 @@ private slots:
 	void onRemoveClick();
 	void onSelectionChanged();
 	void onConfirmClick();
+	void onItemChanged(QListWidgetItem* item);
 };
 
