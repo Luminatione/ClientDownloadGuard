@@ -1,7 +1,4 @@
 #include <QtNetwork/QNetworkAccessManager>
-#include <QUrlQuery>
-#include <QJsonObject>
-#include <QJsonDocument>
 #include <QTimer>
 
 

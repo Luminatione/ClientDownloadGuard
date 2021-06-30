@@ -1,16 +1,14 @@
 #include "AutoDetectionWorker.h"
-#include "MainPanelWindow.h"
 
-#include <QMessageBox>
 #include <Windows.h>
 void AutoDetectionWorker::loadAutoDetectedWindows()
 {
 	records.clear();
-	autoDetectionReader.resetFileCursor();
-	while (!autoDetectionReader.atEnd())
+	autoDetectionIO.resetFileCursor();
+	while (!autoDetectionIO.atEnd())
 	{
-		auto [windowName, type, onConflictBehaviour] = autoDetectionReader.getNextRecord();
-		records.push_back({ windowName, type, onConflictBehaviour });
+		AutoDetectionRecord record = autoDetectionIO.getNextRecord();
+		records.push_back(record);
 	}
 }
 
@@ -46,7 +44,6 @@ bool AutoDetectionWorker::wantsToChangeState(int type)
 
 void AutoDetectionWorker::work()
 {
-	MainPanelWindow* mainPanelWindow = dynamic_cast<MainPanelWindow*>(parent);
 	while (doWork)
 	{
 		if (hasConnection())
@@ -56,12 +53,12 @@ void AutoDetectionWorker::work()
 				HWND window = getWindowWithName(record.windowName);
 				if (window && !checkedWindows.contains(window) && wantsToChangeState(record.type))
 				{
-					if (isNetworkFree() || networkStateShouldBeIgnored(record.onConflictBehaviour))
+					if (isNetworkFree() || networkStateShouldBeIgnored(record.conflictBehaviour))
 					{
 						QString description = "I'm using " + record.windowName;
 						emit onSetState(record.type, description);
 					}
-					else if (shouldNotifyUserOnConflict(record.onConflictBehaviour))
+					else if (shouldNotifyUserOnConflict(record.conflictBehaviour))
 					{
 						emit onNotify(record.type, record.windowName);
 					}

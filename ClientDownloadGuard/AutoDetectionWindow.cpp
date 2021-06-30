@@ -1,13 +1,10 @@
 #include "AutoDetectionWindow.h"
 #include "QtMacros.h"
 #include "DefaultSettings.h"
-#include "AutoDetectionIO.h"
 
-#include <QTreeWidget>
 #include <QComboBox>
 #include <QSettings>
-#include <QFile>
-#include <QMessageBox>
+
 
 AutoDetectionWindow::AutoDetectionWindow(QWidget* parent) : QMainWindow(parent)
 {
@@ -50,7 +47,7 @@ QComboBox* AutoDetectionWindow::getTypeComboBox()
 
 QComboBox* AutoDetectionWindow::getConflictBehaviourComboBox()
 {
-	QStringList options{ "Ignore", "Notify me", "Abandon"};
+	QStringList options{ "Ignore", "Notify me", "Abandon" };
 	return getComboBoxWithItems(options);
 }
 
@@ -61,10 +58,10 @@ void AutoDetectionWindow::setIndexAtColumnAsComboBox(int column, int value)
 
 void AutoDetectionWindow::readRecord()
 {
-	auto [windowName, type, conflictBehaviour] = autoDetectionIO.getNextRecord();
-	ui.tableWidget->item(ui.tableWidget->rowCount() - 1, 0)->setText(windowName);
-	setIndexAtColumnAsComboBox(1, type);
-	setIndexAtColumnAsComboBox(2, conflictBehaviour);
+	AutoDetectionRecord autoDetectionRecord = autoDetectionIO.getNextRecord();
+	ui.tableWidget->item(ui.tableWidget->rowCount() - 1, 0)->setText(autoDetectionRecord.windowName);
+	setIndexAtColumnAsComboBox(1, autoDetectionRecord.type);
+	setIndexAtColumnAsComboBox(2, autoDetectionRecord.conflictBehaviour);
 }
 
 void AutoDetectionWindow::loadTableContent()
@@ -105,8 +102,7 @@ void AutoDetectionWindow::saveTableContent()
 	for (int i = 0; i < ui.tableWidget->rowCount(); ++i)
 	{
 		QString windowName = ui.tableWidget->item(i, 0)->text();
-		autoDetectionIO.saveRecord(windowName, getCurrentIndexOfCellWidgetAsComboBox(i, 1),
-		                                                     getCurrentIndexOfCellWidgetAsComboBox(i, 2));
+		autoDetectionIO.saveRecord(AutoDetectionRecord{ windowName, getCurrentIndexOfCellWidgetAsComboBox(i, 1), getCurrentIndexOfCellWidgetAsComboBox(i, 2) });
 	}
 }
 

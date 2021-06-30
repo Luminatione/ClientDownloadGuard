@@ -61,6 +61,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
@@ -69,6 +70,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
@@ -102,8 +104,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AutoDetectionIO.cpp" />
+    <ClCompile Include="AutoDetectionRecord.cpp" />
     <ClCompile Include="AutoDetectionWindow.cpp" />
     <ClCompile Include="AutoDetectionWorker.cpp" />
+    <ClCompile Include="DataRecordIO.cpp" />
     <ClCompile Include="GetNetworkStateApiCaller.cpp" />
     <ClCompile Include="LabelTextSetter.cpp" />
     <ClCompile Include="LoadingUtility.cpp" />
@@ -136,6 +140,8 @@
     <QtMoc Include="AutoDetectionWindow.h" />
     <ClInclude Include="AutoDetectionIO.h" />
     <QtMoc Include="AutoDetectionWorker.h" />
+    <ClInclude Include="AutoDetectionRecord.h" />
+    <ClInclude Include="DataRecordIO.h" />
     <ClInclude Include="DefaultSettings.h" />
     <ClInclude Include="GetNetworkStateApiCaller.h" />
     <ClInclude Include="LabelTextSetter.h" />

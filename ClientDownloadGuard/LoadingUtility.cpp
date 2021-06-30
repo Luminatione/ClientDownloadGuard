@@ -1,6 +1,5 @@
 #include <QMainWindow>
 #include <QLabel>
-#include <QMovie>
 
 #include "LoadingUtility.h"
 

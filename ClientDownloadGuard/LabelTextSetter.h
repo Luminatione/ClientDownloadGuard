@@ -1,5 +1,4 @@
 #pragma once
-#include <QSharedPointer>
 #include <QString>
 
 class QLabel;

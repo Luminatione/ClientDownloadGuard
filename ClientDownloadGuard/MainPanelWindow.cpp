@@ -7,7 +7,6 @@
 #include "LabelTextSetter.h"
 #include "SettingsWindow.h"
 #include "AutoDetectionWindow.h"
-#include "AutoDetectionWorker.h"
 #include "ScheduleWindow.h"
 
 void MainPanelWindow::startAutoDetection()

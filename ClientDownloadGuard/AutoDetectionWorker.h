@@ -2,6 +2,7 @@
 #include <QMainWindow>
 #include <QString>
 #include <QVector>
+#include <QMutex>
 
 #include "AutoDetectionIO.h"
 
@@ -9,14 +10,8 @@ class AutoDetectionWorker : public QObject
 {
 
 	Q_OBJECT
-	struct Record
-	{
-		QString	windowName;
-		int type;
-		int onConflictBehaviour;
-	};
-	QVector<Record> records;
-	AutoDetectionIO autoDetectionReader = AutoDetectionIO();
+	QVector<AutoDetectionRecord> records;
+	AutoDetectionIO autoDetectionIO = AutoDetectionIO();
 	QMainWindow* parent;
 	QVector<HWND> checkedWindows;
 
