@@ -1,7 +1,7 @@
-#include "AutoDetectionWorker.h"
+#include "AutoDetectionService.h"
 
 #include <Windows.h>
-void AutoDetectionWorker::loadAutoDetectedWindows()
+void AutoDetectionService::loadAutoDetectedWindows()
 {
 	records.clear();
 	autoDetectionIO.resetFileCursor();
@@ -12,37 +12,37 @@ void AutoDetectionWorker::loadAutoDetectedWindows()
 	}
 }
 
-bool AutoDetectionWorker::hasConnection()
+bool AutoDetectionService::hasConnection()
 {
 	return networkState != -1;
 }
 
-HWND AutoDetectionWorker::getWindowWithName(QString& windowName)
+HWND AutoDetectionService::getWindowWithName(QString& windowName)
 {
 	return FindWindowW(nullptr, reinterpret_cast<LPCWSTR>(windowName.utf16()));
 }
 
-bool AutoDetectionWorker::isNetworkFree()
+bool AutoDetectionService::isNetworkFree()
 {
 	return networkState == 0;
 }
 
-bool AutoDetectionWorker::networkStateShouldBeIgnored(int conflictBehaviour)
+bool AutoDetectionService::networkStateShouldBeIgnored(int conflictBehaviour)
 {
 	return conflictBehaviour == 0;
 }
 
-bool AutoDetectionWorker::shouldNotifyUserOnConflict(int conflictBehaviour)
+bool AutoDetectionService::shouldNotifyUserOnConflict(int conflictBehaviour)
 {
 	return conflictBehaviour == 1;
 }
 
-bool AutoDetectionWorker::wantsToChangeState(int type)
+bool AutoDetectionService::wantsToChangeState(int type)
 {
 	return type != 3;
 }
 
-void AutoDetectionWorker::work()
+void AutoDetectionService::work()
 {
 	while (doWork)
 	{
@@ -71,13 +71,13 @@ void AutoDetectionWorker::work()
 	}
 }
 
-void AutoDetectionWorker::setState(int _state)
+void AutoDetectionService::setState(int _state)
 {
 	QMutexLocker<QMutex>locker(&mutex);
 	this->networkState = _state;
 }
 
-AutoDetectionWorker::AutoDetectionWorker(QMainWindow* parent)
+AutoDetectionService::AutoDetectionService(QMainWindow* parent)
 {
 	this->parent = parent;
 	loadAutoDetectedWindows();

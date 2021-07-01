@@ -12,13 +12,13 @@
 void MainPanelWindow::startAutoDetection()
 {
 	
-	autoDetectionWorker =new  AutoDetectionWorker(this);
+	autoDetectionWorker =new  AutoDetectionService(this);
 	autoDetectionWorker->setState(networkState);
 	autoDetectionWorker->moveToThread(&thr);
-	connect(&thr, &QThread::started, autoDetectionWorker, &AutoDetectionWorker::work);
-	connect(autoDetectionWorker, &AutoDetectionWorker::onNotify, this, &MainPanelWindow::onNotify);
-	connect(autoDetectionWorker, &AutoDetectionWorker::onUpdate, this, &MainPanelWindow::onRefreshClick);
-	connect(autoDetectionWorker, &AutoDetectionWorker::onSetState, this, &MainPanelWindow::onSetState);
+	connect(&thr, &QThread::started, autoDetectionWorker, &AutoDetectionService::work);
+	connect(autoDetectionWorker, &AutoDetectionService::onNotify, this, &MainPanelWindow::onNotify);
+	connect(autoDetectionWorker, &AutoDetectionService::onUpdate, this, &MainPanelWindow::onRefreshClick);
+	connect(autoDetectionWorker, &AutoDetectionService::onSetState, this, &MainPanelWindow::onSetState);
 	thr.start();
 }
 
@@ -141,7 +141,7 @@ void MainPanelWindow::onSettingsTriggered()
 void MainPanelWindow::onAutoDetectionTriggered()
 {
 	AutoDetectionWindow* autoDetectionWindow = new AutoDetectionWindow();
-	//QObject::connect(autoDetectionWindow, &AutoDetectionWindow::destroyed, autoDetectionWorker, &AutoDetectionWorker::loadAutoDetectedWindows); //<--- this doesn't work for some reason
+	//QObject::connect(autoDetectionWindow, &AutoDetectionWindow::destroyed, autoDetectionWorker, &AutoDetectionService::loadAutoDetectedWindows); //<--- this doesn't work for some reason
 	connect(autoDetectionWindow, &AutoDetectionWindow::destroyed, [&] {autoDetectionWorker->loadAutoDetectedWindows(); });
 	autoDetectionWindow->show();
 	autoDetectionWindow->setAttribute(Qt::WA_DeleteOnClose);

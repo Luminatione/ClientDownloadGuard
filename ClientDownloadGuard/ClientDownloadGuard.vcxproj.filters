@@ -100,9 +100,6 @@
     <ClCompile Include="AutoDetectionWindow.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="AutoDetectionWorker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AutoDetectionIO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -116,6 +113,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ScheduleRecordIO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScheduleService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoDetectionService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -174,6 +177,9 @@
     <ClInclude Include="ScheduleRecordIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ScheduleService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="loginWindow.ui">
@@ -214,11 +220,11 @@
     <QtMoc Include="AutoDetectionWindow.h">
       <Filter>Header Files\Windows</Filter>
     </QtMoc>
-    <QtMoc Include="AutoDetectionWorker.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="ScheduleWindow.h">
       <Filter>Header Files\Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="AutoDetectionService.h">
+      <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

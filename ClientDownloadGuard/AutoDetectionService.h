@@ -6,7 +6,7 @@
 
 #include "AutoDetectionIO.h"
 
-class AutoDetectionWorker : public QObject
+class AutoDetectionService : public QObject
 {
 
 	Q_OBJECT
@@ -24,7 +24,7 @@ signals:
 	void onUpdate();
 	void onSetState(int, QString&);
 public:
-	AutoDetectionWorker(QMainWindow* parent = nullptr);
+	AutoDetectionService(QMainWindow* parent = nullptr);
 	void setState(int state);
 	void work();
 public slots:

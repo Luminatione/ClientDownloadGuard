@@ -7,7 +7,7 @@
 #include <QThread>
 
 
-#include "AutoDetectionWorker.h"
+#include "AutoDetectionService.h"
 #include "LabelTextSetter.h"
 #include "ui_MainPanelWindow.h"
 
@@ -33,7 +33,7 @@ class MainPanelWindow : public QMainWindow
 	
 	bool offlineMode = false;
 	bool awaitsSetState = false;
-	AutoDetectionWorker* autoDetectionWorker;
+	AutoDetectionService* autoDetectionWorker;
 	state networkState = no_connection;
 	
 	QThread thr = QThread();
