@@ -1,5 +1,9 @@
 #pragma once
-class ScheduleService : 
+#include <QObject>
+
+class ScheduleService : public QObject
 {
+	Q_OBJECT
+	
 };
 

@@ -177,9 +177,6 @@
     <ClInclude Include="ScheduleRecordIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ScheduleService.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="loginWindow.ui">
@@ -224,6 +221,9 @@
       <Filter>Header Files\Windows</Filter>
     </QtMoc>
     <QtMoc Include="AutoDetectionService.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ScheduleService.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

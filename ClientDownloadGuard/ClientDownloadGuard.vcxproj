@@ -157,7 +157,7 @@
     <ClInclude Include="ScheduleRecord.h" />
     <QtMoc Include="ScheduleWindow.h" />
     <ClInclude Include="ScheduleRecordIO.h" />
-    <ClInclude Include="ScheduleService.h" />
+    <QtMoc Include="ScheduleService.h" />
     <ClInclude Include="SetNetworkStateApiCaller.h" />
     <QtMoc Include="SettingsWindow.h" />
     <ClInclude Include="Validator.h" />
