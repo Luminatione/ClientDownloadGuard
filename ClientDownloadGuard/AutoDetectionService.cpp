@@ -77,8 +77,7 @@ void AutoDetectionService::setState(int _state)
 	this->networkState = _state;
 }
 
-AutoDetectionService::AutoDetectionService(QMainWindow* parent)
+AutoDetectionService::AutoDetectionService()
 {
-	this->parent = parent;
 	loadAutoDetectedWindows();
 }

@@ -12,7 +12,6 @@ class AutoDetectionService : public QObject
 	Q_OBJECT
 	QVector<AutoDetectionRecord> records;
 	AutoDetectionIO autoDetectionIO = AutoDetectionIO();
-	QMainWindow* parent;
 	QVector<HWND> checkedWindows;
 
 	mutable  QMutex mutex;
@@ -24,7 +23,7 @@ signals:
 	void onUpdate();
 	void onSetState(int, QString&);
 public:
-	AutoDetectionService(QMainWindow* parent = nullptr);
+	AutoDetectionService();
 	void setState(int state);
 	void work();
 public slots:

@@ -12,7 +12,7 @@
 void MainPanelWindow::startAutoDetection()
 {
 	
-	autoDetectionWorker =new  AutoDetectionService(this);
+	autoDetectionWorker =new  AutoDetectionService();
 	autoDetectionWorker->setState(networkState);
 	autoDetectionWorker->moveToThread(&thr);
 	connect(&thr, &QThread::started, autoDetectionWorker, &AutoDetectionService::work);
