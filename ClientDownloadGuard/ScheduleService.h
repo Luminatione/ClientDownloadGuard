@@ -14,7 +14,7 @@ class ScheduleService : public Service
 public:
 	ScheduleService();
 	void work() override;
-private slots:
+public slots:
 	void loadSchedule();
 private:
 	bool isCurrentWeekDaySelected(ScheduleRecord& record);

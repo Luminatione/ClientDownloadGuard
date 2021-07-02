@@ -21,7 +21,7 @@ class AutoDetectionService : public QObject
 signals:
 	void notify(int, QString&);
 	void update();
-	void setState(int, QString&);
+	void updateNetworkState(int, QString&);
 public:
 	AutoDetectionService();
 	void setState(int state);

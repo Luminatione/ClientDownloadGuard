@@ -11,6 +11,8 @@
 #include "LabelTextSetter.h"
 #include "ui_MainPanelWindow.h"
 
+class ScheduleService;
+
 enum state { no_connection = -1, free_network = 0, busy_network = 1, asking_not_to_download = 2 };
 
 class MainPanelWindow : public QMainWindow
@@ -33,14 +35,17 @@ class MainPanelWindow : public QMainWindow
 	
 	bool offlineMode = false;
 	bool awaitsSetState = false;
-	AutoDetectionService* autoDetectionWorker;
+	AutoDetectionService* autoDetectionService;
+	ScheduleService* scheduleService;
 	state networkState = no_connection;
 	
-	QThread thr = QThread();
+	QThread autoDetectionThread = QThread();
+	QThread scheduleThread = QThread();
 	
 public:
 	void initializeLabelTextSetters();
 	void startAutoDetection();
+	void startSchedule();
 	MainPanelWindow(QString authKey, QWidget* parent = nullptr);
 	~MainPanelWindow();
 	void setAuthKey(QString& authKey);
