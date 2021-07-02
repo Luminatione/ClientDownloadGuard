@@ -17,7 +17,8 @@ public:
 public slots:
 	void loadSchedule();
 private:
-	bool isCurrentWeekDaySelected(ScheduleRecord& record);
+	bool isCurrentWeekDaySelected(int days);
 	void saveSchedule();
+	bool isCurrentTimeBetweenTimeBounds(QTime& current, QTime& begin, QTime& end);
 };
 

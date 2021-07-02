@@ -6,11 +6,11 @@ ScheduleService::ScheduleService()
 	loadSchedule();
 }
 
-bool ScheduleService::isCurrentWeekDaySelected(ScheduleRecord& record)
+bool ScheduleService::isCurrentWeekDaySelected(int days)
 {
 	int mask = 0b10000000;//mask has to have one more zero bcs dayOfWeek return 1 for monday and 7 for sunday
 	QDate date = QDate::currentDate();
-	bool result = record.days & (mask >> date.dayOfWeek());
+	bool result = days & (mask >> date.dayOfWeek());
 	return result;
 }
 
@@ -25,6 +25,18 @@ void ScheduleService::saveSchedule()
 	scheduleRecordIO.save();
 }
 
+bool ScheduleService::isCurrentTimeBetweenTimeBounds(QTime& current, QTime& begin, QTime& end)
+{
+	if (begin < end)
+	{
+		return current >= begin && current <= end;
+	}
+	else
+	{
+		return current >= begin || current <= end;
+	}
+}
+
 void ScheduleService::work()
 {
 	while (true)
@@ -32,7 +44,7 @@ void ScheduleService::work()
 		QTime currentTime = QTime::currentTime();
 		for (auto& record : records)
 		{
-			if (record.enabled && currentTime >= record.begin && currentTime <= record.end && isCurrentWeekDaySelected(record) && !ongoingSchedules.contains(&record))//TODO: correct to work in every case
+			if (record.enabled && isCurrentTimeBetweenTimeBounds(currentTime, record.begin, record.end) && isCurrentWeekDaySelected(record.days) && !ongoingSchedules.contains(&record))
 			{
 				ongoingSchedules.push_back(&record);
 				if (isNetworkFree() || networkStateShouldBeIgnored(record.onConflictBehaviour))
@@ -65,13 +77,14 @@ void ScheduleService::work()
 			}
 		}
 		saveSchedule();
-		Sleep(10000);
+		Sleep(1000);
 	}
 }
 
 void ScheduleService::loadSchedule()
 {
 	records.clear();
+	ongoingSchedules.clear();
 	scheduleRecordIO.resetFileCursor();
 	while (!scheduleRecordIO.atEnd())
 	{
