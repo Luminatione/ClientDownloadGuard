@@ -10,11 +10,14 @@ class ScheduleService : public Service
 {
 	QVector<ScheduleRecord> records;
 	ScheduleRecordIO scheduleRecordIO;
-
+	QVector<ScheduleRecord*> ongoingSchedules;
 public:
 	ScheduleService();
 	void work() override;
 private slots:
 	void loadSchedule();
+private:
+	bool isCurrentWeekDaySelected(ScheduleRecord& record);
+	void saveSchedule();
 };
 

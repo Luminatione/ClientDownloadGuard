@@ -5,13 +5,21 @@
 
 class Service : public QObject
 {
-	Q_OBJECT
+	Q_OBJECT;
 
-		mutable QMutex mutex;
+	mutable QMutex mutex;
 	int networkState = -1;
 public:
+	void setState(int state);
 	virtual void work() = 0;
 signals:
-	void setState(int, QString&);
+	void updateNetworkState(int, QString&);
+	void notify(int, QString&, QString&);
+	void refresh();
+protected:
+	bool isNetworkFree();
+	bool networkStateShouldBeIgnored(int conflictBehaviour);
+	bool shouldNotifyUserOnConflict(int conflictBehaviour);
+	bool wantsToChangeState(int type);
 };
 
