@@ -16,9 +16,9 @@ void MainPanelWindow::startAutoDetection()
 	autoDetectionWorker->setState(networkState);
 	autoDetectionWorker->moveToThread(&thr);
 	connect(&thr, &QThread::started, autoDetectionWorker, &AutoDetectionService::work);
-	connect(autoDetectionWorker, &AutoDetectionService::onNotify, this, &MainPanelWindow::onNotify);
-	connect(autoDetectionWorker, &AutoDetectionService::onUpdate, this, &MainPanelWindow::onRefreshClick);
-	connect(autoDetectionWorker, &AutoDetectionService::onSetState, this, &MainPanelWindow::onSetState);
+	connect(autoDetectionWorker, &AutoDetectionService::notify, this, &MainPanelWindow::onNotify);
+	connect(autoDetectionWorker, &AutoDetectionService::update, this, &MainPanelWindow::onRefreshClick);
+	connect(autoDetectionWorker, &AutoDetectionService::setState, this, &MainPanelWindow::onSetState);
 	thr.start();
 }
 

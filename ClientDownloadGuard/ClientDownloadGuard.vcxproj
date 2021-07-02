@@ -121,6 +121,7 @@
     <ClCompile Include="ScheduleRecordIO.cpp" />
     <ClCompile Include="ScheduleService.cpp" />
     <ClCompile Include="ScheduleWindow.cpp" />
+    <ClCompile Include="Service.cpp" />
     <ClCompile Include="SetNetworkStateApiCaller.cpp" />
     <ClCompile Include="DefaultSettings.cpp" />
     <ClCompile Include="SettingsWindow.cpp" />
@@ -157,7 +158,8 @@
     <ClInclude Include="ScheduleRecord.h" />
     <QtMoc Include="ScheduleWindow.h" />
     <ClInclude Include="ScheduleRecordIO.h" />
-    <QtMoc Include="ScheduleService.h" />
+    <ClInclude Include="ScheduleService.h" />
+    <QtMoc Include="Service.h" />
     <ClInclude Include="SetNetworkStateApiCaller.h" />
     <QtMoc Include="SettingsWindow.h" />
     <ClInclude Include="Validator.h" />

@@ -1,9 +1,20 @@
 #pragma once
+#include <QMutex>
 #include <QObject>
 
-class ScheduleService : public QObject
+#include "ScheduleRecord.h"
+#include "ScheduleRecordIO.h"
+#include "Service.h"
+
+class ScheduleService : public Service
 {
-	Q_OBJECT
-	
+	QVector<ScheduleRecord> records;
+	ScheduleRecordIO scheduleRecordIO;
+
+public:
+	ScheduleService();
+	void work() override;
+private slots:
+	void loadSchedule();
 };
 

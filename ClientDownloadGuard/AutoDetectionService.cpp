@@ -56,14 +56,14 @@ void AutoDetectionService::work()
 					if (isNetworkFree() || networkStateShouldBeIgnored(record.conflictBehaviour))
 					{
 						QString description = "I'm using " + record.windowName;
-						emit onSetState(record.type, description);
+						emit setState(record.type, description);
 					}
 					else if (shouldNotifyUserOnConflict(record.conflictBehaviour))
 					{
-						emit onNotify(record.type, record.windowName);
+						emit notify(record.type, record.windowName);
 					}
 					checkedWindows.push_back(window);
-					emit onUpdate();
+					emit update();
 				}
 			}
 		}

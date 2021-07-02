@@ -121,6 +121,9 @@
     <ClCompile Include="AutoDetectionService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Service.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QtMacros.h">
@@ -177,6 +180,9 @@
     <ClInclude Include="ScheduleRecordIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ScheduleService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="loginWindow.ui">
@@ -223,7 +229,7 @@
     <QtMoc Include="AutoDetectionService.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ScheduleService.h">
+    <QtMoc Include="Service.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

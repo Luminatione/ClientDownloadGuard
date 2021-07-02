@@ -14,14 +14,14 @@ class AutoDetectionService : public QObject
 	AutoDetectionIO autoDetectionIO = AutoDetectionIO();
 	QVector<HWND> checkedWindows;
 
-	mutable  QMutex mutex;
+	mutable QMutex mutex;
 
 	bool doWork = true;
 	int networkState = -1;
 signals:
-	void onNotify(int, QString&);
-	void onUpdate();
-	void onSetState(int, QString&);
+	void notify(int, QString&);
+	void update();
+	void setState(int, QString&);
 public:
 	AutoDetectionService();
 	void setState(int state);
