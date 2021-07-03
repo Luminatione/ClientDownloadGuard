@@ -5,8 +5,9 @@
 #include <QMutex>
 
 #include "AutoDetectionIO.h"
+#include "Service.h"
 
-class AutoDetectionService : public QObject
+class AutoDetectionService : public Service
 {
 
 	Q_OBJECT
@@ -14,25 +15,13 @@ class AutoDetectionService : public QObject
 	AutoDetectionIO autoDetectionIO = AutoDetectionIO();
 	QVector<HWND> checkedWindows;
 
-	mutable QMutex mutex;
-
 	bool doWork = true;
-	int networkState = -1;
-signals:
-	void notify(int, QString&);
-	void update();
-	void setState(int, QString&);
 public:
 	AutoDetectionService();
-	void setState(int state);
-	void work();
+	void work() override;
 public slots:
 	void loadAutoDetectedWindows();
 	bool hasConnection();
 	HWND getWindowWithName(QString& windowName);
-	bool isNetworkFree();
-	bool networkStateShouldBeIgnored(int conflictBehaviour);
-	bool shouldNotifyUserOnConflict(int conflictBehaviour);
-	bool wantsToChangeState(int type);
 };
 
