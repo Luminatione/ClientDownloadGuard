@@ -8,18 +8,30 @@
 #include "SettingsWindow.h"
 #include "AutoDetectionWindow.h"
 #include "ScheduleWindow.h"
+#include "ScheduleService.h"
 
 void MainPanelWindow::startAutoDetection()
 {
-	
-	autoDetectionWorker =new  AutoDetectionService();
-	autoDetectionWorker->setState(networkState);
-	autoDetectionWorker->moveToThread(&thr);
-	connect(&thr, &QThread::started, autoDetectionWorker, &AutoDetectionService::work);
-	connect(autoDetectionWorker, &AutoDetectionService::notify, this, &MainPanelWindow::onNotify);
-	connect(autoDetectionWorker, &AutoDetectionService::update, this, &MainPanelWindow::onRefreshClick);
-	connect(autoDetectionWorker, &AutoDetectionService::setState, this, &MainPanelWindow::onSetState);
-	thr.start();
+	autoDetectionService = new  AutoDetectionService();
+	autoDetectionService->setState(networkState);
+	autoDetectionService->moveToThread(&autoDetectionThread);
+	connect(&autoDetectionThread, &QThread::started, autoDetectionService, &AutoDetectionService::work);
+	connect(autoDetectionService, &AutoDetectionService::notify, this, &MainPanelWindow::onNotify);
+	connect(autoDetectionService, &AutoDetectionService::update, this, &MainPanelWindow::onRefreshClick);
+	connect(autoDetectionService, &AutoDetectionService::updateNetworkState, this, &MainPanelWindow::onSetState);
+	autoDetectionThread.start();
+}
+
+void MainPanelWindow::startSchedule()
+{
+	scheduleService = new ScheduleService();
+	scheduleService->setState(networkState);
+	scheduleService->moveToThread(&scheduleThread);
+	connect(&scheduleThread, &QThread::started, scheduleService, &ScheduleService::work);
+	connect(scheduleService, &ScheduleService::notify, this, &MainPanelWindow::onNotify);
+	connect(scheduleService, &ScheduleService::refresh, this, &MainPanelWindow::onRefreshClick);
+	connect(scheduleService, &ScheduleService::updateNetworkState, this, &MainPanelWindow::onSetState);
+	scheduleThread.start();
 }
 
 MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(authKey)
@@ -38,11 +50,12 @@ MainPanelWindow::MainPanelWindow(QString authKey, QWidget* parent) : authKey(aut
 		ui.statusbar->showMessage("Waiting for server...");
 	}
 	startAutoDetection();
+	startSchedule();
 }
 
 MainPanelWindow::~MainPanelWindow()
 {
-	thr.quit();
+	autoDetectionThread.quit();
 }
 
 void MainPanelWindow::initializeLabelTextSetters()
@@ -95,9 +108,9 @@ void MainPanelWindow::onSetState(int type, QString& description)
 }
 
 void MainPanelWindow::onNotify(int type, QString& windowName)
-{	
+{
 	QMessageBox::StandardButton result = QMessageBox::question(this, "Conflict", "Set selected type?", QMessageBox::Yes | QMessageBox::No);
-	if(result == QMessageBox::Yes && type != 3)//3 mean no change should be applied
+	if (result == QMessageBox::Yes && type != 3)//3 mean no change should be applied
 	{
 		QString description = "I'm using " + windowName;
 		onSetState(type, description);
@@ -141,17 +154,19 @@ void MainPanelWindow::onSettingsTriggered()
 void MainPanelWindow::onAutoDetectionTriggered()
 {
 	AutoDetectionWindow* autoDetectionWindow = new AutoDetectionWindow();
-	//QObject::connect(autoDetectionWindow, &AutoDetectionWindow::destroyed, autoDetectionWorker, &AutoDetectionService::loadAutoDetectedWindows); //<--- this doesn't work for some reason
-	connect(autoDetectionWindow, &AutoDetectionWindow::destroyed, [&] {autoDetectionWorker->loadAutoDetectedWindows(); });
-	autoDetectionWindow->show();
+	//QObject::connect(autoDetectionWindow, &AutoDetectionWindow::destroyed, autoDetectionService, &AutoDetectionService::loadAutoDetectedWindows); //<--- this doesn't work for some reason
+	connect(autoDetectionWindow, &AutoDetectionWindow::destroyed, [&] {autoDetectionService->loadAutoDetectedWindows(); });
 	autoDetectionWindow->setAttribute(Qt::WA_DeleteOnClose);
+	autoDetectionWindow->show();
 }
 
 void MainPanelWindow::onScheduleTriggered()
 {
-	ScheduleWindow* window = new ScheduleWindow();
-	window->setWindowModality(Qt::WindowModal);
-	window->show();
+	ScheduleWindow* scheduleWindow = new ScheduleWindow();
+	connect(scheduleWindow, &ScheduleWindow::destroyed, [&] {scheduleService->loadSchedule(); });
+	scheduleWindow->setWindowModality(Qt::WindowModal);
+	scheduleWindow->setAttribute(Qt::WA_DeleteOnClose);
+	scheduleWindow->show();
 }
 
 void MainPanelWindow::setIcon(int type)
@@ -192,7 +207,7 @@ void MainPanelWindow::onGetStateResponse()
 		descriptionLabelTextSetter.setText(description);
 		setIcon(type);
 		networkState = static_cast<enum state>(type);
-		autoDetectionWorker->setState(networkState);
+		autoDetectionService->setState(networkState);
 	}
 	else
 	{
@@ -206,7 +221,7 @@ void MainPanelWindow::onGetStateError(QNetworkReply::NetworkError errorCode)
 	ui.currentStateGraphic->setPixmap(noConnectionIcon);
 	ui.statusbar->showMessage("Error: " + QString::number(errorCode));
 	networkState = no_connection;
-	autoDetectionWorker->setState(networkState);
+	autoDetectionService->setState(networkState);
 }
 
 void MainPanelWindow::onSetStateResponse()

@@ -16,13 +16,17 @@ public:
 	explicit DataRecordIO(const QString& fileName) : fileName(fileName)
 	{
 		file.setFileName(fileName);
+		openFile();
+		dataStream.setDevice(&file);
+	}
+	DataRecordIO() {
+	}
+	virtual void openFile()
+	{
 		if (!file.open(QIODeviceBase::ReadWrite) && file.exists())
 		{
 			QMessageBox::critical(nullptr, "Error", "Failed to open file");
 		}
-		dataStream.setDevice(&file);
-	}
-	DataRecordIO() {
 	}
 	virtual T getNextRecord()
 	{
@@ -51,5 +55,10 @@ public:
 	virtual bool atEnd()
 	{
 		return dataStream.atEnd();
+	}
+	virtual void save()
+	{
+		closeFile();
+		openFile();
 	}
 };

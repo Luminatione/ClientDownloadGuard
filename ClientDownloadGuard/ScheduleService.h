@@ -14,10 +14,11 @@ class ScheduleService : public Service
 public:
 	ScheduleService();
 	void work() override;
-private slots:
+public slots:
 	void loadSchedule();
 private:
-	bool isCurrentWeekDaySelected(ScheduleRecord& record);
+	bool isCurrentWeekDaySelected(int days);
 	void saveSchedule();
+	bool isCurrentTimeBetweenTimeBounds(QTime& current, QTime& begin, QTime& end);
 };
 

@@ -56,7 +56,7 @@ void AutoDetectionService::work()
 					if (isNetworkFree() || networkStateShouldBeIgnored(record.conflictBehaviour))
 					{
 						QString description = "I'm using " + record.windowName;
-						emit setState(record.type, description);
+						emit updateNetworkState(record.type, description);
 					}
 					else if (shouldNotifyUserOnConflict(record.conflictBehaviour))
 					{
