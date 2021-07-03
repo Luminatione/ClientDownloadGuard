@@ -11,6 +11,17 @@ void AutoDetectionService::loadAutoDetectedWindows()
 		records.push_back(record);
 	}
 }
+
+bool AutoDetectionService::hasConnection()
+{
+	return networkState != -1;
+}
+
+HWND AutoDetectionService::getWindowWithName(QString& windowName)
+{
+	return FindWindowW(nullptr, reinterpret_cast<LPCWSTR>(windowName.utf16()));
+}
+
 void AutoDetectionService::work()
 {
 	while (doWork)
@@ -30,8 +41,8 @@ void AutoDetectionService::work()
 					else if (shouldNotifyUserOnConflict(record.conflictBehaviour))
 					{
 						QString title = "Conflict";
-						QString description = "Conflict occurred during network state setting for" + record.windowName + ". Do you want to override current state?";
-						emit notify(record.type, title, description);
+						QString text = "Conflict occurred during network state setting for" + record.windowName + ". Do you want to override current state?";
+						emit notify(record.type, title, text);
 					}
 					checkedWindows.push_back(window);
 					emit refresh();
@@ -41,6 +52,7 @@ void AutoDetectionService::work()
 		Sleep(10000);
 	}
 }
+
 AutoDetectionService::AutoDetectionService()
 {
 	loadAutoDetectedWindows();

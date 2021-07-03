@@ -5,8 +5,8 @@
 
 class Service : public QObject
 {
-	Q_OBJECT;
-
+	Q_OBJECT
+protected:
 	mutable QMutex mutex;
 	int networkState = -1;
 public:

@@ -17,7 +17,7 @@ void MainPanelWindow::startAutoDetection()
 	autoDetectionService->moveToThread(&autoDetectionThread);
 	connect(&autoDetectionThread, &QThread::started, autoDetectionService, &AutoDetectionService::work);
 	connect(autoDetectionService, &AutoDetectionService::notify, this, &MainPanelWindow::onNotify);
-	connect(autoDetectionService, &AutoDetectionService::update, this, &MainPanelWindow::onRefreshClick);
+	connect(autoDetectionService, &AutoDetectionService::refresh, this, &MainPanelWindow::onRefreshClick);
 	connect(autoDetectionService, &AutoDetectionService::updateNetworkState, this, &MainPanelWindow::onSetState);
 	autoDetectionThread.start();
 }
@@ -107,12 +107,12 @@ void MainPanelWindow::onSetState(int type, QString& description)
 	SERVER_RESPONSE_TO_THIS_CONNECTION(replySet, MainPanelWindow::onSetStateResponse, MainPanelWindow::onSetStateError);
 }
 
-void MainPanelWindow::onNotify(int type, QString& windowName)
+void MainPanelWindow::onNotify(int type, QString& title, QString& text)
 {
-	QMessageBox::StandardButton result = QMessageBox::question(this, "Conflict", "Set selected type?", QMessageBox::Yes | QMessageBox::No);
+	QMessageBox::StandardButton result = QMessageBox::question(this, title, text, QMessageBox::Yes | QMessageBox::No);
 	if (result == QMessageBox::Yes && type != 3)//3 mean no change should be applied
 	{
-		QString description = "I'm using " + windowName;
+		QString description = "State set automatically";
 		onSetState(type, description);
 	}
 }

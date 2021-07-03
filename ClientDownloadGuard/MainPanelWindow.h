@@ -50,7 +50,7 @@ public:
 	~MainPanelWindow();
 	void setAuthKey(QString& authKey);
 	void getState();
-	void onNotify(int type, QString& windowName);
+	void onNotify(int type, QString& title, QString& text);
 	
 private:
 	void initializeIcons();

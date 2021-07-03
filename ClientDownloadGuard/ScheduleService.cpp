@@ -55,8 +55,8 @@ void ScheduleService::work()
 				else if (shouldNotifyUserOnConflict(record.onConflictBehaviour))
 				{
 					QString title = "Conflict";
-					QString description = "Conflict occurred during network state setting for " + record.name + ". Do you want to override current state?";
-					emit notify(record.type, title, description);
+					QString text = "Conflict occurred during network state setting for " + record.name + ". Do you want to override current state?";
+					emit notify(record.type, title, text);
 				}
 				emit refresh();
 			}
