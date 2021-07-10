@@ -95,6 +95,10 @@ void MainPanelWindow::getState()
 
 void MainPanelWindow::onSetState(int type, QString& description)
 {
+	if(type == 3)
+	{
+		return;
+	}
 	if (offlineMode)
 	{
 		awaitsSetState = true;
@@ -110,7 +114,7 @@ void MainPanelWindow::onSetState(int type, QString& description)
 void MainPanelWindow::onNotify(int type, QString& title, QString& text)
 {
 	QMessageBox::StandardButton result = QMessageBox::question(this, title, text, QMessageBox::Yes | QMessageBox::No);
-	if (result == QMessageBox::Yes && type != 3)//3 mean no change should be applied
+	if (result == QMessageBox::Yes)
 	{
 		QString description = "State set automatically";
 		onSetState(type, description);

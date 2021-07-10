@@ -3,3 +3,4 @@
 -disabled changing windows size (except auto detection window)
 -description now has word wrapping enabled
 -using keyboard to navigate and confirm
+-fixed bug where choosing "None" state in schedule caused network state to appear as "no connection"
