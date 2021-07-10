@@ -1,2 +1,3 @@
 1.1 Download Guard patch notes
 -windows titles was changed
+-disabled changing windows size (except auto detection window)
