@@ -39,6 +39,9 @@
     <Filter Include="Source Files\Windows">
       <UniqueIdentifier>{cf597978-2864-49fd-be6d-58191d4ae1cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Patch Notes">
+      <UniqueIdentifier>{9b5ae219-0af8-4bdd-9596-81eb33ecff52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="mainWindow.qrc">
@@ -232,5 +235,10 @@
     <QtMoc Include="Service.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="1.1.txt">
+      <Filter>Patch Notes</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -167,6 +167,9 @@
     <ClInclude Include="QtMacros.h" />
     <QtMoc Include="ServerConnectionManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="1.1.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />
