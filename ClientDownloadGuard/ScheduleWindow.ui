@@ -37,6 +37,9 @@
         <property name="text">
          <string>Add</string>
         </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
        </widget>
       </item>
       <item>
@@ -44,12 +47,18 @@
         <property name="text">
          <string>Remove</string>
         </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="closeButton">
         <property name="text">
          <string>Close</string>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -293,6 +302,9 @@
        <widget class="QPushButton" name="confirmButton">
         <property name="text">
          <string>Confirm</string>
+        </property>
+        <property name="default">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

@@ -2,3 +2,4 @@
 -windows titles was changed
 -disabled changing windows size (except auto detection window)
 -description now has word wrapping enabled
+-using keyboard to navigate and confirm

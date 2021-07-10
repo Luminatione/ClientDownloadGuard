@@ -85,6 +85,9 @@
         <property name="text">
          <string>Login</string>
         </property>
+        <property name="autoDefault">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
      </layout>
@@ -103,12 +106,18 @@
         <property name="text">
          <string>Register</string>
         </property>
+        <property name="default">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="quitButton">
         <property name="text">
          <string>Quit</string>
+        </property>
+        <property name="autoDefault">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -118,6 +127,14 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>usernameLineEdit</tabstop>
+  <tabstop>passwordLineEdit</tabstop>
+  <tabstop>repeatPasswordLineEdit</tabstop>
+  <tabstop>registerButton</tabstop>
+  <tabstop>quitButton</tabstop>
+  <tabstop>loginButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
