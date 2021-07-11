@@ -6,8 +6,9 @@
 * [Setup](#setup)
 ## General info
 This is client side for Download Guard project. The main goal of app is to allow users to inform others about network usage.
-##Screenshots
+## Screenshots
 Login and register screens:
+
 ![alt text](https://github.com/Luminatione/ClientDownloadGuard/blob/master/Screenshots/logiscreen.png "Login screen")
 ![alt text](https://github.com/Luminatione/ClientDownloadGuard/blob/master/Screenshots/regscreen.png "Register screen")
 
